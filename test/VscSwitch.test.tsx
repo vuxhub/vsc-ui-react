@@ -67,6 +67,16 @@ describe('VscSwitch', () => {
     expect(screen.getByRole('switch', { name: 'Disabled' })).toBeDisabled();
   });
 
+  it('supports checked and disabled together', () => {
+    render(
+      <VscSwitch label="Disabled on" checked disabled onChange={() => {}} />,
+      { wrapper },
+    );
+    const switchEl = screen.getByRole('switch', { name: 'Disabled on' });
+    expect(switchEl).toBeDisabled();
+    expect(switchEl).toBeChecked();
+  });
+
   it('fires onChange when clicked', () => {
     const onChange = vi.fn();
     render(<VscSwitch label="Click" onChange={onChange} />, { wrapper });

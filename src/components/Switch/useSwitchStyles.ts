@@ -12,8 +12,24 @@ const checkedInput =
 const checkedIndicator = `${checkedInput} ~ .fui-Switch__indicator.fui-Switch__indicator`;
 const checkedIndicatorHover = `${checkedInput}:hover ~ .fui-Switch__indicator.fui-Switch__indicator`;
 const checkedIndicatorActive = `${checkedInput}:active ~ .fui-Switch__indicator.fui-Switch__indicator`;
+
+/** Checked + disabled — each branch needs its own sibling selector (comma binds loosely) */
+const checkedDisabledIndicator =
+  '& input.fui-Switch__input:checked:disabled ~ .fui-Switch__indicator.fui-Switch__indicator, & input.fui-Switch__input:checked[aria-disabled="true"] ~ .fui-Switch__indicator.fui-Switch__indicator';
+
 const checkedTrackBackground = 'var(--vscode-checkbox-selectBackground)';
 const checkedTrackBorder = 'var(--vscode-checkbox-selectBorder)';
+
+const checkedIndicatorOnStyles = {
+  backgroundColor: checkedTrackBackground,
+  ...shorthands.borderColor(checkedTrackBorder),
+
+  '::after': {
+    left: 'auto',
+    right: 'var(--vsc-switch-thumb-inset)',
+    backgroundColor: '#ffffff',
+  },
+} as const;
 
 // ---------------------------------------------------------------------------
 //  Base – root override styles via makeStyles (medium / default size)
@@ -72,17 +88,9 @@ const useBaseStyles = makeStyles({
       },
     },
 
-    [checkedIndicator]: {
-      backgroundColor: checkedTrackBackground,
-      ...shorthands.borderColor(checkedTrackBorder),
+    [checkedIndicator]: checkedIndicatorOnStyles,
 
-      '::after': {
-        left: 'auto',
-        right: 'var(--vsc-switch-thumb-inset)',
-        // Switch thumb on selected track is always white (distinct from checkbox checkmark token)
-        backgroundColor: '#ffffff',
-      },
-    },
+    [checkedDisabledIndicator]: checkedIndicatorOnStyles,
 
     '& .fui-Switch__label': {
       fontFamily: vscFontFamily,

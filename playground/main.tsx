@@ -675,6 +675,7 @@ function SwitchSection() {
                       checked={checked}
                       disabled={col === 'disabled'}
                       onChange={() => {}}
+                      autoFocus={col === 'focus'}
                     />
                   );
                 }}
