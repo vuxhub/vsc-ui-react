@@ -58,14 +58,14 @@ const thStyle: React.CSSProperties = {
   textTransform: 'uppercase',
   letterSpacing: 0.5,
   opacity: 0.6,
-  color: '#cccccc',
+  color: 'var(--vscode-foreground)',
 };
 
 const tdStyle: React.CSSProperties = {
   padding: '12px 16px 12px 12px',
   borderBottom: '1px solid var(--page-border-color, #333)',
   verticalAlign: 'middle',
-  color: '#cccccc',
+  color: 'var(--vscode-foreground)',
 };
 
 const codeStyle: React.CSSProperties = {
@@ -84,7 +84,7 @@ export const Swatch = ({ color }: { color: ColorSwatch }) => (
       style={{
         height: 64,
         width: '100%',
-        backgroundColor: color.darkValue,
+        backgroundColor: `var(${color.token})`,
       }}
     />
     <div style={swatchLabelStyle}>
