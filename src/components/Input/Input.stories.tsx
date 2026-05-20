@@ -1,13 +1,17 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { SearchRegular } from '@fluentui/react-icons';
 import { VscInput } from '.';
 import { Section, Row, Inline } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscInput> = {
+const meta = {
   title: 'Components/Input',
   component: VscInput,
   tags: ['autodocs'],
+  args: {
+    onChange: fn(),
+  },
   parameters: {
     docs: {
       description: {
@@ -16,38 +20,17 @@ const meta: Meta<typeof VscInput> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscInput>;
 
 export default meta;
-type Story = StoryObj<typeof VscInput>;
+type Story = StoryObj<typeof meta>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
 export const Default: Story = {
-  name: 'Default',
-  render: () => (
-    <>
-      <Section title="Default Input">
-        <Row>
-          <VscInput placeholder="Enter a value..." />
-          <VscInput placeholder="Disabled" disabled />
-        </Row>
-      </Section>
-      <Section title="Sizes">
-        <Row>
-          <Inline label="Small">
-            <VscInput size="small" placeholder="Small" />
-          </Inline>
-          <Inline label="Medium (default)">
-            <VscInput placeholder="Medium" />
-          </Inline>
-          <Inline label="Large">
-            <VscInput size="large" placeholder="Large" />
-          </Inline>
-        </Row>
-      </Section>
-    </>
-  ),
+  args: {
+    placeholder: 'Enter a value...',
+  },
 };
 
 /* ── With Icon ───────────────────────────────────────────────────── */

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { VscLabel } from '.';
-import { Section, Row, Inline } from '../../stories/helpers/helpers';
+import { Row, Inline } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscLabel> = {
+const meta = {
   title: 'Components/Label',
   component: VscLabel,
   tags: ['autodocs'],
@@ -15,64 +15,90 @@ const meta: Meta<typeof VscLabel> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscLabel>;
 
 export default meta;
-type Story = StoryObj<typeof VscLabel>;
+type Story = StoryObj<typeof meta>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
 export const Default: Story = {
-  name: 'Default',
+  args: {
+    children: 'Default label',
+  },
+};
+
+/* ── Disabled ────────────────────────────────────────────────────── */
+
+export const Disabled: Story = {
+  name: 'Disabled',
+  args: {
+    children: 'Disabled label',
+    disabled: true,
+  },
+};
+
+/* ── Sizes ───────────────────────────────────────────────────────── */
+
+export const Sizes: Story = {
+  name: 'Sizes',
   render: () => (
-    <>
-      <Section title="Default Label">
-        <Row>
-          <VscLabel>Default label</VscLabel>
-          <VscLabel disabled>Disabled label</VscLabel>
-        </Row>
-      </Section>
-      <Section title="Sizes">
-        <Row>
-          <Inline label="Small">
-            <VscLabel size="small">Small label</VscLabel>
-          </Inline>
-          <Inline label="Medium (default)">
-            <VscLabel size="medium">Medium label</VscLabel>
-          </Inline>
-          <Inline label="Large">
-            <VscLabel size="large">Large label</VscLabel>
-          </Inline>
-        </Row>
-      </Section>
-      <Section title="Weights">
-        <Row>
-          <Inline label="Regular">
-            <VscLabel weight="regular">Regular weight</VscLabel>
-          </Inline>
-          <Inline label="Semibold">
-            <VscLabel weight="semibold">Semibold weight</VscLabel>
-          </Inline>
-        </Row>
-      </Section>
-      <Section title="Required">
-        <Row>
-          <VscLabel required>Required field</VscLabel>
-          <VscLabel required size="large" weight="semibold">
-            Large required
-          </VscLabel>
-        </Row>
-      </Section>
-      <Section title="With Tooltip">
-        <Row>
-          <VscLabel tooltipContent="This provides additional context">
-            Label with info
-          </VscLabel>
-          <VscLabel required tooltipContent="This field is mandatory">
-            Required with tooltip
-          </VscLabel>
-        </Row>
-      </Section>
-    </>
+    <Row>
+      <Inline label="Small">
+        <VscLabel size="small">Small label</VscLabel>
+      </Inline>
+      <Inline label="Medium (default)">
+        <VscLabel size="medium">Medium label</VscLabel>
+      </Inline>
+      <Inline label="Large">
+        <VscLabel size="large">Large label</VscLabel>
+      </Inline>
+    </Row>
+  ),
+};
+
+/* ── Weights ─────────────────────────────────────────────────────── */
+
+export const Weights: Story = {
+  name: 'Weights',
+  render: () => (
+    <Row>
+      <Inline label="Regular">
+        <VscLabel weight="regular">Regular weight</VscLabel>
+      </Inline>
+      <Inline label="Semibold">
+        <VscLabel weight="semibold">Semibold weight</VscLabel>
+      </Inline>
+    </Row>
+  ),
+};
+
+/* ── Required ────────────────────────────────────────────────────── */
+
+export const Required: Story = {
+  name: 'Required',
+  render: () => (
+    <Row>
+      <VscLabel required>Required field</VscLabel>
+      <VscLabel required size="large" weight="semibold">
+        Large required
+      </VscLabel>
+    </Row>
+  ),
+};
+
+/* ── With Tooltip ────────────────────────────────────────────────── */
+
+export const WithTooltip: Story = {
+  name: 'With Tooltip',
+  render: () => (
+    <Row>
+      <VscLabel tooltipContent="This provides additional context">
+        Label with info
+      </VscLabel>
+      <VscLabel required tooltipContent="This field is mandatory">
+        Required with tooltip
+      </VscLabel>
+    </Row>
   ),
 };

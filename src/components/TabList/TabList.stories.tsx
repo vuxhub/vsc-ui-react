@@ -9,7 +9,7 @@ import {
 import { VscTabList, VscTab } from '.';
 import { Section } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscTabList> = {
+const meta = {
   title: 'Components/TabList',
   component: VscTabList,
   tags: ['autodocs'],
@@ -21,10 +21,26 @@ const meta: Meta<typeof VscTabList> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscTabList>;
 
 export default meta;
-type Story = StoryObj<typeof VscTabList>;
+type Story = StoryObj<typeof meta>;
+
+/* ── Default ─────────────────────────────────────────────────────── */
+
+export const Default: Story = {
+  args: {
+    defaultSelectedValue: 'general',
+  },
+  render: (args) => (
+    <VscTabList {...args}>
+      <VscTab value="general">General</VscTab>
+      <VscTab value="editor">Editor</VscTab>
+      <VscTab value="terminal">Terminal</VscTab>
+      <VscTab value="extensions">Extensions</VscTab>
+    </VscTabList>
+  ),
+};
 
 /* ── Default Tabs ────────────────────────────────────────────────── */
 

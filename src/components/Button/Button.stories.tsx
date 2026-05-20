@@ -28,6 +28,39 @@ const meta = {
   args: {
     onClick: fn(),
   },
+  argTypes: {
+    appearance: {
+      control: 'select',
+      options: ['primary', 'secondary', 'outline', 'subtle', 'transparent'],
+      description: 'Visual style of the button.',
+    },
+    size: {
+      control: 'select',
+      options: ['medium', 'small', 'compact'],
+      description:
+        'Size variant. Includes `compact` (15 px) in addition to Fluent built-in sizes.',
+    },
+    icon: {
+      control: false,
+      description: 'Optional leading icon element.',
+    },
+    iconPosition: {
+      control: 'radio',
+      options: ['before', 'after'],
+      description: 'Position of the icon relative to the label.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the button and prevents interaction.',
+    },
+    children: {
+      control: 'text',
+      description: 'Button label content.',
+    },
+    onClick: {
+      description: 'Click handler.',
+    },
+  },
   parameters: {
     docs: {
       description: {

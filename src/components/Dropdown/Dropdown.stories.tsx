@@ -10,7 +10,7 @@ import {
 } from '.';
 import { Section, Row, Inline } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscDropdown> = {
+const meta = {
   title: 'Components/Dropdown',
   component: VscDropdown,
   tags: ['autodocs'],
@@ -22,10 +22,25 @@ const meta: Meta<typeof VscDropdown> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscDropdown>;
 
 export default meta;
-type Story = StoryObj<typeof VscDropdown>;
+type Story = StoryObj<typeof meta>;
+
+/* ── Default ─────────────────────────────────────────────────────── */
+
+export const Default: Story = {
+  args: {
+    placeholder: 'Select a theme',
+  },
+  render: (args) => (
+    <VscDropdown {...args}>
+      <VscOption text="Dark+">Dark+</VscOption>
+      <VscOption text="Light+">Light+</VscOption>
+      <VscOption text="Monokai">Monokai</VscOption>
+    </VscDropdown>
+  ),
+};
 
 /* ── Dropdown ────────────────────────────────────────────────────── */
 

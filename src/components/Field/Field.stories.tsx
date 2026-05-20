@@ -6,7 +6,7 @@ import { VscTextarea } from '../Textarea';
 import { VscDropdown, VscOption } from '../Dropdown';
 import { Section } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscField> = {
+const meta = {
   title: 'Components/Field',
   component: VscField,
   tags: ['autodocs'],
@@ -18,36 +18,24 @@ const meta: Meta<typeof VscField> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscField>;
 
 export default meta;
-type Story = StoryObj<typeof VscField>;
+type Story = StoryObj<typeof meta>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
 export const Default: Story = {
-  name: 'Default',
-  render: () => (
-    <Section
-      title="Field"
-      description="Wraps an input with a label and optional validation message."
-    >
-      <div style={{ maxWidth: 360 }}>
-        <VscField label="Workspace Name" required style={{ marginBottom: 16 }}>
-          <VscInput placeholder="my-workspace" />
-        </VscField>
-        <VscField label="Description" style={{ marginBottom: 16 }}>
-          <VscTextarea placeholder="Optional description..." rows={3} />
-        </VscField>
-        <VscField
-          label="Port"
-          validationState="error"
-          validationMessage="Port must be between 0 and 65535"
-        >
-          <VscInput validationState="error" defaultValue="-1" />
-        </VscField>
-      </div>
-    </Section>
+  args: {
+    label: 'Workspace Name',
+    required: true,
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 360 }}>
+      <VscField {...args}>
+        <VscInput placeholder="my-workspace" />
+      </VscField>
+    </div>
   ),
 };
 

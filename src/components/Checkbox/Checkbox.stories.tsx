@@ -1,12 +1,16 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { VscCheckbox } from '.';
-import { Section, Row, Inline } from '../../stories/helpers/helpers';
+import { Row, Inline } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscCheckbox> = {
+const meta = {
   title: 'Components/Checkbox',
   component: VscCheckbox,
   tags: ['autodocs'],
+  args: {
+    onChange: fn(),
+  },
   parameters: {
     docs: {
       description: {
@@ -15,49 +19,71 @@ const meta: Meta<typeof VscCheckbox> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscCheckbox>;
 
 export default meta;
-type Story = StoryObj<typeof VscCheckbox>;
+type Story = StoryObj<typeof meta>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
 export const Default: Story = {
-  name: 'Default',
+  args: {
+    label: 'Accept terms',
+  },
+};
+
+/* ── States ──────────────────────────────────────────────────────── */
+
+export const States: Story = {
+  name: 'States',
   render: () => (
-    <>
-      <Section title="Default Checkbox">
-        <Row>
-          <VscCheckbox label="Unchecked" />
-          <VscCheckbox label="Checked" defaultChecked />
-          <VscCheckbox label="Disabled" disabled />
-          <VscCheckbox label="Disabled checked" disabled defaultChecked />
-        </Row>
-      </Section>
-      <Section title="Sizes">
-        <Row>
-          <Inline label="Small">
-            <VscCheckbox size="small" label="Small" defaultChecked />
-          </Inline>
-          <Inline label="Medium (default)">
-            <VscCheckbox label="Medium" defaultChecked />
-          </Inline>
-          <Inline label="Large">
-            <VscCheckbox size="large" label="Large" defaultChecked />
-          </Inline>
-        </Row>
-      </Section>
-      <Section title="Mixed / Indeterminate">
-        <Row>
-          <VscCheckbox label="Indeterminate" checked="mixed" />
-        </Row>
-      </Section>
-      <Section title="Without Label">
-        <Row>
-          <VscCheckbox aria-label="Standalone checkbox" />
-          <VscCheckbox aria-label="Standalone checked" defaultChecked />
-        </Row>
-      </Section>
-    </>
+    <Row>
+      <VscCheckbox label="Unchecked" />
+      <VscCheckbox label="Checked" defaultChecked />
+      <VscCheckbox label="Disabled" disabled />
+      <VscCheckbox label="Disabled checked" disabled defaultChecked />
+    </Row>
+  ),
+};
+
+/* ── Sizes ───────────────────────────────────────────────────────── */
+
+export const Sizes: Story = {
+  name: 'Sizes',
+  render: () => (
+    <Row>
+      <Inline label="Small">
+        <VscCheckbox size="small" label="Small" defaultChecked />
+      </Inline>
+      <Inline label="Medium (default)">
+        <VscCheckbox label="Medium" defaultChecked />
+      </Inline>
+      <Inline label="Large">
+        <VscCheckbox size="large" label="Large" defaultChecked />
+      </Inline>
+    </Row>
+  ),
+};
+
+/* ── Indeterminate ───────────────────────────────────────────────── */
+
+export const Indeterminate: Story = {
+  name: 'Indeterminate',
+  render: () => (
+    <Row>
+      <VscCheckbox label="Indeterminate" checked="mixed" />
+    </Row>
+  ),
+};
+
+/* ── Without Label ───────────────────────────────────────────────── */
+
+export const WithoutLabel: Story = {
+  name: 'Without Label',
+  render: () => (
+    <Row>
+      <VscCheckbox aria-label="Standalone checkbox" />
+      <VscCheckbox aria-label="Standalone checked" defaultChecked />
+    </Row>
   ),
 };

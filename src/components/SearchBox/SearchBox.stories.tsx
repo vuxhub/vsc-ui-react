@@ -1,12 +1,16 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { VscSearchBox } from '.';
 import { Section, Row, Inline } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscSearchBox> = {
+const meta = {
   title: 'Components/SearchBox',
   component: VscSearchBox,
   tags: ['autodocs'],
+  args: {
+    onChange: fn(),
+  },
   parameters: {
     docs: {
       description: {
@@ -15,26 +19,17 @@ const meta: Meta<typeof VscSearchBox> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscSearchBox>;
 
 export default meta;
-type Story = StoryObj<typeof VscSearchBox>;
+type Story = StoryObj<typeof meta>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
 export const Default: Story = {
-  name: 'Default',
-  render: () => (
-    <Section
-      title="SearchBox"
-      description="A search input with built-in search icon and dismiss action."
-    >
-      <Row>
-        <VscSearchBox placeholder="Search settings" />
-        <VscSearchBox placeholder="Disabled" disabled />
-      </Row>
-    </Section>
-  ),
+  args: {
+    placeholder: 'Search settings',
+  },
 };
 
 /* ── Size Variants ───────────────────────────────────────────────── */

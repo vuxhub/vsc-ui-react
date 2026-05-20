@@ -1,12 +1,16 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { VscTextarea } from '.';
 import { Section, Row, Inline } from '../../stories/helpers/helpers';
 
-const meta: Meta<typeof VscTextarea> = {
+const meta = {
   title: 'Components/Textarea',
   component: VscTextarea,
   tags: ['autodocs'],
+  args: {
+    onChange: fn(),
+  },
   parameters: {
     docs: {
       description: {
@@ -15,44 +19,18 @@ const meta: Meta<typeof VscTextarea> = {
       },
     },
   },
-};
+} satisfies Meta<typeof VscTextarea>;
 
 export default meta;
-type Story = StoryObj<typeof VscTextarea>;
+type Story = StoryObj<typeof meta>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
 export const Default: Story = {
-  name: 'Default',
-  render: () => (
-    <>
-      <Section title="Textarea" description="Multi-line text input.">
-        <Row>
-          <VscTextarea
-            placeholder="Describe your issue..."
-            rows={4}
-            style={{ minWidth: 320 }}
-          />
-          <VscTextarea
-            disabled
-            defaultValue="This field is disabled"
-            rows={4}
-            style={{ minWidth: 320 }}
-          />
-        </Row>
-      </Section>
-      <Section title="Read-only">
-        <Row>
-          <VscTextarea
-            readOnly
-            defaultValue="This content is read-only and cannot be edited."
-            rows={3}
-            style={{ minWidth: 320 }}
-          />
-        </Row>
-      </Section>
-    </>
-  ),
+  args: {
+    placeholder: 'Describe your issue...',
+    rows: 4,
+  },
 };
 
 /* ── Validation States ───────────────────────────────────────────── */

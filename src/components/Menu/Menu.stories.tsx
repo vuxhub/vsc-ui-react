@@ -27,7 +27,7 @@ import {
 } from '.';
 import { Section } from '../../stories/helpers/helpers';
 
-const meta: Meta = {
+const meta = {
   title: 'Components/Menu',
   tags: ['autodocs'],
   parameters: {
@@ -38,7 +38,7 @@ const meta: Meta = {
       },
     },
   },
-};
+} satisfies Meta;
 
 export default meta;
 type Story = StoryObj;
