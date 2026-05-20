@@ -3,29 +3,8 @@ import { forwardRef } from 'react';
 
 import { useButtonStylesHook, type VscButtonSize } from './useButtonStyles';
 
-type ButtonAppearance =
-  | 'primary'
-  | 'secondary'
-  | 'outline'
-  | 'subtle'
-  | 'transparent';
-
-export type VscButtonProps = Pick<
-  ButtonProps,
-  'icon' | 'iconPosition' | 'shape' | 'disabled' | 'disabledFocusable'
-> & {
-  /** Visual style of the button. */
-  appearance?: ButtonAppearance;
-  /** Size variant. */
+export type VscButtonProps = Omit<ButtonProps, 'size'> & {
   size?: VscButtonSize;
-  /** Button content. */
-  children?: React.ReactNode;
-  /** Additional CSS class name. */
-  className?: string;
-  /** Click handler. */
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  /** Accessible label for icon-only buttons. */
-  'aria-label'?: string;
 };
 
 export const VscButton = forwardRef<HTMLButtonElement, VscButtonProps>(
@@ -34,7 +13,7 @@ export const VscButton = forwardRef<HTMLButtonElement, VscButtonProps>(
     const fluentSize = isCompact ? undefined : size;
 
     const mergedClassName = useButtonStylesHook({
-      appearance,
+      appearance: appearance as VscButtonProps['appearance'],
       size,
       iconOnly: !!icon && !children,
       className,
@@ -47,7 +26,7 @@ export const VscButton = forwardRef<HTMLButtonElement, VscButtonProps>(
         size={fluentSize}
         icon={icon}
         className={mergedClassName}
-        {...rest}
+        {...(rest as ButtonProps)}
       >
         {children}
       </Button>
