@@ -91,3 +91,30 @@ export type { VscCheckboxProps } from './components/Checkbox';
 // Label
 export { VscLabel } from './components/Label';
 export type { VscLabelProps } from './components/Label';
+
+// Dialog
+export {
+  VscDialog,
+  VscDialogTrigger,
+  VscDialogSurface,
+  VscDialogBody,
+  VscDialogTitle,
+  VscDialogCloseButton,
+  VscDialogDescription,
+  VscDialogSeparator,
+  VscDialogContent,
+  VscDialogActions,
+} from './components/Dialog';
+export type {
+  VscDialogProps,
+  VscDialogTriggerProps,
+  VscDialogSurfaceProps,
+  VscDialogBodyProps,
+  VscDialogTitleProps,
+  VscDialogCloseButtonProps,
+  VscDialogDescriptionProps,
+  VscDialogSeparatorProps,
+  VscDialogContentProps,
+  VscDialogActionsProps,
+  VscDialogSize,
+} from './components/Dialog';
