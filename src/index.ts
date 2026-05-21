@@ -91,3 +91,7 @@ export type { VscCheckboxProps } from './components/Checkbox';
 // Label
 export { VscLabel } from './components/Label';
 export type { VscLabelProps } from './components/Label';
+
+// Switch
+export { VscSwitch } from './components/Switch';
+export type { VscSwitchProps } from './components/Switch';
