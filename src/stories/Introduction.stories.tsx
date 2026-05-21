@@ -55,7 +55,6 @@ const linkStyle: React.CSSProperties = {
 /* ── Story ───────────────────────────────────────────────────────── */
 
 export const Introduction: Story = {
-  name: "Introduction",
   render: () => (
     <div style={{ maxWidth: 720 }}>
       {/* ── Hero ─────────────────────────────────────────────── */}

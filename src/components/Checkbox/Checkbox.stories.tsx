@@ -35,7 +35,6 @@ export const Default: Story = {
 /* ── States ──────────────────────────────────────────────────────── */
 
 export const States: Story = {
-  name: 'States',
   render: () => (
     <Row>
       <VscCheckbox label="Unchecked" />
@@ -49,7 +48,6 @@ export const States: Story = {
 /* ── Sizes ───────────────────────────────────────────────────────── */
 
 export const Sizes: Story = {
-  name: 'Sizes',
   render: () => (
     <Row>
       <Inline label="Small">
@@ -68,7 +66,6 @@ export const Sizes: Story = {
 /* ── Indeterminate ───────────────────────────────────────────────── */
 
 export const Indeterminate: Story = {
-  name: 'Indeterminate',
   render: () => (
     <Row>
       <VscCheckbox label="Indeterminate" checked="mixed" />
@@ -79,7 +76,6 @@ export const Indeterminate: Story = {
 /* ── Without Label ───────────────────────────────────────────────── */
 
 export const WithoutLabel: Story = {
-  name: 'Without Label',
   render: () => (
     <Row>
       <VscCheckbox aria-label="Standalone checkbox" />

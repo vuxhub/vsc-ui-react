@@ -35,7 +35,6 @@ export const Default: Story = {
 /* ── Size Variants ───────────────────────────────────────────────── */
 
 export const SizeVariants: Story = {
-  name: 'Size Variants',
   render: () => (
     <Section title="Size Variants">
       <Row>

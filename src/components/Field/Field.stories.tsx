@@ -42,7 +42,6 @@ export const Default: Story = {
 /* ── With Tooltip ────────────────────────────────────────────────── */
 
 export const WithTooltip: Story = {
-  name: 'With Tooltip',
   render: () => (
     <Section
       title="Field with Tooltip"

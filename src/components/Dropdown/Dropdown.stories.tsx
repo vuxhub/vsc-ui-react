@@ -89,7 +89,6 @@ export const DropdownTrigger: Story = {
 /* ── Validation States ───────────────────────────────────────────── */
 
 export const ValidationStates: Story = {
-  name: 'Validation States',
   render: () => (
     <Section title="Validation States">
       <Row>

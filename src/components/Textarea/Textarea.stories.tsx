@@ -36,7 +36,6 @@ export const Default: Story = {
 /* ── Validation States ───────────────────────────────────────────── */
 
 export const ValidationStates: Story = {
-  name: 'Validation States',
   render: () => (
     <Section title="Validation States">
       <Row>
@@ -64,7 +63,6 @@ export const ValidationStates: Story = {
 /* ── Resizable ───────────────────────────────────────────────────── */
 
 export const Resizable: Story = {
-  name: 'Resizable',
   render: () => (
     <Section title="Resize Behavior">
       <Row>

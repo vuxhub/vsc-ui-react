@@ -31,7 +31,6 @@ export const Default: Story = {
 /* ── Disabled ────────────────────────────────────────────────────── */
 
 export const Disabled: Story = {
-  name: 'Disabled',
   args: {
     children: 'Disabled label',
     disabled: true,
@@ -41,7 +40,6 @@ export const Disabled: Story = {
 /* ── Sizes ───────────────────────────────────────────────────────── */
 
 export const Sizes: Story = {
-  name: 'Sizes',
   render: () => (
     <Row>
       <Inline label="Small">
@@ -60,7 +58,6 @@ export const Sizes: Story = {
 /* ── Weights ─────────────────────────────────────────────────────── */
 
 export const Weights: Story = {
-  name: 'Weights',
   render: () => (
     <Row>
       <Inline label="Regular">
@@ -76,7 +73,6 @@ export const Weights: Story = {
 /* ── Required ────────────────────────────────────────────────────── */
 
 export const Required: Story = {
-  name: 'Required',
   render: () => (
     <Row>
       <VscLabel required>Required field</VscLabel>
@@ -90,7 +86,6 @@ export const Required: Story = {
 /* ── With Tooltip ────────────────────────────────────────────────── */
 
 export const WithTooltip: Story = {
-  name: 'With Tooltip',
   render: () => (
     <Row>
       <VscLabel tooltipContent="This provides additional context">

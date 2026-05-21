@@ -1,10 +1,13 @@
 import React from 'react';
 import type { PropsWithChildren } from 'react';
-import { DocsContainer as BaseContainer } from '@storybook/addon-docs/blocks';
+import {
+  DocsContainer as BaseContainer,
+  type DocsContextProps,
+} from '@storybook/addon-docs/blocks';
 import { themes } from 'storybook/theming';
 
 interface DocsContainerProps {
-  context: any;
+  context: DocsContextProps;
 }
 
 /**

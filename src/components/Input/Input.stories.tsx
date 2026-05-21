@@ -36,7 +36,6 @@ export const Default: Story = {
 /* ── With Icon ───────────────────────────────────────────────────── */
 
 export const WithIcon: Story = {
-  name: 'With Icon',
   render: () => (
     <Section title="Input with Icon">
       <Row>
@@ -53,7 +52,6 @@ export const WithIcon: Story = {
 /* ── Validation States ───────────────────────────────────────────── */
 
 export const ValidationStates: Story = {
-  name: 'Validation States',
   render: () => (
     <Section title="Validation States">
       <Row>

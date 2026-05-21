@@ -45,7 +45,6 @@ export const Default: Story = {
 /* ── Default Tabs ────────────────────────────────────────────────── */
 
 export const DefaultTabs: Story = {
-  name: 'Default Tabs',
   render: () => (
     <>
       <Section
@@ -77,7 +76,6 @@ export const DefaultTabs: Story = {
 /* ── With Disabled Tab ───────────────────────────────────────────── */
 
 export const WithDisabledTab: Story = {
-  name: 'With Disabled Tab',
   render: () => (
     <Section title="Disabled Tab">
       <VscTabList defaultSelectedValue="problems">
@@ -94,7 +92,6 @@ export const WithDisabledTab: Story = {
 /* ── Vertical Tabs ───────────────────────────────────────────────── */
 
 export const VerticalTabs: Story = {
-  name: 'Vertical Tabs',
   render: () => (
     <Section title="Vertical" description="TabList with vertical orientation.">
       <VscTabList vertical defaultSelectedValue="search">
@@ -110,7 +107,6 @@ export const VerticalTabs: Story = {
 /* ── With Icons ──────────────────────────────────────────────────── */
 
 export const WithIcons: Story = {
-  name: 'With Icons',
   render: () => (
     <>
       <Section title="Default with Icons" description="20px icons.">

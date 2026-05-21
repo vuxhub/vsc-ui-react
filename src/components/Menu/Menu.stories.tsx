@@ -87,7 +87,6 @@ export const BasicMenu: Story = {
 /* ── Edit Menu ───────────────────────────────────────────────────── */
 
 export const EditMenu: Story = {
-  name: 'Edit Menu',
   render: () => (
     <Section title="Edit Menu" description="A full edit menu with undo/redo.">
       <Menu>
@@ -128,7 +127,6 @@ export const EditMenu: Story = {
 /* ── With Groups ─────────────────────────────────────────────────── */
 
 export const WithGroups: Story = {
-  name: 'With Groups',
   render: () => (
     <Section title="Grouped Menu" description="Items organized with headers.">
       <Menu>
@@ -162,7 +160,6 @@ export const WithGroups: Story = {
 /* ── Checkbox & Radio Items ──────────────────────────────────────── */
 
 export const CheckboxAndRadio: Story = {
-  name: 'Checkbox & Radio Items',
   render: () => (
     <Section title="Checkbox & Radio Menu Items">
       <Menu>
@@ -205,7 +202,6 @@ export const CheckboxAndRadio: Story = {
 /* ── Disabled Items ──────────────────────────────────────────────── */
 
 export const DisabledItems: Story = {
-  name: 'Disabled Items',
   render: () => (
     <Section title="Menu with Disabled Items">
       <Menu>
