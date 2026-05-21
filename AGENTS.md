@@ -15,7 +15,19 @@ src/
     └── <ComponentName>/      # One folder per component group
         ├── index.ts          # Barrel re-exports for the folder
         ├── Vsc<Name>.tsx     # React component(s)
-        └── use<Name>Styles.ts  # Griffel style hooks
+        ├── use<Name>Styles.ts  # Griffel style hooks
+        └── <Name>.stories.tsx  # Storybook stories (co-located)
+
+.storybook/                   # Storybook configuration
+├── main.ts                   # Framework, addons, story globs
+├── preview.tsx               # Decorators, globals, parameters
+├── manager.ts                # Manager theme switching
+├── themes.ts                 # Fluent themes composed with VS Code tokens
+├── ThemeEffect.tsx           # Body class + CSS var injection for canvas
+├── DocsContainer.tsx         # Dynamic docs theme based on scheme global
+├── DocsPage.tsx              # Custom docs page layout
+├── preview-head.html         # Minimal CSS overrides for docs chrome
+└── theme-tokens.css          # VS Code design token CSS variables
 
 test/
 ├── setupTests.ts             # Vitest setup (imports jest-dom matchers)
@@ -236,3 +248,41 @@ This ensures all code committed to the repo is lint-clean, well-formatted, type-
 | Build             | Vite (library mode) + TypeScript declaration emit                           |
 | Test              | Vitest + happy-dom + @testing-library/react + jest-dom                      |
 | Lint              | ESLint 9 flat config + Prettier                                             |
+| Docs              | Storybook 10 (`@storybook/react-vite`)                                      |
+
+## Storybook
+
+### Running
+
+```bash
+npm run storybook        # dev server on port 6007
+npm run build-storybook  # static build to storybook-static/
+```
+
+### Story Conventions
+
+Stories are co-located with their components at `src/components/<Name>/<Name>.stories.tsx`.
+
+- Use `satisfies Meta<typeof VscComponent>` for type-safe meta.
+- Add `tags: ['autodocs']` to get an auto-generated docs page.
+- Use the **args pattern** for the primary/default story so controls appear in the docs.
+- Use **gallery-style stories** (no args, hardcoded props) for showcasing variant grids.
+- Import `fn()` from `storybook/test` for action args (e.g. `onClick: fn()`).
+
+### Theming Architecture
+
+The toolbar toggle switches between dark and light themes. The scheme is propagated through:
+
+1. **`preview.tsx`** — `withFluent` decorator reads `context.globals.scheme`, selects the matching Fluent theme from `themes.ts`, and wraps every story in `<FluentProvider>`.
+2. **`themes.ts`** — Composes Fluent's `webDarkTheme`/`webLightTheme` with VS Code CSS variable overrides for brand colors, foregrounds, and fonts.
+3. **`ThemeEffect.tsx`** — Sets `vscode-dark`/`vscode-light` body class and `--sb-docs-bg` CSS var.
+4. **`DocsContainer.tsx`** — Dynamically passes `themes.dark`/`themes.light` to Storybook's `ThemeProvider` for the docs page.
+5. **`manager.ts`** — Listens for `GLOBALS_UPDATED` events and switches the sidebar/toolbar theme.
+
+### CSS Override Rules
+
+`preview-head.html` contains minimal CSS. When adding overrides:
+
+- **Only target specific docs chrome elements** (e.g. `.sbdocs.sbdocs-preview`, `#storybook-docs > div`).
+- **Never use broad selectors** like `span`, `code`, `*` with `!important` — they break Storybook's syntax highlighting and Fluent's icon coloring.
+- Let Storybook and Fluent handle their own styling natively.

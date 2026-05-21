@@ -1,0 +1,33 @@
+<!--
+  Minimal overrides for the Storybook docs preview iframe.
+  The DocsContainer dynamically switches the Storybook theme (dark/light),
+  so most chrome styling is handled natively. These rules only cover
+  elements that need VS Code-specific treatment.
+-->
+<style>
+  /* ── Docs padding ─────────────────────────────────────────────── */
+  #storybook-docs > div {
+    padding: 20px !important;
+  }
+
+  /* ── Canvas story background follows VS Code theme ────────────── */
+  .sb-show-main,
+  body {
+    background: var(--sb-docs-bg, #1e1e1e) !important;
+  }
+
+  /* ── Story preview container ──────────────────────────────────── */
+  .docs-story {
+    background: var(--sb-docs-bg, #1e1e1e) !important;
+  }
+
+  .sbdocs.sbdocs-preview {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px !important;
+    border: 1px solid rgba(38, 74, 115, 0.15) !important;
+  }
+
+  /* ── ArgsTable type values (Emotion-styled spans) ─────────────── */
+  .docblock-argstable tbody td span {
+    color: inherit !important;
+  }
+</style>

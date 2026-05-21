@@ -1,6 +1,6 @@
 # vsc-ui-react
 
-VS Code styled Fluent UI components for React. Wraps Fluent UI v9 components and applies VS Code theme-based styling through bundled CSS modules.
+VS Code styled Fluent UI components for React. Wraps Fluent UI v9 components and applies VS Code theme-based styling using Griffel CSS-in-JS.
 
 ## Install
 
@@ -80,6 +80,24 @@ Also re-exports `Menu`, `MenuTrigger`, and `MenuSplitGroup` from Fluent UI for c
 | ------------ | ------------------- |
 | `VscTabList` | Tab strip container |
 | `VscTab`     | Individual tab      |
+
+## Storybook
+
+Interactive component documentation is built in. To run locally:
+
+```bash
+npm run storybook
+```
+
+This starts Storybook at `http://localhost:6007`. Use the toolbar toggle to switch between dark and light themes.
+
+To build a static Storybook site:
+
+```bash
+npm run build-storybook
+```
+
+Stories live alongside their components in `src/components/<Name>/<Name>.stories.tsx`.
 
 ## Contributing
 

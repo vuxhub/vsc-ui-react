@@ -1,0 +1,208 @@
+import { Meta } from '@storybook/blocks';
+import {
+  TypeScaleTable,
+  FontWeightTable,
+  FontFamilyTable,
+  Callout,
+} from '../helpers/design-language-helpers';
+
+<Meta title="Design System/Typography" />
+
+# Typography
+
+Our VS Code extension components use the same Fluent 2 type scale as the base
+design system, with one key override:
+
+<Callout>
+  <strong>Font family changed:</strong>{' '}
+  <span style={{ textDecoration: 'line-through', opacity: 0.5 }}>Segoe UI</span>
+  {' → '}
+  <span style={{ fontWeight: 600 }}>SF Pro Text</span>
+  <br />
+  <span style={{ fontSize: 12, opacity: 0.6 }}>
+    All other typography settings — sizes, line heights, and weights — remain
+    unchanged from the Fluent 2 defaults.
+  </span>
+</Callout>
+
+---
+
+## Font Family
+
+VS Code's UI uses the system font stack. On macOS, which is the primary
+environment for our extension, this maps to SF Pro Text.
+
+<FontFamilyTable />
+
+---
+
+## Type Scale
+
+The type scale follows standard Fluent 2 sizing. No changes have been made to
+font sizes, line heights, or font weights.
+
+<TypeScaleTable
+  rows={[
+    {
+      name: 'Caption 2',
+      token: 'fontSizeBase100',
+      size: '10px',
+      lineHeight: '14px',
+      weight: '400 Regular',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 10, lineHeight: '14px', fontWeight: 400 },
+    },
+    {
+      name: 'Caption 2 Strong',
+      token: 'fontSizeBase100',
+      size: '10px',
+      lineHeight: '14px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 10, lineHeight: '14px', fontWeight: 600 },
+    },
+    {
+      name: 'Caption 1',
+      token: 'fontSizeBase200',
+      size: '12px',
+      lineHeight: '16px',
+      weight: '400 Regular',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 12, lineHeight: '16px', fontWeight: 400 },
+    },
+    {
+      name: 'Caption 1 Strong',
+      token: 'fontSizeBase200',
+      size: '12px',
+      lineHeight: '16px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 12, lineHeight: '16px', fontWeight: 600 },
+    },
+    {
+      name: 'Caption 1 Stronger',
+      token: 'fontSizeBase200',
+      size: '12px',
+      lineHeight: '16px',
+      weight: '700 Bold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 12, lineHeight: '16px', fontWeight: 700 },
+    },
+    {
+      name: 'Body 1 (Default)',
+      token: 'fontSizeBase300',
+      size: '14px',
+      lineHeight: '20px',
+      weight: '400 Regular',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 14, lineHeight: '20px', fontWeight: 400 },
+    },
+    {
+      name: 'Body 1 Strong',
+      token: 'fontSizeBase300',
+      size: '14px',
+      lineHeight: '20px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 14, lineHeight: '20px', fontWeight: 600 },
+    },
+    {
+      name: 'Body 1 Stronger',
+      token: 'fontSizeBase300',
+      size: '14px',
+      lineHeight: '20px',
+      weight: '700 Bold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 14, lineHeight: '20px', fontWeight: 700 },
+    },
+    {
+      name: 'Body 2',
+      token: 'fontSizeBase400',
+      size: '16px',
+      lineHeight: '22px',
+      weight: '400 Regular',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 16, lineHeight: '22px', fontWeight: 400 },
+    },
+    {
+      name: 'Subtitle 2',
+      token: 'fontSizeBase400',
+      size: '16px',
+      lineHeight: '22px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 16, lineHeight: '22px', fontWeight: 600 },
+    },
+    {
+      name: 'Subtitle 2 Stronger',
+      token: 'fontSizeBase400',
+      size: '16px',
+      lineHeight: '22px',
+      weight: '700 Bold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 16, lineHeight: '22px', fontWeight: 700 },
+    },
+    {
+      name: 'Subtitle 1',
+      token: 'fontSizeBase500',
+      size: '20px',
+      lineHeight: '28px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 20, lineHeight: '28px', fontWeight: 600 },
+    },
+    {
+      name: 'Title 3',
+      token: 'fontSizeBase600',
+      size: '24px',
+      lineHeight: '32px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 24, lineHeight: '32px', fontWeight: 600 },
+    },
+    {
+      name: 'Title 2',
+      token: 'fontSizeHero700',
+      size: '28px',
+      lineHeight: '36px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps over the lazy dog',
+      sampleStyle: { fontSize: 28, lineHeight: '36px', fontWeight: 600 },
+    },
+    {
+      name: 'Title 1',
+      token: 'fontSizeHero800',
+      size: '32px',
+      lineHeight: '40px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox jumps',
+      sampleStyle: { fontSize: 32, lineHeight: '40px', fontWeight: 600 },
+    },
+    {
+      name: 'Large Title',
+      token: 'fontSizeHero900',
+      size: '40px',
+      lineHeight: '52px',
+      weight: '600 Semibold',
+      sample: 'The quick brown fox',
+      sampleStyle: { fontSize: 40, lineHeight: '52px', fontWeight: 600 },
+    },
+    {
+      name: 'Display',
+      token: 'fontSizeHero1000',
+      size: '68px',
+      lineHeight: '92px',
+      weight: '600 Semibold',
+      sample: 'Display',
+      sampleStyle: { fontSize: 68, lineHeight: '92px', fontWeight: 600 },
+    },
+  ]}
+/>
+
+---
+
+## Font Weights
+
+Four weights are defined in Fluent 2, unchanged from defaults.
+
+<FontWeightTable />
