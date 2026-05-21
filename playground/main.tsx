@@ -231,7 +231,6 @@ const SWITCH_STATE_ROWS = [
 const SWITCH_LABEL_ROWS = [
   { key: 'none', label: 'No label' },
   { key: 'after', label: 'Label after' },
-  { key: 'before', label: 'Label before' },
   { key: 'above', label: 'Label above' },
 ];
 
@@ -662,11 +661,7 @@ function SwitchSection() {
                   const checked = stateRow.key === 'checked';
                   const size = sizeRow.key as 'small' | 'medium' | 'large';
                   const labelPosition =
-                    row === 'before'
-                      ? ('before' as const)
-                      : row === 'above'
-                        ? ('above' as const)
-                        : ('after' as const);
+                    row === 'above' ? ('above' as const) : ('after' as const);
                   return (
                     <VscSwitch
                       label={row === 'none' ? undefined : 'Label'}

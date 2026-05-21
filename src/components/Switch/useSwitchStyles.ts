@@ -2,6 +2,7 @@ import {
   makeStyles,
   mergeClasses,
   shorthands,
+  type SwitchProps,
 } from '@fluentui/react-components';
 
 import { vscFontFamily } from '../../styles/tokens';
@@ -157,6 +158,47 @@ const useStyles = makeStyles({
     },
   },
 
+  labelAbove: {
+    alignItems: 'flex-start',
+
+    '& .fui-Switch__label': {
+      paddingInlineStart: '0',
+      paddingInlineEnd: '0',
+      width: 'auto',
+    },
+
+    '& .fui-Switch__indicator.fui-Switch__indicator': {
+      marginTop: '0',
+      marginInline: '0',
+    },
+
+    '& .fui-Switch__input': {
+      width: '32px',
+      height: '16px',
+    },
+  },
+
+  labelAfter: {
+    '& .fui-Switch__label': {
+      paddingInlineStart: '4px',
+      paddingInlineEnd: '8px',
+    },
+  },
+
+  labelAboveSmall: {
+    '& .fui-Switch__input': {
+      width: '26px',
+      height: '13px',
+    },
+  },
+
+  labelAboveLarge: {
+    '& .fui-Switch__input': {
+      width: '40px',
+      height: '20px',
+    },
+  },
+
   small: {
     '& .fui-Switch__indicator.fui-Switch__indicator': {
       width: '26px',
@@ -185,11 +227,12 @@ const useStyles = makeStyles({
 export interface UseSwitchStylesOptions {
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
+  labelPosition?: Exclude<SwitchProps['labelPosition'], 'before'>;
   className?: string;
 }
 
 export function useSwitchStyles(options: UseSwitchStylesOptions) {
-  const { size, disabled, className } = options;
+  const { size, disabled, labelPosition, className } = options;
   const base = useBaseStyles();
   const classes = useStyles();
 
@@ -197,6 +240,11 @@ export function useSwitchStyles(options: UseSwitchStylesOptions) {
     base.root,
     size === 'small' && classes.small,
     size === 'large' && classes.large,
+    labelPosition === 'above' && classes.labelAbove,
+    labelPosition === 'above' && size === 'small' && classes.labelAboveSmall,
+    labelPosition === 'above' && size === 'large' && classes.labelAboveLarge,
+    (labelPosition === 'after' || labelPosition === undefined) &&
+      classes.labelAfter,
     disabled && classes.disabled,
     className,
   );
