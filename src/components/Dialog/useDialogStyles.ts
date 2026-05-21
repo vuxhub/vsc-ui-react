@@ -63,7 +63,7 @@ const useBackdropStyles = makeStyles({
 
 const useBodyBaseStyles = makeStyles({
   root: {
-    gap: '16px',
+    gap: '8px',
     maxHeight: 'inherit',
   },
 });
@@ -74,11 +74,9 @@ const useBodyBaseStyles = makeStyles({
 
 const useTitleBaseStyles = makeStyles({
   root: {
+    ...typographyStyles.subtitle2,
     fontFamily: vscFontFamily,
     color: 'var(--vscode-foreground)',
-    fontSize: 'var(--fontSizeBase500, 16px)',
-    fontWeight: 'var(--fontWeightSemibold, 600)' as unknown as number,
-    lineHeight: 'var(--lineHeightBase500, 22px)',
     paddingBottom: '0',
   },
   action: {
@@ -137,11 +135,9 @@ const useCloseButtonStyles = makeStyles({
 
 const useDescriptionStyles = makeStyles({
   root: {
-    ...typographyStyles.body1,
+    ...typographyStyles.caption1,
     fontFamily: vscFontFamily,
     color: 'var(--vscode-descriptionForeground)',
-    fontSize: 'var(--fontSizeBase300, 13px)',
-    lineHeight: 'var(--lineHeightBase300, 18px)',
     marginTop: '0',
     marginBottom: '0',
   },
