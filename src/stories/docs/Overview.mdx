@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction/Overview" />
+
+# vsc-ui-react
+
+VS Code styled Fluent UI components for React. This Storybook previews
+every component exported by the
+[vsc-ui-react](https://www.npmjs.com/package/vsc-ui-react) package with
+VS Code theme tokens applied.
+
+---
+
+## Install
+
+```bash
+npm install vsc-ui-react
+```
+
+## Quick Start
+
+```tsx
+import { VscButton } from 'vsc-ui-react';
+
+export function Example() {
+  return (
+    <VscButton appearance="primary" size="compact">
+      Save
+    </VscButton>
+  );
+}
+```
+
+## Prerequisites
+
+- **React 18+** and **ReactDOM 18+**
+- **@fluentui/react-components** (peer dependency)
+- A VS Code extension webview, or any React app where you want VS Code–styled
+  components
