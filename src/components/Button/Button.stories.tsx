@@ -100,11 +100,21 @@ export const AllAppearances: Story = {
       description="All five button appearances at default size."
     >
       <Row>
-        <VscButton {...args} appearance="primary">Primary</VscButton>
-        <VscButton {...args} appearance="secondary">Secondary</VscButton>
-        <VscButton {...args} appearance="outline">Outline</VscButton>
-        <VscButton {...args} appearance="subtle">Subtle</VscButton>
-        <VscButton {...args} appearance="transparent">Transparent</VscButton>
+        <VscButton {...args} appearance="primary">
+          Primary
+        </VscButton>
+        <VscButton {...args} appearance="secondary">
+          Secondary
+        </VscButton>
+        <VscButton {...args} appearance="outline">
+          Outline
+        </VscButton>
+        <VscButton {...args} appearance="subtle">
+          Subtle
+        </VscButton>
+        <VscButton {...args} appearance="transparent">
+          Transparent
+        </VscButton>
       </Row>
     </Section>
   ),
@@ -117,8 +127,12 @@ export const Sizes: Story = {
     <>
       <Section title="Medium (default)">
         <Row>
-          <VscButton {...args} appearance="primary">Medium</VscButton>
-          <VscButton {...args} appearance="secondary">Medium</VscButton>
+          <VscButton {...args} appearance="primary">
+            Medium
+          </VscButton>
+          <VscButton {...args} appearance="secondary">
+            Medium
+          </VscButton>
         </Row>
       </Section>
       <Section title="Small">
@@ -154,7 +168,11 @@ export const WithIcons: Story = {
         <VscButton {...args} appearance="primary" icon={<AddRegular />}>
           New File
         </VscButton>
-        <VscButton {...args} appearance="secondary" icon={<FolderOpenRegular />}>
+        <VscButton
+          {...args}
+          appearance="secondary"
+          icon={<FolderOpenRegular />}
+        >
           Open Folder
         </VscButton>
         <VscButton {...args} appearance="outline" icon={<InfoRegular />}>
@@ -163,7 +181,11 @@ export const WithIcons: Story = {
         <VscButton {...args} appearance="subtle" icon={<EditRegular />}>
           Edit
         </VscButton>
-        <VscButton {...args} appearance="transparent" icon={<ArrowSyncRegular />}>
+        <VscButton
+          {...args}
+          appearance="transparent"
+          icon={<ArrowSyncRegular />}
+        >
           Refresh
         </VscButton>
       </Row>

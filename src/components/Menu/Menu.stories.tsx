@@ -34,7 +34,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Context menu and dropdown menu components styled to match VS Code. Includes `VscMenuItem`, `VscMenuItemCheckbox`, `VscMenuItemRadio`, `VscMenuDivider`, `VscMenuGroup`, and `VscMenuGroupHeader`. Wraps Fluent\'s `Menu` and `MenuTrigger` for positioning.',
+          "Context menu and dropdown menu components styled to match VS Code. Includes `VscMenuItem`, `VscMenuItemCheckbox`, `VscMenuItemRadio`, `VscMenuDivider`, `VscMenuGroup`, and `VscMenuGroupHeader`. Wraps Fluent's `Menu` and `MenuTrigger` for positioning.",
       },
     },
   },

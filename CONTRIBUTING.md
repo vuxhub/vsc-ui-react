@@ -59,8 +59,8 @@ Create `src/components/<Name>/<Name>.stories.tsx`. Use the existing Button stori
 
 The Storybook instance supports dark/light theme switching via a toolbar toggle. Key files:
 
-| File                           | Purpose                                              |
-| ------------------------------ | ---------------------------------------------------- |
+| File                           | Purpose                                               |
+| ------------------------------ | ----------------------------------------------------- |
 | `.storybook/themes.ts`         | Fluent theme composition with VS Code token overrides |
 | `.storybook/ThemeEffect.tsx`   | Sets body class + CSS vars for canvas backgrounds     |
 | `.storybook/DocsContainer.tsx` | Dynamic docs theme switching based on scheme global   |
