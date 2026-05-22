@@ -1,8 +1,8 @@
-import React from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta = {
-  title: "Introduction",
+  title: 'Introduction',
 };
 
 export default meta;
@@ -28,28 +28,28 @@ const descStyle: React.CSSProperties = {
 };
 
 const codeBlock: React.CSSProperties = {
-  fontFamily: "monospace",
+  fontFamily: 'monospace',
   fontSize: 13,
   lineHeight: 1.6,
-  padding: "16px 20px",
+  padding: '16px 20px',
   borderRadius: 6,
-  backgroundColor: "var(--code-bg, #1e1e1e)",
-  border: "1px solid var(--code-border, #333)",
-  overflow: "auto",
-  whiteSpace: "pre",
+  backgroundColor: 'var(--code-bg, #1e1e1e)',
+  border: '1px solid var(--code-border, #333)',
+  overflow: 'auto',
+  whiteSpace: 'pre',
 };
 
 const inlineCode: React.CSSProperties = {
-  fontFamily: "monospace",
+  fontFamily: 'monospace',
   fontSize: 12,
-  padding: "2px 6px",
+  padding: '2px 6px',
   borderRadius: 3,
-  backgroundColor: "var(--badge-bg, rgba(255,255,255,0.08))",
+  backgroundColor: 'var(--badge-bg, rgba(255,255,255,0.08))',
 };
 
 const linkStyle: React.CSSProperties = {
-  color: "var(--vscode-textLink-foreground, #3794ff)",
-  textDecoration: "none",
+  color: 'var(--vscode-textLink-foreground, #3794ff)',
+  textDecoration: 'none',
 };
 
 /* ── Story ───────────────────────────────────────────────────────── */
@@ -64,7 +64,7 @@ export const Introduction: Story = {
         </h1>
         <p style={{ fontSize: 15, opacity: 0.7, lineHeight: 1.6, margin: 0 }}>
           VS Code styled Fluent UI components for React. This Storybook previews
-          every component exported by the{" "}
+          every component exported by the{' '}
           <a
             href="https://www.npmjs.com/package/vsc-ui-react"
             target="_blank"
@@ -72,7 +72,7 @@ export const Introduction: Story = {
             style={linkStyle}
           >
             vsc-ui-react
-          </a>{" "}
+          </a>{' '}
           NPM package with VS Code theme overrides applied.
         </p>
       </div>
@@ -80,7 +80,7 @@ export const Introduction: Story = {
       {/* ── Prerequisites & Setup ────────────────────────────── */}
       <div style={sectionStyle}>
         <h2 style={headingStyle}>Prerequisites</h2>
-        <ul style={{ ...descStyle, paddingLeft: 20, margin: "0 0 16px" }}>
+        <ul style={{ ...descStyle, paddingLeft: 20, margin: '0 0 16px' }}>
           <li>
             <strong>React 18+</strong> and <strong>ReactDOM 18+</strong>
           </li>
@@ -99,8 +99,8 @@ export const Introduction: Story = {
         <h2 style={headingStyle}>Install</h2>
         <div style={codeBlock}>npm install vsc-ui-react</div>
         <p style={{ ...descStyle, marginTop: 12 }}>
-          <code style={inlineCode}>@fluentui/react-components</code>,{" "}
-          <code style={inlineCode}>react</code>, and{" "}
+          <code style={inlineCode}>@fluentui/react-components</code>,{' '}
+          <code style={inlineCode}>react</code>, and{' '}
           <code style={inlineCode}>react-dom</code> are peer dependencies and
           will be installed automatically (npm v7+).
         </p>
@@ -132,23 +132,23 @@ export function App() {
       <div
         style={{
           ...sectionStyle,
-          padding: "20px 24px",
+          padding: '20px 24px',
           borderRadius: 8,
-          border: "1px solid var(--page-border-color, #333)",
-          backgroundColor: "var(--preview-bg, #252526)",
+          border: '1px solid var(--page-border-color, #333)',
+          backgroundColor: 'var(--preview-bg, #252526)',
         }}
       >
         <h2 style={{ ...headingStyle, marginBottom: 12 }}>Questions?</h2>
-        <p style={{ ...descStyle, margin: "0 0 12px" }}>
+        <p style={{ ...descStyle, margin: '0 0 12px' }}>
           This project is maintained by:
         </p>
-        <table style={{ fontSize: 13, borderCollapse: "collapse" }}>
+        <table style={{ fontSize: 13, borderCollapse: 'collapse' }}>
           <tbody>
             <tr>
-              <td style={{ padding: "4px 24px 4px 0", fontWeight: 600 }}>
+              <td style={{ padding: '4px 24px 4px 0', fontWeight: 600 }}>
                 Amy Chen
               </td>
-              <td style={{ padding: "4px 0" }}>
+              <td style={{ padding: '4px 0' }}>
                 <a
                   href="https://github.com/si-jin-chen"
                   target="_blank"
@@ -160,10 +160,10 @@ export function App() {
               </td>
             </tr>
             <tr>
-              <td style={{ padding: "4px 24px 4px 0", fontWeight: 600 }}>
+              <td style={{ padding: '4px 24px 4px 0', fontWeight: 600 }}>
                 Hui Miao
               </td>
-              <td style={{ padding: "4px 0" }}>
+              <td style={{ padding: '4px 0' }}>
                 <a
                   href="https://github.com/huimiu"
                   target="_blank"
@@ -176,8 +176,8 @@ export function App() {
             </tr>
           </tbody>
         </table>
-        <p style={{ ...descStyle, margin: "16px 0 0", fontSize: 12 }}>
-          Source:{" "}
+        <p style={{ ...descStyle, margin: '16px 0 0', fontSize: 12 }}>
+          Source:{' '}
           <a
             href="https://github.com/huimiu/vsc-ui-react"
             target="_blank"
