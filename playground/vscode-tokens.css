@@ -29,6 +29,8 @@
   --vscode-contrastActiveBorder: transparent;
   --vscode-widget-border: #313131;
   --vscode-widget-shadow: rgba(0, 0, 0, 0.36);
+  --vscode-dialog-overlay: rgba(0, 0, 0, 0.4);
+  --vscode-toolbar-hoverBackground: rgba(90, 93, 94, 0.31);
 
   /* Editor + workbench surfaces */
   --vscode-editor-background: #1f1f1f;
@@ -133,6 +135,8 @@
   --vscode-focusBorder: #005fb8;
   --vscode-widget-border: #e5e5e5;
   --vscode-widget-shadow: rgba(0, 0, 0, 0.16);
+  --vscode-dialog-overlay: rgba(0, 0, 0, 0.4);
+  --vscode-toolbar-hoverBackground: rgba(0, 0, 0, 0.1);
 
   --vscode-editor-background: #ffffff;
   --vscode-editor-foreground: #3b3b3b;

@@ -5,7 +5,12 @@ import {
   webDarkTheme,
   webLightTheme,
 } from '@fluentui/react-components';
-import { AddRegular, ChevronDownRegular } from '@fluentui/react-icons';
+import {
+  AddRegular,
+  ChevronDownRegular,
+  EyeOffRegular,
+  EyeRegular,
+} from '@fluentui/react-icons';
 
 import {
   VscButton,
@@ -32,6 +37,15 @@ import {
   VscCheckbox,
   VscLabel,
   VscSwitch,
+  VscDialog,
+  VscDialogTrigger,
+  VscDialogSurface,
+  VscDialogBody,
+  VscDialogTitle,
+  VscDialogDescription,
+  VscDialogSeparator,
+  VscDialogContent,
+  VscDialogActions,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -1330,6 +1344,263 @@ function LabelSection() {
   );
 }
 
+const dialogLinkStyle: React.CSSProperties = {
+  color: 'var(--vscode-textLink-foreground)',
+  textDecoration: 'none',
+};
+
+const dialogFieldStackStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 12,
+};
+
+const dialogRadioGroupStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 8,
+  border: 'none',
+  padding: 0,
+  margin: 0,
+};
+
+const dialogRadioLabelStyle: React.CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 8,
+  fontSize: 13,
+  color: 'var(--vscode-foreground)',
+  cursor: 'pointer',
+};
+
+const dialogRadioInputStyle: React.CSSProperties = {
+  accentColor: 'var(--vscode-button-background)',
+  width: 16,
+  height: 16,
+  margin: 0,
+};
+
+const dialogRevealButtonStyle: React.CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 0,
+  border: 'none',
+  background: 'transparent',
+  color: 'var(--vscode-icon-foreground)',
+  cursor: 'pointer',
+  lineHeight: 0,
+};
+
+function CredentialValueInput() {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <VscInput
+      type={visible ? 'text' : 'password'}
+      placeholder="Value"
+      withIcon
+      contentAfter={
+        <button
+          type="button"
+          style={dialogRevealButtonStyle}
+          aria-label={visible ? 'Hide value' : 'Show value'}
+          onClick={() => setVisible((v) => !v)}
+        >
+          {visible ? (
+            <EyeOffRegular fontSize={16} />
+          ) : (
+            <EyeRegular fontSize={16} />
+          )}
+        </button>
+      }
+    />
+  );
+}
+
+function McpToolFormFields({ radioName }: { radioName: string }) {
+  return (
+    <>
+      <VscDialogDescription>
+        You are connecting to a third-party service that is not run or provided
+        by Microsoft. Your use of that service is subject to the terms between
+        you and that service. By continuing, you agree to the terms of service.{' '}
+        <a href="#" style={dialogLinkStyle} onClick={(e) => e.preventDefault()}>
+          Learn more
+        </a>
+      </VscDialogDescription>
+
+      <fieldset style={dialogRadioGroupStyle}>
+        <legend
+          style={{
+            padding: 0,
+            marginBottom: 8,
+            fontSize: 13,
+            fontWeight: 400,
+            color: 'var(--vscode-descriptionForeground)',
+          }}
+        >
+          How to add function tool
+        </legend>
+        <label style={dialogRadioLabelStyle}>
+          <input
+            type="radio"
+            name={radioName}
+            defaultChecked
+            style={dialogRadioInputStyle}
+          />
+          By example
+        </label>
+        <label style={dialogRadioLabelStyle}>
+          <input type="radio" name={radioName} style={dialogRadioInputStyle} />
+          upload existing schema
+        </label>
+      </fieldset>
+
+      <div style={dialogFieldStackStyle}>
+        <VscField label="Label" required tooltipContent="Help text">
+          <VscInput placeholder="Enter connection name" />
+        </VscField>
+        <VscField label="Label" required tooltipContent="Help text">
+          <VscInput placeholder="https://your-mcp-server.com" />
+        </VscField>
+        <VscField label="Label" required tooltipContent="Help text">
+          <VscDropdown placeholder="Key based" value="key-based">
+            <VscOption value="key-based">Key based</VscOption>
+            <VscOption value="oauth">OAuth</VscOption>
+          </VscDropdown>
+        </VscField>
+        <div style={dialogFieldStackStyle}>
+          <VscLabel required tooltipContent="Help text">
+            Credentials
+          </VscLabel>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              gap: 8,
+              alignItems: 'center',
+            }}
+          >
+            <VscInput placeholder="Key" />
+            <span
+              style={{
+                color: 'var(--vscode-descriptionForeground)',
+                fontSize: 13,
+              }}
+            >
+              :
+            </span>
+            <CredentialValueInput />
+          </div>
+          <VscButton
+            appearance="outline"
+            icon={<AddRegular />}
+            style={{ alignSelf: 'flex-start' }}
+          >
+            Add Credential
+          </VscButton>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function InstructionDialog({ size }: { size: 'wide' | 'narrow' }) {
+  return (
+    <VscDialog>
+      <VscDialogTrigger>
+        <VscButton>Open {size === 'wide' ? 'wide' : 'narrow'} dialog</VscButton>
+      </VscDialogTrigger>
+      <VscDialogSurface size={size}>
+        <VscDialogBody>
+          <VscDialogTitle>Main question or action</VscDialogTitle>
+          <VscDialogContent>
+            <VscDialogDescription>
+              <p style={{ margin: 0, fontSize: 13, lineHeight: '18px' }}>
+                Check our{' '}
+                <a
+                  href="#"
+                  style={dialogLinkStyle}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  documentation
+                </a>{' '}
+                to learn how AI Toolkit improves the instruction for your AI
+                agent.
+              </p>
+            </VscDialogDescription>
+            <VscDialogSeparator />
+            <VscTextarea
+              rows={5}
+              defaultValue="Make these instructions clearer and more actionable. Keep the original intent, remove ambiguity, and rewrite with concise steps, explicit constraints, and expected output format."
+            />
+          </VscDialogContent>
+          <VscDialogActions size={size}>
+            <VscButton appearance="primary">Action</VscButton>
+            <VscButton>Action</VscButton>
+          </VscDialogActions>
+        </VscDialogBody>
+      </VscDialogSurface>
+    </VscDialog>
+  );
+}
+
+function McpToolDialog() {
+  const radioName = React.useId();
+  return (
+    <VscDialog>
+      <div style={{ display: 'inline-flex', width: 'fit-content' }}>
+        <VscDialogTrigger>
+          <VscButton>Open form dialog</VscButton>
+        </VscDialogTrigger>
+      </div>
+      <VscDialogSurface size="wide">
+        <VscDialogBody>
+          <VscDialogTitle>Add Model Context Protocol tool</VscDialogTitle>
+          <VscDialogContent>
+            <McpToolFormFields radioName={radioName} />
+          </VscDialogContent>
+          <VscDialogActions size="wide">
+            <VscButton appearance="primary">Action</VscButton>
+            <VscButton>Action</VscButton>
+          </VscDialogActions>
+        </VscDialogBody>
+      </VscDialogSurface>
+    </VscDialog>
+  );
+}
+
+function DialogSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscDialog</h2>
+      <p style={helperNoteStyle}>
+        Instruction editor (wide and narrow) with optional description and
+        separator, plus a wide form dialog with fields, radio options, dropdown,
+        and credentials.
+      </p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={gridHeadStyle}>Dialog (wide & narrow)</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <InstructionDialog size="wide" />
+            <InstructionDialog size="narrow" />
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={gridHeadStyle}>Dialog with form</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <McpToolDialog />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TabListSection() {
   return (
     <section style={sectionStyle}>
@@ -1589,6 +1860,7 @@ function Playground() {
           <LabelSection />
           <MenuSection />
           <TabListSection />
+          <DialogSection />
           <LiveHoverDemo />
         </div>
       </div>

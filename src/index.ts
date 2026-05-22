@@ -95,3 +95,30 @@ export type { VscLabelProps } from './components/Label';
 // Switch
 export { VscSwitch } from './components/Switch';
 export type { VscSwitchProps } from './components/Switch';
+
+// Dialog
+export {
+  VscDialog,
+  VscDialogTrigger,
+  VscDialogSurface,
+  VscDialogBody,
+  VscDialogTitle,
+  VscDialogCloseButton,
+  VscDialogDescription,
+  VscDialogSeparator,
+  VscDialogContent,
+  VscDialogActions,
+} from './components/Dialog';
+export type {
+  VscDialogProps,
+  VscDialogTriggerProps,
+  VscDialogSurfaceProps,
+  VscDialogBodyProps,
+  VscDialogTitleProps,
+  VscDialogCloseButtonProps,
+  VscDialogDescriptionProps,
+  VscDialogSeparatorProps,
+  VscDialogContentProps,
+  VscDialogActionsProps,
+  VscDialogSize,
+} from './components/Dialog';
