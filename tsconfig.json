@@ -11,7 +11,15 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noEmit": true,
+    "allowArbitraryExtensions": true,
     "types": ["vitest/globals"]
   },
-  "include": ["src", "test", "playground", "vite.config.ts", "vitest.config.ts"]
+  "include": [
+    "src",
+    "test",
+    "playground",
+    ".storybook",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ]
 }

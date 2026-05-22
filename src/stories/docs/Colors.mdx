@@ -1,0 +1,340 @@
+import { Meta } from '@storybook/blocks';
+import { ColorSection } from '../helpers/design-language-helpers';
+
+<Meta title="Design System/Colors" />
+
+# Colors
+
+Our VS Code extension components use only **official VS Code color tokens**
+(`var(--vscode-*)`). No custom colors are defined — all values come from the
+active VS Code theme at runtime.
+
+> **Why VS Code tokens?** Using only official `--vscode-*` CSS variables means
+> our components automatically adapt to any user-installed theme — Dark+, Light+,
+> Monokai, Solarized, high contrast, and all community themes. No hardcoded
+> colors needed.
+>
+> Reference: [VS Code Theme Color Reference](https://code.visualstudio.com/api/references/theme-color)
+
+---
+
+## Base & Foreground
+
+Core foreground and status colors used across the UI.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Foreground',
+      token: '--vscode-foreground',
+      darkValue: '#cccccc',
+      lightValue: '#424242',
+    },
+    {
+      name: 'Description Foreground',
+      token: '--vscode-descriptionForeground',
+      darkValue: '#9d9d9d',
+      lightValue: '#717171',
+    },
+    {
+      name: 'Disabled Foreground',
+      token: '--vscode-disabledForeground',
+      darkValue: 'rgba(204,204,204,0.5)',
+      lightValue: 'rgba(66,66,66,0.5)',
+    },
+    {
+      name: 'Error Foreground',
+      token: '--vscode-errorForeground',
+      darkValue: '#f48771',
+      lightValue: '#a1260d',
+    },
+    {
+      name: 'Focus Border',
+      token: '--vscode-focusBorder',
+      darkValue: '#007fd4',
+      lightValue: '#0078d4',
+    },
+    {
+      name: 'Icon Foreground',
+      token: '--vscode-icon-foreground',
+      darkValue: '#cccccc',
+      lightValue: '#424242',
+    },
+    {
+      name: 'Link Foreground',
+      token: '--vscode-textLink-foreground',
+      darkValue: '#3794ff',
+      lightValue: '#0066bf',
+    },
+    {
+      name: 'Link Active Foreground',
+      token: '--vscode-textLink-activeForeground',
+      darkValue: '#3794ff',
+      lightValue: '#0066bf',
+    },
+  ]}
+/>
+
+---
+
+## Button
+
+Primary and secondary button colors for actions.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Primary Background',
+      token: '--vscode-button-background',
+      darkValue: '#0078d4',
+      lightValue: '#0078d4',
+    },
+    {
+      name: 'Primary Foreground',
+      token: '--vscode-button-foreground',
+      darkValue: '#ffffff',
+      lightValue: '#ffffff',
+    },
+    {
+      name: 'Primary Hover',
+      token: '--vscode-button-hoverBackground',
+      darkValue: '#026ec1',
+      lightValue: '#026ec1',
+    },
+    {
+      name: 'Primary Border',
+      token: '--vscode-button-border',
+      darkValue: 'rgba(255,255,255,0.07)',
+      lightValue: 'rgba(0,0,0,0.07)',
+    },
+    {
+      name: 'Secondary Background',
+      token: '--vscode-button-secondaryBackground',
+      darkValue: '#313131',
+      lightValue: '#e5e5e5',
+    },
+    {
+      name: 'Secondary Foreground',
+      token: '--vscode-button-secondaryForeground',
+      darkValue: '#cccccc',
+      lightValue: '#424242',
+    },
+    {
+      name: 'Secondary Hover',
+      token: '--vscode-button-secondaryHoverBackground',
+      darkValue: '#3c3c3c',
+      lightValue: '#cccccc',
+    },
+  ]}
+/>
+
+---
+
+## Input
+
+Text inputs, search boxes, textareas, and validation states.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Input Background',
+      token: '--vscode-input-background',
+      darkValue: '#3c3c3c',
+      lightValue: '#ffffff',
+    },
+    {
+      name: 'Input Foreground',
+      token: '--vscode-input-foreground',
+      darkValue: '#cccccc',
+      lightValue: '#616161',
+    },
+    {
+      name: 'Input Border',
+      token: '--vscode-input-border',
+      darkValue: '#474747',
+      lightValue: '#cecece',
+    },
+    {
+      name: 'Placeholder',
+      token: '--vscode-input-placeholderForeground',
+      darkValue: '#9d9d9d',
+      lightValue: '#767676',
+    },
+    {
+      name: 'Option Active Background',
+      token: '--vscode-inputOption-activeBackground',
+      darkValue: 'rgba(36,137,219,0.51)',
+      lightValue: 'rgba(0,120,212,0.3)',
+    },
+    {
+      name: 'Validation Error Border',
+      token: '--vscode-inputValidation-errorBorder',
+      darkValue: '#be1100',
+      lightValue: '#be1100',
+    },
+    {
+      name: 'Validation Warning Border',
+      token: '--vscode-inputValidation-warningBorder',
+      darkValue: '#9d5d00',
+      lightValue: '#9d5d00',
+    },
+    {
+      name: 'Validation Info Border',
+      token: '--vscode-inputValidation-infoBorder',
+      darkValue: '#007acc',
+      lightValue: '#007acc',
+    },
+  ]}
+/>
+
+---
+
+## Dropdown
+
+Dropdown triggers and dropdown list panels.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Dropdown Background',
+      token: '--vscode-dropdown-background',
+      darkValue: '#3c3c3c',
+      lightValue: '#ffffff',
+    },
+    {
+      name: 'Dropdown Foreground',
+      token: '--vscode-dropdown-foreground',
+      darkValue: '#f0f0f0',
+      lightValue: '#616161',
+    },
+    {
+      name: 'Dropdown Border',
+      token: '--vscode-dropdown-border',
+      darkValue: '#474747',
+      lightValue: '#cecece',
+    },
+    {
+      name: 'Dropdown List Background',
+      token: '--vscode-dropdown-listBackground',
+      darkValue: '#252526',
+      lightValue: '#ffffff',
+    },
+  ]}
+/>
+
+---
+
+## Menu
+
+Context menus and menu bar items.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Menu Background',
+      token: '--vscode-menu-background',
+      darkValue: '#1f1f1f',
+      lightValue: '#ffffff',
+    },
+    {
+      name: 'Menu Foreground',
+      token: '--vscode-menu-foreground',
+      darkValue: '#cccccc',
+      lightValue: '#3b3b3b',
+    },
+    {
+      name: 'Menu Border',
+      token: '--vscode-menu-border',
+      darkValue: '#454545',
+      lightValue: '#c8c8c8',
+    },
+    {
+      name: 'Selection Background',
+      token: '--vscode-menu-selectionBackground',
+      darkValue: '#04395e',
+      lightValue: '#0078d4',
+    },
+    {
+      name: 'Selection Foreground',
+      token: '--vscode-menu-selectionForeground',
+      darkValue: '#ffffff',
+      lightValue: '#ffffff',
+    },
+    {
+      name: 'Separator',
+      token: '--vscode-menu-separatorBackground',
+      darkValue: '#454545',
+      lightValue: '#d4d4d4',
+    },
+  ]}
+/>
+
+---
+
+## List
+
+Selection and hover states for list items and trees.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Active Selection BG',
+      token: '--vscode-list-activeSelectionBackground',
+      darkValue: '#04395e',
+      lightValue: '#0060c0',
+    },
+    {
+      name: 'Active Selection FG',
+      token: '--vscode-list-activeSelectionForeground',
+      darkValue: '#ffffff',
+      lightValue: '#ffffff',
+    },
+    {
+      name: 'Hover Background',
+      token: '--vscode-list-hoverBackground',
+      darkValue: '#2a2d2e',
+      lightValue: '#e8e8e8',
+    },
+    {
+      name: 'Hover Foreground',
+      token: '--vscode-list-hoverForeground',
+      darkValue: '#cccccc',
+      lightValue: '#424242',
+    },
+  ]}
+/>
+
+---
+
+## Tabs & Toolbar
+
+Tab labels and subtle toolbar interactions.
+
+<ColorSection
+  colors={[
+    {
+      name: 'Active Foreground',
+      token: '--vscode-tab-activeForeground',
+      darkValue: '#ffffff',
+      lightValue: '#333333',
+    },
+    {
+      name: 'Inactive Foreground',
+      token: '--vscode-tab-inactiveForeground',
+      darkValue: '#9d9d9d',
+      lightValue: '#717171',
+    },
+    {
+      name: 'Toolbar Hover BG',
+      token: '--vscode-toolbar-hoverBackground',
+      darkValue: 'rgba(90,93,94,0.31)',
+      lightValue: 'rgba(0,0,0,0.08)',
+    },
+    {
+      name: 'Toolbar Active BG',
+      token: '--vscode-toolbar-activeBackground',
+      darkValue: 'rgba(99,102,103,0.31)',
+      lightValue: 'rgba(0,0,0,0.12)',
+    },
+  ]}
+/>
