@@ -31,6 +31,7 @@ import {
   VscTab,
   VscCheckbox,
   VscLabel,
+  VscSwitch,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -216,6 +217,24 @@ const CHECKBOX_SIZE_ROWS = [
 ];
 
 const CHECKBOX_COLUMNS = [
+  { key: 'default', label: 'Default' },
+  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
+  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+  { key: 'disabled', label: 'Disabled' },
+];
+
+const SWITCH_STATE_ROWS = [
+  { key: 'unchecked', label: 'Unchecked' },
+  { key: 'checked', label: 'Checked' },
+];
+
+const SWITCH_LABEL_ROWS = [
+  { key: 'none', label: 'No label' },
+  { key: 'after', label: 'Label after' },
+  { key: 'above', label: 'Label above' },
+];
+
+const SWITCH_COLUMNS = [
   { key: 'default', label: 'Default' },
   { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
   { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
@@ -616,6 +635,48 @@ function CheckboxSection() {
               );
             }}
           />
+        </React.Fragment>
+      ))}
+    </section>
+  );
+}
+
+function SwitchSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscSwitch</h2>
+      {CHECKBOX_SIZE_ROWS.map((sizeRow) => (
+        <React.Fragment key={sizeRow.key}>
+          <h3 style={headerStyle}>{sizeRow.label}</h3>
+          {SWITCH_STATE_ROWS.map((stateRow) => (
+            <React.Fragment key={stateRow.key}>
+              <Matrix
+                rows={SWITCH_LABEL_ROWS}
+                columns={SWITCH_COLUMNS}
+                columnWidthMode="content"
+                rowLabelWidth={120}
+                rowGap={24}
+                columnGap={28}
+                cellRender={(row, col) => {
+                  const checked = stateRow.key === 'checked';
+                  const size = sizeRow.key as 'small' | 'medium' | 'large';
+                  const labelPosition =
+                    row === 'above' ? ('above' as const) : ('after' as const);
+                  return (
+                    <VscSwitch
+                      label={row === 'none' ? undefined : 'Label'}
+                      labelPosition={labelPosition}
+                      size={size}
+                      checked={checked}
+                      disabled={col === 'disabled'}
+                      onChange={() => {}}
+                      autoFocus={col === 'focus'}
+                    />
+                  );
+                }}
+              />
+            </React.Fragment>
+          ))}
         </React.Fragment>
       ))}
     </section>
@@ -1519,6 +1580,7 @@ function Playground() {
           <MenuButtonSection />
           <SplitButtonSection />
           <CheckboxSection />
+          <SwitchSection />
           <InputSection />
           <TextareaSection />
           <SearchBoxSection />
