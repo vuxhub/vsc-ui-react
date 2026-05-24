@@ -329,6 +329,16 @@ body {
   border-radius: 4px !important;
 }
 
+.vsc-force-focus .fui-Radio {
+  outline: 1px solid var(--vscode-focusBorder) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+.vsc-force-hover .fui-Radio .fui-Radio__label {
+  color: var(--vscode-inputOption-activeForeground) !important;
+}
+
 /*
  * Force-selected for form controls: mirrors an active/selected surface using
  * VS Code input-option active tokens so selected columns are clearly visible.

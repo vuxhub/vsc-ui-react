@@ -88,6 +88,13 @@ export type { VscTabListProps, VscTabProps } from './components/TabList';
 export { VscCheckbox } from './components/Checkbox';
 export type { VscCheckboxProps } from './components/Checkbox';
 
+// RadioGroup
+export { VscRadioGroup, VscRadio } from './components/RadioGroup';
+export type {
+  VscRadioGroupProps,
+  VscRadioProps,
+} from './components/RadioGroup';
+
 // Label
 export { VscLabel } from './components/Label';
 export type { VscLabelProps } from './components/Label';
