@@ -18,7 +18,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A select-style dropdown with VS Code styling. This family also includes `VscCombobox` (editable with filtering), `VscListbox` (inline list), and supporting primitives like `VscOption`, `VscOptionGroup`, and `VscOptionSeparator`.',
+          'A select-style dropdown with VS Code styling. This family also includes `VscCombobox` (editable with filtering), `VscListbox` (inline list), and supporting primitives like `VscOption`, `VscOptionGroup`, and `VscOptionSeparator`. Visual note: `Default`, `Dropdown`, and `Selection States` cover closed-trigger behavior; `Open State` and `Combobox Open State` are for popup/list visuals.',
       },
     },
   },
@@ -112,6 +112,80 @@ export const ValidationStates: Story = {
   ),
 };
 
+/* ── Selection States ───────────────────────────────────────────── */
+
+export const SelectionStates: Story = {
+  render: () => (
+    <>
+      <Section title="Selected Trigger Value">
+        <Row>
+          <VscDropdown defaultValue="Dark+ (default dark)">
+            <VscOption text="Dark+ (default dark)">
+              Dark+ (default dark)
+            </VscOption>
+            <VscOption text="Light+ (default light)">
+              Light+ (default light)
+            </VscOption>
+            <VscOption text="Monokai">Monokai</VscOption>
+          </VscDropdown>
+        </Row>
+      </Section>
+
+      <Section
+        title="Selected Option Styling (Inline Listbox)"
+        description="Use Listbox for deterministic selected-option visuals without relying on popup behavior."
+      >
+        <div style={{ maxWidth: 320 }}>
+          <VscListbox
+            selectionIndicator="checkmark"
+            selectedOptions={['dark-plus']}
+          >
+            <VscOption value="dark-plus" text="Dark+ (default dark)">
+              Dark+ (default dark)
+            </VscOption>
+            <VscOption value="light-plus" text="Light+ (default light)">
+              Light+ (default light)
+            </VscOption>
+            <VscOption value="monokai" text="Monokai">
+              Monokai
+            </VscOption>
+          </VscListbox>
+        </div>
+      </Section>
+    </>
+  ),
+};
+
+/* ── Open State ─────────────────────────────────────────────────── */
+
+export const OpenDropdown: Story = {
+  name: 'Open State',
+  render: () => (
+    <Section
+      title="Dropdown Open By Default"
+      description="Useful for validating popup option, hover, and selection visuals in screenshots."
+    >
+      <div style={{ maxWidth: 320 }}>
+        <VscDropdown
+          open
+          value="Dark+ (default dark)"
+          onOpenChange={() => {
+            // Keep story deterministic by leaving open state controlled.
+          }}
+        >
+          <VscOption text="Dark+ (default dark)">
+            Dark+ (default dark)
+          </VscOption>
+          <VscOption text="Light+ (default light)">
+            Light+ (default light)
+          </VscOption>
+          <VscOption text="Monokai">Monokai</VscOption>
+        </VscDropdown>
+      </div>
+    </Section>
+  ),
+};
+
 /* ── Combobox ────────────────────────────────────────────────────── */
 
 export const ComboboxStory: Story = {
@@ -133,6 +207,32 @@ export const ComboboxStory: Story = {
           <VscOption text="Disabled">Disabled</VscOption>
         </VscCombobox>
       </Row>
+    </Section>
+  ),
+};
+
+export const OpenCombobox: Story = {
+  name: 'Combobox Open State',
+  render: () => (
+    <Section
+      title="Combobox Open By Default"
+      description="Useful for validating popup option, hover, and selection visuals for editable triggers."
+    >
+      <div style={{ maxWidth: 320 }}>
+        <VscCombobox
+          open
+          value="TypeScript"
+          onOpenChange={() => {
+            // Keep story deterministic by leaving open state controlled.
+          }}
+        >
+          <VscOption text="JavaScript">JavaScript</VscOption>
+          <VscOption text="TypeScript">TypeScript</VscOption>
+          <VscOption text="Python">Python</VscOption>
+          <VscOption text="Rust">Rust</VscOption>
+          <VscOption text="Go">Go</VscOption>
+        </VscCombobox>
+      </div>
     </Section>
   ),
 };

@@ -32,7 +32,7 @@ const useDropdownBaseStyles = makeStyles({
     backgroundColor: 'var(--vscode-dropdown-background)',
     transition: 'none',
 
-    '::after': {
+    '&::after, &.fui-Dropdown::after, &.fui-Dropdown:focus-within::after': {
       display: 'none' as const,
     },
 
@@ -46,6 +46,10 @@ const useDropdownBaseStyles = makeStyles({
       border: 'none',
       cursor: 'pointer',
       minHeight: 'unset',
+    },
+
+    '& .fui-Dropdown__button::after': {
+      display: 'none' as const,
     },
 
     '& .fui-Dropdown__button[data-placeholder]': {
@@ -92,7 +96,7 @@ const useDropdownBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-dropdown-border)'),
     },
 
-    ':focus-within': {
+    '&.fui-Dropdown:focus-within': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
       outline: 'none',
     },
@@ -258,7 +262,7 @@ const useComboboxBaseStyles = makeStyles({
     backgroundColor: 'var(--vscode-dropdown-background)',
     transition: 'none',
 
-    '::after': {
+    '&::after, &.fui-Combobox::after, &.fui-Combobox:focus-within::after': {
       display: 'none' as const,
     },
 
@@ -318,7 +322,7 @@ const useComboboxBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-dropdown-border)'),
     },
 
-    ':focus-within': {
+    '&.fui-Combobox:focus-within': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
       outline: 'none',
     },

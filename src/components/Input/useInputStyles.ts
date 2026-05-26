@@ -24,7 +24,7 @@ const useBaseStyles = makeStyles({
     backgroundColor: 'var(--vscode-input-background)',
     transition: 'none',
 
-    '::after': {
+    '&::after, &.fui-Input::after, &.fui-Input:focus-within::after': {
       display: 'none' as const,
     },
 
@@ -64,7 +64,7 @@ const useBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-input-border)'),
     },
 
-    ':focus-within': {
+    '&.fui-Input:focus-within': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
       outline: 'none',
     },
