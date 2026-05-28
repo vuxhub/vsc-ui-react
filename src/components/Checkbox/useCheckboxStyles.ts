@@ -6,6 +6,36 @@ import {
 
 import { vscFontFamily } from '../../styles/tokens';
 
+const checkboxIndicator = '.fui-Checkbox__indicator.fui-Checkbox__indicator';
+const checkboxInput = 'input.fui-Checkbox__input';
+const checkedIndicator = `& ${checkboxInput}:checked ~ ${checkboxIndicator}`;
+const mixedIndicator = `& ${checkboxInput}:indeterminate ~ ${checkboxIndicator}`;
+const checkedIndicatorHover = `&:hover ${checkboxInput}:checked ~ ${checkboxIndicator}`;
+const mixedIndicatorHover = `&:hover ${checkboxInput}:indeterminate ~ ${checkboxIndicator}`;
+const disabledIndicator = `& ${checkboxInput}:disabled ~ ${checkboxIndicator}, & ${checkboxInput}[aria-disabled='true'] ~ ${checkboxIndicator}`;
+const checkedDisabledIndicator = `& ${checkboxInput}:disabled:checked ~ ${checkboxIndicator}, & ${checkboxInput}[aria-disabled='true']:checked ~ ${checkboxIndicator}`;
+const mixedDisabledIndicator = `& ${checkboxInput}:disabled:indeterminate ~ ${checkboxIndicator}, & ${checkboxInput}[aria-disabled='true']:indeterminate ~ ${checkboxIndicator}`;
+
+const checkboxBackground = 'var(--vscode-checkbox-background, transparent)';
+const checkboxBorder =
+  'var(--vscode-checkbox-border, var(--vscode-input-border, var(--vscode-foreground)))';
+const checkboxForeground =
+  'var(--vscode-checkbox-foreground, var(--vscode-foreground))';
+const checkboxHoverForeground =
+  'var(--vscode-checkbox-hoverForeground, var(--vscode-list-hoverForeground, var(--vscode-checkbox-foreground, var(--vscode-foreground))))';
+const checkboxHoverBorder =
+  'var(--vscode-checkbox-hoverBorder, var(--vscode-checkbox-hoverForeground, var(--vscode-list-hoverForeground, var(--vscode-checkbox-border, var(--vscode-foreground)))))';
+const checkboxSelectedBackground =
+  'var(--vscode-checkbox-selectBackground, var(--vscode-button-background))';
+const checkboxSelectedBorder =
+  'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-selectBackground, var(--vscode-button-background)))';
+const checkboxSelectedForeground =
+  'var(--vscode-checkbox-selectForeground, var(--vscode-button-foreground))';
+const checkboxSelectedHoverBackground =
+  'var(--vscode-checkbox-selectHoverBackground, var(--vscode-checkbox-selectBackground, var(--vscode-button-background)))';
+const checkboxSelectedHoverBorder =
+  'var(--vscode-checkbox-selectHoverBorder, var(--vscode-checkbox-selectHoverBackground, var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-selectBackground, var(--vscode-button-background)))))';
+
 // ---------------------------------------------------------------------------
 //  Base – root override styles via makeStyles
 // ---------------------------------------------------------------------------
@@ -15,80 +45,157 @@ const useBaseStyles = makeStyles({
     fontFamily: vscFontFamily,
     transition: 'none',
     alignItems: 'center',
+    gap: '7px',
 
-    '& .fui-Checkbox__indicator.fui-Checkbox__indicator': {
-      ...shorthands.borderColor('var(--vscode-checkbox-border)'),
+    [`& ${checkboxIndicator}`]: {
+      boxSizing: 'border-box',
+      display: 'flex',
+      alignSelf: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0,
+      padding: '0',
+      margin: '0',
+      ...shorthands.borderStyle('solid'),
+      ...shorthands.borderColor(checkboxBorder),
       ...shorthands.borderWidth('1px'),
       ...shorthands.borderRadius('2px'),
-      backgroundColor: 'var(--vscode-checkbox-background)',
-      color: 'var(--vscode-checkbox-foreground, var(--vscode-foreground))',
+      backgroundColor: checkboxBackground,
+      color: checkboxForeground,
+      fill: 'currentColor',
       boxShadow: 'none',
       transition: 'none',
-      width: '16px',
-      height: '16px',
-      fontSize: '16px',
-      margin: '0',
-      marginInlineEnd: '6px',
+      width: '12px',
+      height: '12px',
+      fontSize: '12px',
+      '--vsc-checkbox-check-icon-size': '12px',
+      '--vsc-checkbox-mixed-icon-size': '6px',
+
+      '& > svg': {
+        display: 'block',
+        width: 'var(--vsc-checkbox-check-icon-size)',
+        height: 'var(--vsc-checkbox-check-icon-size)',
+        fontSize: 'var(--vsc-checkbox-check-icon-size)',
+        color: 'inherit',
+        fill: 'currentColor',
+      },
     },
 
-    '& input:checked ~ .fui-Checkbox__indicator.fui-Checkbox__indicator': {
-      backgroundColor: 'var(--vscode-checkbox-selectBackground)',
-      ...shorthands.borderColor(
-        'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-border))',
-      ),
-      color: 'var(--vscode-checkbox-selectForeground, #242424)',
+    [checkedIndicator]: {
+      backgroundColor: checkboxSelectedBackground,
+      ...shorthands.borderColor(checkboxSelectedBorder),
+      color: checkboxSelectedForeground,
     },
 
-    '& input:indeterminate ~ .fui-Checkbox__indicator.fui-Checkbox__indicator':
+    [`${checkedIndicator} > svg`]: {
+      width: 'var(--vsc-checkbox-check-icon-size)',
+      height: 'var(--vsc-checkbox-check-icon-size)',
+      fontSize: 'var(--vsc-checkbox-check-icon-size)',
+    },
+
+    [mixedIndicator]: {
+      backgroundColor: checkboxBackground,
+      ...shorthands.borderColor(checkboxSelectedBorder),
+      color: checkboxSelectedBackground,
+    },
+
+    [`${mixedIndicator} > svg`]: {
+      width: 'var(--vsc-checkbox-mixed-icon-size)',
+      height: 'var(--vsc-checkbox-mixed-icon-size)',
+      fontSize: 'var(--vsc-checkbox-mixed-icon-size)',
+    },
+
+    [`&:hover ${checkboxIndicator}`]: {
+      ...shorthands.borderColor(checkboxHoverBorder),
+      backgroundColor: checkboxBackground,
+      color: checkboxHoverForeground,
+    },
+
+    [checkedIndicatorHover]: {
+      backgroundColor: checkboxSelectedHoverBackground,
+      ...shorthands.borderColor(checkboxSelectedHoverBorder),
+      color: checkboxSelectedForeground,
+    },
+
+    [mixedIndicatorHover]: {
+      backgroundColor: checkboxBackground,
+      ...shorthands.borderColor(checkboxSelectedHoverBorder),
+      color: checkboxSelectedHoverBackground,
+    },
+
+    '&:hover .fui-Checkbox__label': {
+      color: checkboxHoverForeground,
+    },
+
+    [`&[data-fui-focus-within]:focus-within ${checkboxIndicator}`]: {
+      ...shorthands.borderColor(checkboxHoverBorder),
+      color: checkboxHoverForeground,
+    },
+
+    [`&[data-fui-focus-within]:focus-within ${checkboxInput}:checked ~ ${checkboxIndicator}`]:
       {
-        backgroundColor: 'var(--vscode-checkbox-background)',
-        ...shorthands.borderColor(
-          'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-border))',
-        ),
-        color: 'var(--vscode-checkbox-selectBackground)',
+        backgroundColor: checkboxSelectedHoverBackground,
+        ...shorthands.borderColor(checkboxSelectedHoverBorder),
+        color: checkboxSelectedForeground,
       },
 
+    [`&[data-fui-focus-within]:focus-within ${checkboxInput}:indeterminate ~ ${checkboxIndicator}`]:
+      {
+        backgroundColor: checkboxBackground,
+        ...shorthands.borderColor(checkboxSelectedHoverBorder),
+        color: checkboxSelectedHoverBackground,
+      },
+
+    '&[data-fui-focus-within]:focus-within .fui-Checkbox__label': {
+      color: checkboxHoverForeground,
+    },
+
+    [disabledIndicator]: {
+      backgroundColor: checkboxBackground,
+      ...shorthands.borderColor(checkboxBorder),
+      color: checkboxForeground,
+    },
+
+    [checkedDisabledIndicator]: {
+      backgroundColor: checkboxSelectedBackground,
+      ...shorthands.borderColor(checkboxSelectedBorder),
+      color: checkboxSelectedForeground,
+    },
+
+    [mixedDisabledIndicator]: {
+      backgroundColor: checkboxBackground,
+      ...shorthands.borderColor(checkboxSelectedBorder),
+      color: checkboxSelectedBackground,
+    },
+
     '& .fui-Checkbox__label': {
+      alignSelf: 'center',
       fontFamily: vscFontFamily,
       fontSize: 'var(--fontSizeBase200, 12px)',
       lineHeight: 'var(--lineHeightBase200, 16px)',
       color: 'var(--vscode-foreground)',
+      marginTop: '0',
+      marginRight: '0',
+      marginBottom: '0',
+      marginLeft: '0',
       paddingTop: '0',
+      paddingRight: '0',
       paddingBottom: '0',
+      paddingLeft: '0',
+      cursor: 'pointer',
     },
 
-    ':hover .fui-Checkbox__indicator.fui-Checkbox__indicator': {
-      ...shorthands.borderColor('var(--vscode-checkbox-border)'),
-      backgroundColor: 'var(--vscode-checkbox-background)',
-    },
-
-    ':hover input:checked ~ .fui-Checkbox__indicator.fui-Checkbox__indicator': {
-      backgroundColor: 'var(--vscode-checkbox-selectBackground)',
-      ...shorthands.borderColor(
-        'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-border))',
-      ),
-    },
-
-    ':hover input:indeterminate ~ .fui-Checkbox__indicator.fui-Checkbox__indicator':
-      {
-        backgroundColor: 'var(--vscode-checkbox-background)',
-        ...shorthands.borderColor(
-          'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-border))',
-        ),
-      },
-
-    '&:focus-visible': {
+    '&:focus-visible, &[data-fui-focus-within]:focus-within': {
       outlineStyle: 'solid',
       outlineWidth: '1px',
       outlineColor: 'var(--vscode-focusBorder)',
-      outlineOffset: '6px',
+      outlineOffset: '2px',
       borderRadius: '4px',
     },
 
-    '& input:focus-visible ~ .fui-Checkbox__indicator.fui-Checkbox__indicator':
-      {
-        outlineStyle: 'none',
-      },
+    [`& ${checkboxInput}:focus-visible ~ ${checkboxIndicator}`]: {
+      outlineStyle: 'none',
+    },
 
     '::after': {
       display: 'none' as const,
@@ -109,14 +216,21 @@ const useStyles = makeStyles({
     opacity: 0.4,
     cursor: 'not-allowed',
     pointerEvents: 'none',
+
+    '& .fui-Checkbox__label': {
+      cursor: 'not-allowed',
+    },
   },
 
   small: {
-    '& .fui-Checkbox__indicator.fui-Checkbox__indicator': {
-      width: '14px',
-      height: '14px',
-      fontSize: '14px',
-      marginInlineEnd: '4px',
+    gap: '5px',
+
+    [`& ${checkboxIndicator}`]: {
+      width: '10px',
+      height: '10px',
+      fontSize: '10px',
+      '--vsc-checkbox-check-icon-size': '10px',
+      '--vsc-checkbox-mixed-icon-size': '5px',
     },
 
     '& .fui-Checkbox__label': {
@@ -126,11 +240,19 @@ const useStyles = makeStyles({
   },
 
   large: {
-    '& .fui-Checkbox__indicator.fui-Checkbox__indicator': {
-      width: '20px',
-      height: '20px',
-      fontSize: '20px',
-      marginInlineEnd: '8px',
+    gap: '9px',
+
+    [`& ${checkboxIndicator}`]: {
+      width: '16px',
+      height: '16px',
+      fontSize: '16px',
+      '--vsc-checkbox-check-icon-size': '16px',
+      '--vsc-checkbox-mixed-icon-size': '8px',
+    },
+
+    '& .fui-Checkbox__label': {
+      fontSize: 'var(--fontSizeBase300, 14px)',
+      lineHeight: 'var(--lineHeightBase300, 20px)',
     },
   },
 });

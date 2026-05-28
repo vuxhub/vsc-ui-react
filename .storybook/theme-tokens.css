@@ -39,6 +39,17 @@
   --vscode-input-border: #474747;
   --vscode-input-placeholderForeground: #9d9d9d;
 
+  /* Checkbox */
+  --vscode-checkbox-background: transparent;
+  --vscode-checkbox-foreground: #cccccc;
+  --vscode-checkbox-border: #cccccc;
+  --vscode-checkbox-hoverForeground: #ffffff;
+  --vscode-checkbox-hoverBorder: #ffffff;
+  --vscode-checkbox-selectBackground: #0078d4;
+  --vscode-checkbox-selectBorder: #0078d4;
+  --vscode-checkbox-selectForeground: #242424;
+  --vscode-checkbox-selectHoverBackground: #4e94ce;
+  --vscode-checkbox-selectHoverBorder: #4e94ce;
   /* Input Options */
   --vscode-inputOption-activeBackground: rgba(36, 137, 219, 0.51);
   --vscode-inputOption-activeBorder: rgba(0, 122, 204, 0);
@@ -127,6 +138,16 @@ body.light-mode {
   --vscode-input-border: #cecece;
   --vscode-input-placeholderForeground: #767676;
 
+  --vscode-checkbox-background: #ffffff;
+  --vscode-checkbox-foreground: #3b3b3b;
+  --vscode-checkbox-border: #3b3b3b;
+  --vscode-checkbox-hoverForeground: #000000;
+  --vscode-checkbox-hoverBorder: #000000;
+  --vscode-checkbox-selectBackground: #005fb8;
+  --vscode-checkbox-selectBorder: #005fb8;
+  --vscode-checkbox-selectForeground: #ffffff;
+  --vscode-checkbox-selectHoverBackground: #0258a8;
+  --vscode-checkbox-selectHoverBorder: #0258a8;
   --vscode-inputOption-activeBackground: rgba(0, 120, 212, 0.3);
   --vscode-inputOption-activeBorder: rgba(0, 122, 204, 0);
   --vscode-inputOption-activeForeground: #000000;

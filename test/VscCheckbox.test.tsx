@@ -55,18 +55,37 @@ describe('VscCheckbox', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
+  it('renders the checked indicator icon after click', () => {
+    const { container } = render(<VscCheckbox label="Icon" />, { wrapper });
+
+    expect(container.querySelector('.fui-Checkbox__indicator svg')).toBeNull();
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Icon' }));
+    expect(
+      container.querySelector('.fui-Checkbox__indicator svg'),
+    ).toBeTruthy();
+  });
+
   it('supports checked state', () => {
-    render(<VscCheckbox label="Checked" checked onChange={() => {}} />, {
+    const { container } = render(<VscCheckbox label="Checked" checked />, {
       wrapper,
     });
     expect(screen.getByRole('checkbox', { name: 'Checked' })).toBeChecked();
+    expect(
+      container.querySelector('.fui-Checkbox__indicator svg'),
+    ).toBeTruthy();
   });
 
   it('supports mixed (indeterminate) state', () => {
-    render(<VscCheckbox label="Mixed" checked="mixed" onChange={() => {}} />, {
-      wrapper,
-    });
+    const { container } = render(
+      <VscCheckbox label="Mixed" checked="mixed" />,
+      {
+        wrapper,
+      },
+    );
     const checkbox = screen.getByRole('checkbox', { name: 'Mixed' });
     expect(checkbox).toHaveProperty('indeterminate', true);
+    expect(
+      container.querySelector('.fui-Checkbox__indicator svg'),
+    ).toBeTruthy();
   });
 });

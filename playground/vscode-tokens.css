@@ -115,11 +115,15 @@
 
   /* Checkbox */
   --vscode-checkbox-background: transparent;
-  --vscode-checkbox-foreground: #f0f0f0;
-  --vscode-checkbox-border: #f0f0f0;
+  --vscode-checkbox-foreground: #cccccc;
+  --vscode-checkbox-border: #cccccc;
+  --vscode-checkbox-hoverForeground: #ffffff;
+  --vscode-checkbox-hoverBorder: #ffffff;
   --vscode-checkbox-selectBackground: #0078d4;
   --vscode-checkbox-selectBorder: #0078d4;
   --vscode-checkbox-selectForeground: #242424;
+  --vscode-checkbox-selectHoverBackground: #4e94ce;
+  --vscode-checkbox-selectHoverBorder: #4e94ce;
 }
 
 :root.theme-light {
@@ -213,9 +217,13 @@
   --vscode-checkbox-background: #ffffff;
   --vscode-checkbox-foreground: #3b3b3b;
   --vscode-checkbox-border: #3b3b3b;
+  --vscode-checkbox-hoverForeground: #000000;
+  --vscode-checkbox-hoverBorder: #000000;
   --vscode-checkbox-selectBackground: #005fb8;
   --vscode-checkbox-selectBorder: #005fb8;
   --vscode-checkbox-selectForeground: #ffffff;
+  --vscode-checkbox-selectHoverBackground: #0258a8;
+  --vscode-checkbox-selectHoverBorder: #0258a8;
 }
 
 html,
@@ -301,6 +309,32 @@ body {
  * preserve validation border colors. The component handles all cases.
  */
 
+.vsc-force-hover .fui-Checkbox .fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox .fui-Checkbox__indicator {
+  background-color: var(--vscode-checkbox-background) !important;
+  border-color: var(--vscode-checkbox-hoverBorder) !important;
+  color: var(--vscode-checkbox-hoverForeground) !important;
+}
+
+.vsc-force-hover .fui-Checkbox .fui-Checkbox__label,
+.vsc-force-focus .fui-Checkbox .fui-Checkbox__label {
+  color: var(--vscode-checkbox-hoverForeground) !important;
+}
+
+.vsc-force-hover .fui-Checkbox input:checked ~ .fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox input:checked ~ .fui-Checkbox__indicator {
+  background-color: var(--vscode-checkbox-selectHoverBackground) !important;
+  border-color: var(--vscode-checkbox-selectHoverBorder) !important;
+  color: var(--vscode-checkbox-selectForeground) !important;
+}
+
+.vsc-force-hover .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator {
+  background-color: var(--vscode-checkbox-background) !important;
+  border-color: var(--vscode-checkbox-selectHoverBorder) !important;
+  color: var(--vscode-checkbox-selectHoverBackground) !important;
+}
+
 /*
  * Force-focus for inputs/textareas/dropdowns/searchbox: paint the focus
  * border statically so the "Focus" column reflects what the component would
@@ -319,7 +353,7 @@ body {
 
 .vsc-force-focus .fui-Checkbox {
   outline: 1px solid var(--vscode-focusBorder) !important;
-  outline-offset: 6px !important;
+  outline-offset: 2px !important;
   border-radius: 4px !important;
 }
 

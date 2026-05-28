@@ -617,9 +617,52 @@ function SplitButtonSection() {
 }
 
 function CheckboxSection() {
+  const [controlledChecked, setControlledChecked] = useState(false);
+  const [mixedChecked, setMixedChecked] = useState<'mixed' | boolean>('mixed');
+
   return (
     <section style={sectionStyle}>
       <h2 style={headerStyle}>VscCheckbox</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <h3 style={headerStyle}>Direct Usage</h3>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: 20,
+          }}
+        >
+          <VscCheckbox label="Unchecked" />
+          <VscCheckbox label="Default checked" defaultChecked />
+          <VscCheckbox
+            label="Controlled"
+            checked={controlledChecked}
+            onChange={(_, data) => setControlledChecked(data.checked === true)}
+          />
+          <VscCheckbox
+            label="Mixed"
+            checked={mixedChecked}
+            onChange={(_, data) => setMixedChecked(data.checked)}
+          />
+          <VscCheckbox label="Disabled" disabled />
+          <VscCheckbox label="Disabled checked" disabled defaultChecked />
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: 20,
+          }}
+        >
+          <VscCheckbox size="small" label="Small" defaultChecked />
+          <VscCheckbox label="Medium" defaultChecked />
+          <VscCheckbox size="large" label="Large" defaultChecked />
+          <VscCheckbox aria-label="Standalone" />
+          <VscCheckbox aria-label="Standalone checked" defaultChecked />
+        </div>
+      </div>
       {CHECKBOX_SIZE_ROWS.map((sizeRow) => (
         <React.Fragment key={sizeRow.key}>
           <h3 style={headerStyle}>{sizeRow.label}</h3>
