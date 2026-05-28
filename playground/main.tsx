@@ -8,6 +8,7 @@ import {
 import {
   AddRegular,
   ChevronDownRegular,
+  CircleRegular,
   EyeOffRegular,
   EyeRegular,
 } from '@fluentui/react-icons';
@@ -36,6 +37,7 @@ import {
   VscTab,
   VscCheckbox,
   VscLabel,
+  VscBadge,
   VscSwitch,
   VscDialog,
   VscDialogTrigger,
@@ -1344,6 +1346,66 @@ function LabelSection() {
   );
 }
 
+const BADGE_APPEARANCE_COLUMNS = [
+  { key: 'filled', label: 'Filled' },
+  { key: 'tint', label: 'Tint' },
+  { key: 'outline', label: 'Outline' },
+  { key: 'subtle', label: 'Subtle' },
+];
+
+const BADGE_SIZE_ROWS = [
+  { key: 'large', label: 'Large' },
+  { key: 'medium', label: 'Medium' },
+  { key: 'small', label: 'Small' },
+];
+
+const BADGE_COLOR_ROWS = [
+  { key: 'blue', label: 'Blue' },
+  { key: 'red', label: 'Red' },
+  { key: 'yellow', label: 'Yellow' },
+  { key: 'green', label: 'Green' },
+  { key: 'neutral', label: 'Neutral' },
+  { key: 'neutralContrast', label: 'Neutral contrast' },
+];
+
+function BadgeSection() {
+  const badgeIcon = <CircleRegular />;
+
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscBadge</h2>
+
+      {BADGE_COLOR_ROWS.map((colorRow) => (
+        <React.Fragment key={colorRow.key}>
+          <h3 style={headerStyle}>{colorRow.label}</h3>
+          <Matrix
+            rows={BADGE_SIZE_ROWS}
+            columns={BADGE_APPEARANCE_COLUMNS}
+            columnWidthMode="content"
+            rowLabelWidth={80}
+            cellRender={(sizeKey, appearanceKey) => (
+              <VscBadge
+                color={
+                  colorRow.key as React.ComponentProps<typeof VscBadge>['color']
+                }
+                appearance={
+                  appearanceKey as React.ComponentProps<
+                    typeof VscBadge
+                  >['appearance']
+                }
+                size={sizeKey as React.ComponentProps<typeof VscBadge>['size']}
+                icon={badgeIcon}
+              >
+                Badge
+              </VscBadge>
+            )}
+          />
+        </React.Fragment>
+      ))}
+    </section>
+  );
+}
+
 const dialogLinkStyle: React.CSSProperties = {
   color: 'var(--vscode-textLink-foreground)',
   textDecoration: 'none',
@@ -1858,6 +1920,7 @@ function Playground() {
           <DropdownSection />
           <FieldSection />
           <LabelSection />
+          <BadgeSection />
           <MenuSection />
           <TabListSection />
           <DialogSection />

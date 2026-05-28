@@ -96,6 +96,15 @@ export type { VscLabelProps } from './components/Label';
 export { VscSwitch } from './components/Switch';
 export type { VscSwitchProps } from './components/Switch';
 
+// Badge
+export { VscBadge } from './components/Badge';
+export type {
+  VscBadgeProps,
+  VscBadgeAppearance,
+  VscBadgeColor,
+  VscBadgeSize,
+} from './components/Badge';
+
 // Dialog
 export {
   VscDialog,
