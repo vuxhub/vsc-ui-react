@@ -45,7 +45,7 @@ const useBaseStyles = makeStyles({
     fontFamily: vscFontFamily,
     transition: 'none',
     alignItems: 'center',
-    gap: '7px',
+    gap: '6px',
 
     [`& ${checkboxIndicator}`]: {
       boxSizing: 'border-box',
@@ -223,7 +223,7 @@ const useStyles = makeStyles({
   },
 
   small: {
-    gap: '5px',
+    gap: '4px',
 
     [`& ${checkboxIndicator}`]: {
       width: '10px',
@@ -240,7 +240,7 @@ const useStyles = makeStyles({
   },
 
   large: {
-    gap: '9px',
+    gap: '8px',
 
     [`& ${checkboxIndicator}`]: {
       width: '16px',
