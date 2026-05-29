@@ -144,7 +144,7 @@
   --vscode-dialog-overlay: rgba(0, 0, 0, 0.4);
   --vscode-toolbar-hoverBackground: rgba(0, 0, 0, 0.1);
 
-  --vscode-editor-background: #f4f4f4;
+  --vscode-editor-background: #ffffff;
   --vscode-editor-foreground: #3b3b3b;
   --vscode-editorWidget-background: #f8f8f8;
   --vscode-editorWidget-foreground: #3b3b3b;
@@ -205,7 +205,7 @@
   --vscode-badge-successForeground: #388a34;
   --vscode-badge-neutralBackground: #3b3b3b;
   --vscode-badge-neutralForeground: #d3d3d3;
-  --vscode-badge-neutralContrastBackground: #ffffff;
+  --vscode-badge-neutralContrastBackground: #f0f0f0;
   --vscode-badge-neutralContrastForeground: #939393;
   --vscode-textLink-foreground: #005fb8;
   --vscode-textLink-activeForeground: #005fb8;
