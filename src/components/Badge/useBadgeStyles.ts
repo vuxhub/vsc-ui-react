@@ -127,9 +127,19 @@ const useIconStyles = makeStyles({
 const useTextStyles = makeStyles({
   root: {
     display: 'inline-block',
+    lineHeight: 'inherit',
+  },
+  small: {
+    paddingLeft: '1px',
+    paddingRight: '1px',
+  },
+  medium: {
+    paddingLeft: '2px',
+    paddingRight: '2px',
+  },
+  large: {
     paddingLeft: '3px',
     paddingRight: '3px',
-    lineHeight: 'inherit',
   },
 });
 
@@ -146,11 +156,10 @@ const useSizeStyles = makeStyles({
       maxHeight: '16px',
       width: 'auto',
       minWidth: 'auto',
-      gap: '0px',
       paddingTop: '2px',
       paddingBottom: '2px',
-      paddingLeft: '5px',
-      paddingRight: '5px',
+      paddingLeft: '1px',
+      paddingRight: '2px',
       fontSize: '10px',
       lineHeight: '14px',
     },
@@ -164,7 +173,6 @@ const useSizeStyles = makeStyles({
       maxHeight: '20px',
       width: 'auto',
       minWidth: 'auto',
-      gap: '0px',
       paddingTop: '3px',
       paddingBottom: '3px',
       paddingLeft: '4px',
@@ -182,7 +190,6 @@ const useSizeStyles = makeStyles({
       maxHeight: '24px',
       width: 'auto',
       minWidth: 'auto',
-      gap: '2px',
       paddingTop: '4px',
       paddingBottom: '4px',
       paddingLeft: '4px',
@@ -558,5 +565,12 @@ export function useBadgeStyles(options: UseBadgeStylesOptions) {
     size === 'large' && icons.large,
   );
 
-  return { rootClassName, textClassName: text.root, iconClassName };
+  const textClassName = mergeClasses(
+    text.root,
+    size === 'small' && text.small,
+    size === 'medium' && text.medium,
+    size === 'large' && text.large,
+  );
+
+  return { rootClassName, textClassName, iconClassName };
 }
