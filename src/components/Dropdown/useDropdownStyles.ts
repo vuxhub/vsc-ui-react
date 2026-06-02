@@ -126,8 +126,8 @@ const useDropdownStyles = makeStyles({
     minHeight: '24px',
     '& .fui-Dropdown__button': {
       padding: '2px 8px 2px 6px',
-      fontSize: 'var(--fontSizeBase200, 12px)',
-      lineHeight: 'var(--lineHeightBase200, 16px)',
+      fontSize: 'var(--fontSizeBase100, 10px)',
+      lineHeight: 'var(--lineHeightBase100, 14px)',
     },
     '& .fui-Dropdown__expandIcon': {
       fontSize: 0,
@@ -148,6 +148,8 @@ const useDropdownStyles = makeStyles({
     minHeight: '28px',
     '& .fui-Dropdown__button': {
       ...shorthands.padding('5px', '8px'),
+      fontSize: 'var(--fontSizeBase300, 14px)',
+      lineHeight: 'var(--lineHeightBase300, 20px)',
     },
     '& .fui-Dropdown__expandIcon': {
       width: '16px',
@@ -352,6 +354,8 @@ const useComboboxStyles = makeStyles({
     minHeight: '24px',
     '& .fui-Combobox__input': {
       padding: '2px 8px 2px 6px',
+      fontSize: 'var(--fontSizeBase100, 10px)',
+      lineHeight: 'var(--lineHeightBase100, 14px)',
     },
     '& .fui-Combobox__expandIcon': {
       fontSize: 0,
@@ -372,6 +376,8 @@ const useComboboxStyles = makeStyles({
     minHeight: '28px',
     '& .fui-Combobox__input': {
       ...shorthands.padding('5px', '8px'),
+      fontSize: 'var(--fontSizeBase300, 14px)',
+      lineHeight: 'var(--lineHeightBase300, 20px)',
     },
     '& .fui-Combobox__expandIcon': {
       width: '16px',

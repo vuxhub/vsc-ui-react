@@ -14,11 +14,29 @@ const meta = {
   title: 'Components/Dropdown',
   component: VscDropdown,
   tags: ['autodocs'],
+  argTypes: {
+    validationState: {
+      control: 'radio',
+      options: ['none', 'error', 'warning', 'info'],
+      mapping: {
+        none: undefined,
+        error: 'error',
+        warning: 'warning',
+        info: 'info',
+      },
+      description: 'Validation border state for the trigger.',
+    },
+    size: {
+      control: 'radio',
+      options: ['small', 'medium', 'large'],
+      description: 'Size variant of the dropdown trigger.',
+    },
+  },
   parameters: {
     docs: {
       description: {
         component:
-          'A select-style dropdown with VS Code styling. This family also includes `VscCombobox` (editable with filtering), `VscListbox` (inline list), and supporting primitives like `VscOption`, `VscOptionGroup`, and `VscOptionSeparator`. Visual note: `Default`, `Dropdown`, and `Selection States` cover closed-trigger behavior; `Open State` and `Combobox Open State` are for popup/list visuals.',
+          'A select-style dropdown with VS Code styling. This family also includes `VscCombobox` (editable with filtering), `VscListbox` (inline list), and supporting primitives like `VscOption`, `VscOptionGroup`, and `VscOptionSeparator`. Visual note: `Default`, `Disabled`, `Sizes`, and `Selection States` cover closed-trigger behavior; `Open State` and `Combobox Open State` are for popup/list visuals.',
       },
     },
   },
@@ -32,6 +50,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Select a theme',
+    size: 'medium',
   },
   render: (args) => (
     <VscDropdown {...args}>
@@ -42,47 +61,46 @@ export const Default: Story = {
   ),
 };
 
-/* ── Dropdown ────────────────────────────────────────────────────── */
+/* ── Disabled ────────────────────────────────────────────────────── */
 
-export const DropdownTrigger: Story = {
-  name: 'Dropdown',
+export const Disabled: Story = {
   render: () => (
-    <>
-      <Section title="Default Dropdown">
-        <Row>
-          <VscDropdown placeholder="Select a theme" defaultValue="Dark+">
-            <VscOption text="Dark+">Dark+</VscOption>
-            <VscOption text="Light+">Light+</VscOption>
-            <VscOption text="Monokai">Monokai</VscOption>
+    <Section title="Disabled">
+      <Row>
+        <VscDropdown placeholder="Disabled" disabled>
+          <VscOption text="Disabled">Disabled</VscOption>
+        </VscDropdown>
+      </Row>
+    </Section>
+  ),
+};
+
+/* ── Sizes ───────────────────────────────────────────────────────── */
+
+export const Sizes: Story = {
+  render: () => (
+    <Section title="Sizes">
+      <Row>
+        <Inline label="Small">
+          <VscDropdown size="small" placeholder="Small">
+            <VscOption text="A">A</VscOption>
+            <VscOption text="B">B</VscOption>
           </VscDropdown>
-          <VscDropdown placeholder="Disabled" disabled>
-            <VscOption text="Disabled">Disabled</VscOption>
+        </Inline>
+        <Inline label="Medium (default)">
+          <VscDropdown placeholder="Medium">
+            <VscOption text="A">A</VscOption>
+            <VscOption text="B">B</VscOption>
           </VscDropdown>
-        </Row>
-      </Section>
-      <Section title="Sizes">
-        <Row>
-          <Inline label="Small">
-            <VscDropdown size="small" placeholder="Small">
-              <VscOption text="A">A</VscOption>
-              <VscOption text="B">B</VscOption>
-            </VscDropdown>
-          </Inline>
-          <Inline label="Medium (default)">
-            <VscDropdown placeholder="Medium">
-              <VscOption text="A">A</VscOption>
-              <VscOption text="B">B</VscOption>
-            </VscDropdown>
-          </Inline>
-          <Inline label="Large">
-            <VscDropdown size="large" placeholder="Large">
-              <VscOption text="A">A</VscOption>
-              <VscOption text="B">B</VscOption>
-            </VscDropdown>
-          </Inline>
-        </Row>
-      </Section>
-    </>
+        </Inline>
+        <Inline label="Large">
+          <VscDropdown size="large" placeholder="Large">
+            <VscOption text="A">A</VscOption>
+            <VscOption text="B">B</VscOption>
+          </VscDropdown>
+        </Inline>
+      </Row>
+    </Section>
   ),
 };
 
