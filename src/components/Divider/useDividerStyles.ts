@@ -21,7 +21,7 @@ const useBaseStyles = makeStyles({
       flexGrow: 1,
       borderTopStyle: 'solid',
       borderTopWidth: '1px',
-      borderTopColor: '#454545',
+      borderTopColor: 'var(--vscode-divider-background)',
       content: '""',
     },
 
@@ -31,7 +31,7 @@ const useBaseStyles = makeStyles({
       flexGrow: 1,
       borderTopStyle: 'solid',
       borderTopWidth: '1px',
-      borderTopColor: '#454545',
+      borderTopColor: 'var(--vscode-divider-background)',
       content: '""',
     },
   },
@@ -56,7 +56,7 @@ const useOrientationStyles = makeStyles({
       borderBottomStyle: 'none',
       borderLeftStyle: 'solid',
       borderLeftWidth: '1px',
-      borderLeftColor: '#454545',
+      borderLeftColor: 'var(--vscode-divider-background)',
       minHeight: '8px',
     },
 
@@ -66,7 +66,7 @@ const useOrientationStyles = makeStyles({
       borderBottomStyle: 'none',
       borderLeftStyle: 'solid',
       borderLeftWidth: '1px',
-      borderLeftColor: '#454545',
+      borderLeftColor: 'var(--vscode-divider-background)',
       minHeight: '8px',
     },
   },
@@ -78,19 +78,34 @@ const useOrientationStyles = makeStyles({
 
 const useSizeStyles = makeStyles({
   small: {
-    // Horizontal: short padding for text wrapper
     '& > span': {
-      paddingLeft: '8px',
-      paddingRight: '8px',
-      fontSize: '11px',
+      paddingLeft: '4px',
+      paddingRight: '4px',
+      fontSize: '14px',
     },
   },
   large: {
-    // Horizontal: more generous padding for text wrapper
     '& > span': {
-      paddingLeft: '12px',
-      paddingRight: '12px',
-      fontSize: '12px',
+      paddingLeft: '4px',
+      paddingRight: '4px',
+      fontSize: '16px',
+    },
+  },
+});
+
+const useVerticalSizeStyles = makeStyles({
+  small: {
+    '& > span': {
+      paddingTop: '4px',
+      paddingBottom: '4px',
+      fontSize: '14px',
+    },
+  },
+  large: {
+    '& > span': {
+      paddingTop: '8px',
+      paddingBottom: '8px',
+      fontSize: '16px',
     },
   },
 });
@@ -167,7 +182,7 @@ const useVerticalAlignStyles = makeStyles({
 
 const useWrapperStyles = makeStyles({
   wrapper: {
-    color: '#9D9D9D',
+    color: 'var(--vscode-divider-foreground)',
     fontSize: '12px',
     lineHeight: '1',
     whiteSpace: 'nowrap',
@@ -200,6 +215,7 @@ export function useDividerStyles(options: UseDividerStylesOptions) {
   const base = useBaseStyles();
   const orientationClasses = useOrientationStyles();
   const sizeClasses = useSizeStyles();
+  const verticalSizeClasses = useVerticalSizeStyles();
   const alignClasses = useAlignStyles();
   const verticalAlignClasses = useVerticalAlignStyles();
   const wrapperClasses = useWrapperStyles();
@@ -207,7 +223,9 @@ export function useDividerStyles(options: UseDividerStylesOptions) {
   const rootClassName = mergeClasses(
     base.root,
     orientationClasses[orientation],
-    sizeClasses[size],
+    orientation === 'horizontal'
+      ? sizeClasses[size]
+      : verticalSizeClasses[size],
     orientation === 'horizontal'
       ? alignClasses[alignContent]
       : verticalAlignClasses[alignContent],
