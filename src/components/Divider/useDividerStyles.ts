@@ -81,14 +81,14 @@ const useSizeStyles = makeStyles({
     '& > span': {
       paddingLeft: '4px',
       paddingRight: '4px',
-      fontSize: '14px',
+      fontSize: '10px',
     },
   },
   large: {
     '& > span': {
       paddingLeft: '4px',
       paddingRight: '4px',
-      fontSize: '16px',
+      fontSize: '12px',
     },
   },
 });
@@ -98,14 +98,14 @@ const useVerticalSizeStyles = makeStyles({
     '& > span': {
       paddingTop: '4px',
       paddingBottom: '4px',
-      fontSize: '14px',
+      fontSize: '10px',
     },
   },
   large: {
     '& > span': {
       paddingTop: '8px',
       paddingBottom: '8px',
-      fontSize: '16px',
+      fontSize: '12px',
     },
   },
 });
