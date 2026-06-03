@@ -2,6 +2,7 @@ import {
   makeStyles,
   mergeClasses,
   shorthands,
+  tokens,
 } from '@fluentui/react-components';
 
 import { vscFontFamily } from '../../styles/tokens';
@@ -28,13 +29,14 @@ const useRadioBaseStyles = makeStyles({
     alignItems: 'center',
 
     // --- Indicator (circle) ---
-    // Fluent default margin (8px all around) is preserved — we do NOT override
+    // Override Fluent's default 8px indicator margin to match VS Code spacing.
     '& .fui-Radio__indicator.fui-Radio__indicator': {
       ...shorthands.borderColor(
         'var(--vscode-radio-border, var(--vscode-checkbox-border))',
       ),
       ...shorthands.borderWidth('1px'),
       ...shorthands.borderRadius('50%'),
+      margin: `${tokens.spacingVerticalS} ${tokens.spacingHorizontalS}`,
       backgroundColor:
         'var(--vscode-radio-background, var(--vscode-checkbox-background))',
       color: 'transparent',
@@ -134,6 +136,7 @@ const useRadioPermStyles = makeStyles({
     '& .fui-Radio__indicator.fui-Radio__indicator': {
       width: '8px',
       height: '8px',
+      margin: `${tokens.spacingVerticalXS} ${tokens.spacingHorizontalXS}`,
     },
 
     '& .fui-Radio__label': {
@@ -146,6 +149,7 @@ const useRadioPermStyles = makeStyles({
     '& .fui-Radio__indicator.fui-Radio__indicator': {
       width: '12px',
       height: '12px',
+      margin: `${tokens.spacingVerticalSNudge} ${tokens.spacingHorizontalSNudge}`,
     },
 
     '& .fui-Radio__label': {
