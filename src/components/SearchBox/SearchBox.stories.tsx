@@ -19,6 +19,12 @@ const meta = {
       },
     },
   },
+  argTypes: {
+    size: {
+      control: 'radio',
+      options: ['small', 'medium', 'large'],
+    },
+  },
 } satisfies Meta<typeof VscSearchBox>;
 
 export default meta;

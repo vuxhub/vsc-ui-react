@@ -47,7 +47,7 @@ const meta = {
       description: 'Visual style of the button.',
     },
     size: {
-      control: 'select',
+      control: 'radio',
       options: ['medium', 'small', 'compact'],
       description:
         'Size variant. Includes `compact` (15 px) in addition to Fluent built-in sizes.',
