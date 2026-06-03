@@ -309,11 +309,23 @@ body {
  * preserve validation border colors. The component handles all cases.
  */
 
+/*
+ * Checkbox visuals are painted by the indicator's ::before pseudo-element
+ * (positioned at `inset: var(--vsc-checkbox-indicator-padding)`), driven by
+ * CSS custom properties. We must set those variables — NOT paint the
+ * indicator wrapper directly, which would flood-fill the full 24×24 slot.
+ */
 .vsc-force-hover .fui-Checkbox .fui-Checkbox__indicator,
 .vsc-force-focus .fui-Checkbox .fui-Checkbox__indicator {
-  background-color: var(--vscode-checkbox-background) !important;
-  border-color: var(--vscode-checkbox-hoverBorder) !important;
-  color: var(--vscode-checkbox-hoverForeground) !important;
+  --vsc-checkbox-indicator-background: var(
+    --vscode-checkbox-background
+  ) !important;
+  --vsc-checkbox-indicator-border: var(
+    --vscode-checkbox-hoverBorder
+  ) !important;
+  --vsc-checkbox-indicator-foreground: var(
+    --vscode-checkbox-hoverForeground
+  ) !important;
 }
 
 .vsc-force-hover .fui-Checkbox .fui-Checkbox__label,
@@ -323,16 +335,28 @@ body {
 
 .vsc-force-hover .fui-Checkbox input:checked ~ .fui-Checkbox__indicator,
 .vsc-force-focus .fui-Checkbox input:checked ~ .fui-Checkbox__indicator {
-  background-color: var(--vscode-checkbox-selectHoverBackground) !important;
-  border-color: var(--vscode-checkbox-selectHoverBorder) !important;
-  color: var(--vscode-checkbox-selectForeground) !important;
+  --vsc-checkbox-indicator-background: var(
+    --vscode-checkbox-selectHoverBackground
+  ) !important;
+  --vsc-checkbox-indicator-border: var(
+    --vscode-checkbox-selectHoverBorder
+  ) !important;
+  --vsc-checkbox-indicator-foreground: var(
+    --vscode-checkbox-selectForeground
+  ) !important;
 }
 
 .vsc-force-hover .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator,
 .vsc-force-focus .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator {
-  background-color: var(--vscode-checkbox-background) !important;
-  border-color: var(--vscode-checkbox-selectHoverBorder) !important;
-  color: var(--vscode-checkbox-selectHoverBackground) !important;
+  --vsc-checkbox-indicator-background: var(
+    --vscode-checkbox-background
+  ) !important;
+  --vsc-checkbox-indicator-border: var(
+    --vscode-checkbox-selectHoverBorder
+  ) !important;
+  --vsc-checkbox-indicator-foreground: var(
+    --vscode-checkbox-selectHoverBackground
+  ) !important;
 }
 
 /*
