@@ -175,6 +175,6 @@ body.light-mode {
   --badge-bg: rgba(0, 0, 0, 0.06);
   --badge-text: #424242;
 
-  --vscode-divider-background: #454545;
+  --vscode-divider-background: #e5e5e5;
   --vscode-divider-foreground: #9D9D9D;
 }
