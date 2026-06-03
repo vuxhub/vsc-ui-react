@@ -38,10 +38,10 @@ const meta = {
       },
     },
   },
-} satisfies Meta;
+} satisfies Meta<typeof Menu>;
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof meta>;
 
 /* ── Basic Context Menu ──────────────────────────────────────────── */
 

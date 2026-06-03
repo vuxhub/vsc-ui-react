@@ -97,7 +97,7 @@ const useBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-input-border)'),
     },
 
-    ':focus-within': {
+    '&.fui-Input:focus-within': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
       outline: 'none',
     },

@@ -32,7 +32,7 @@ const useDropdownBaseStyles = makeStyles({
     backgroundColor: 'var(--vscode-dropdown-background)',
     transition: 'none',
 
-    '::after': {
+    '&::after, &.fui-Dropdown::after, &.fui-Dropdown:focus-within::after': {
       display: 'none' as const,
     },
 
@@ -46,6 +46,10 @@ const useDropdownBaseStyles = makeStyles({
       border: 'none',
       cursor: 'pointer',
       minHeight: 'unset',
+    },
+
+    '& .fui-Dropdown__button::after': {
+      display: 'none' as const,
     },
 
     '& .fui-Dropdown__button[data-placeholder]': {
@@ -92,7 +96,7 @@ const useDropdownBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-dropdown-border)'),
     },
 
-    ':focus-within': {
+    '&.fui-Dropdown:focus-within': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
       outline: 'none',
     },
@@ -122,8 +126,8 @@ const useDropdownStyles = makeStyles({
     minHeight: '24px',
     '& .fui-Dropdown__button': {
       padding: '2px 8px 2px 6px',
-      fontSize: 'var(--fontSizeBase200, 12px)',
-      lineHeight: 'var(--lineHeightBase200, 16px)',
+      fontSize: 'var(--fontSizeBase100, 10px)',
+      lineHeight: 'var(--lineHeightBase100, 14px)',
     },
     '& .fui-Dropdown__expandIcon': {
       fontSize: 0,
@@ -144,6 +148,8 @@ const useDropdownStyles = makeStyles({
     minHeight: '28px',
     '& .fui-Dropdown__button': {
       ...shorthands.padding('5px', '8px'),
+      fontSize: 'var(--fontSizeBase300, 14px)',
+      lineHeight: 'var(--lineHeightBase300, 20px)',
     },
     '& .fui-Dropdown__expandIcon': {
       width: '16px',
@@ -258,7 +264,7 @@ const useComboboxBaseStyles = makeStyles({
     backgroundColor: 'var(--vscode-dropdown-background)',
     transition: 'none',
 
-    '::after': {
+    '&::after, &.fui-Combobox::after, &.fui-Combobox:focus-within::after': {
       display: 'none' as const,
     },
 
@@ -318,7 +324,7 @@ const useComboboxBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-dropdown-border)'),
     },
 
-    ':focus-within': {
+    '&.fui-Combobox:focus-within': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
       outline: 'none',
     },
@@ -348,6 +354,8 @@ const useComboboxStyles = makeStyles({
     minHeight: '24px',
     '& .fui-Combobox__input': {
       padding: '2px 8px 2px 6px',
+      fontSize: 'var(--fontSizeBase100, 10px)',
+      lineHeight: 'var(--lineHeightBase100, 14px)',
     },
     '& .fui-Combobox__expandIcon': {
       fontSize: 0,
@@ -368,6 +376,8 @@ const useComboboxStyles = makeStyles({
     minHeight: '28px',
     '& .fui-Combobox__input': {
       ...shorthands.padding('5px', '8px'),
+      fontSize: 'var(--fontSizeBase300, 14px)',
+      lineHeight: 'var(--lineHeightBase300, 20px)',
     },
     '& .fui-Combobox__expandIcon': {
       width: '16px',
