@@ -79,10 +79,10 @@ export const Sizes: Story = {
           <VscRadio value="b" label="Option B" size="small" />
         </VscRadioGroup>
       </Inline>
-      <Inline label="Medium (default)">
+      <Inline label="Medium">
         <VscRadioGroup defaultValue="a">
-          <VscRadio value="a" label="Medium" />
-          <VscRadio value="b" label="Option B" />
+          <VscRadio value="a" label="Medium" size="medium" />
+          <VscRadio value="b" label="Option B" size="medium" />
         </VscRadioGroup>
       </Inline>
       <Inline label="Large">

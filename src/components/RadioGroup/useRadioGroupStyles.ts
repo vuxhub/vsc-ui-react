@@ -30,10 +30,13 @@ const useRadioBaseStyles = makeStyles({
     // --- Indicator (circle) ---
     // Fluent default margin (8px all around) is preserved — we do NOT override
     '& .fui-Radio__indicator.fui-Radio__indicator': {
-      ...shorthands.borderColor('var(--vscode-checkbox-border)'),
+      ...shorthands.borderColor(
+        'var(--vscode-radio-border, var(--vscode-checkbox-border))',
+      ),
       ...shorthands.borderWidth('1px'),
       ...shorthands.borderRadius('50%'),
-      backgroundColor: 'var(--vscode-checkbox-background)',
+      backgroundColor:
+        'var(--vscode-radio-background, var(--vscode-checkbox-background))',
       color: 'transparent',
       boxShadow: 'none',
       transition: 'none',
@@ -41,11 +44,17 @@ const useRadioBaseStyles = makeStyles({
       height: '16px',
     },
 
+    '& .fui-Radio__indicator.fui-Radio__indicator::after': {
+      width: '100%',
+      height: '100%',
+    },
+
     // --- Checked state: inner dot via SVG fill (color) ---
     '& input:checked ~ .fui-Radio__indicator.fui-Radio__indicator': {
-      color: 'var(--vscode-checkbox-selectBackground)',
+      color:
+        'var(--vscode-radio-selectBackground, var(--vscode-checkbox-selectBackground))',
       ...shorthands.borderColor(
-        'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-border))',
+        'var(--vscode-radio-selectBorder, var(--vscode-checkbox-selectBorder, var(--vscode-radio-border, var(--vscode-checkbox-border))))',
       ),
     },
 
@@ -59,16 +68,13 @@ const useRadioBaseStyles = makeStyles({
       paddingBottom: '0',
     },
 
-    // --- Hover: keep indicator stable ---
-    ':hover .fui-Radio__indicator.fui-Radio__indicator': {
-      ...shorthands.borderColor('var(--vscode-checkbox-border)'),
-      backgroundColor: 'var(--vscode-checkbox-background)',
-    },
-
+    // --- Hover: checked radios shift to the hover border + dot color ---
     ':hover input:checked ~ .fui-Radio__indicator.fui-Radio__indicator': {
-      color: 'var(--vscode-checkbox-selectBackground)',
+      color:
+        'var(--vscode-radio-selectHoverBackground, var(--vscode-radio-selectBackground, var(--vscode-checkbox-selectBackground)))',
+
       ...shorthands.borderColor(
-        'var(--vscode-checkbox-selectBorder, var(--vscode-checkbox-border))',
+        'var(--vscode-radio-hoverBorder, var(--vscode-checkbox-hoverBorder, var(--vscode-radio-selectBorder, var(--vscode-checkbox-selectBorder, var(--vscode-radio-border, var(--vscode-checkbox-border))))))',
       ),
     },
 
