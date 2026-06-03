@@ -122,3 +122,7 @@ export type {
   VscDialogActionsProps,
   VscDialogSize,
 } from './components/Dialog';
+
+// Accordion
+export { VscAccordion } from './components/Accordion';
+export type { VscAccordionProps } from './components/Accordion';
