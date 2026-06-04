@@ -1,6 +1,6 @@
 import type { FontFamilyTokens, Theme } from '@fluentui/react-components';
 
-import { webDarkTheme, webLightTheme } from '@fluentui/react-components';
+import { webDarkTheme } from '@fluentui/react-components';
 
 /* ── Font family ─────────────────────────────────────────────────── */
 
@@ -17,7 +17,12 @@ const fontFamilyTokens: FontFamilyTokens = {
 
 /**
  * Fluent token → VS Code CSS variable mappings.
- * These let Fluent components render with VS Code's theme colors at runtime.
+ *
+ * All color tokens resolve to var(--vscode-*) custom properties, which
+ * switch values at runtime via CSS class selectors (:root.theme-dark /
+ * :root.theme-light) in vscode-tokens.css. This means a SINGLE Fluent
+ * theme object works for both dark and light — no React re-render needed
+ * on theme switch, just a CSS class toggle.
  */
 const vscodeTokenOverrides: Partial<Theme> = {
   // Typography
@@ -27,6 +32,10 @@ const vscodeTokenOverrides: Partial<Theme> = {
   lineHeightBase100: '14px',
   lineHeightBase200: '16px',
   lineHeightBase300: '20px',
+
+  // FluentProvider root element tokens
+  colorNeutralForeground1: 'var(--vscode-foreground)',
+  colorNeutralBackground1: 'var(--vscode-editor-background)',
 
   // Brand / Primary button
   colorBrandBackground: 'var(--vscode-button-background)',
@@ -56,18 +65,19 @@ const vscodeTokenOverrides: Partial<Theme> = {
   colorNeutralForegroundDisabled: 'var(--vscode-disabledForeground)',
 };
 
-/* ── Exported themes ─────────────────────────────────────────────── */
+/* ── Exported theme ──────────────────────────────────────────────── */
 
 export type VscTheme = Theme;
 
-export const darkTheme: VscTheme = {
+/**
+ * Unified Fluent theme for VS Code components. Uses webDarkTheme as a
+ * structural base — the base color values are irrelevant because all
+ * component styles override them with var(--vscode-*) CSS variables.
+ * Non-color tokens (typography, spacing, border-radius) are identical
+ * between dark and light Fluent themes.
+ */
+export const vscTheme: VscTheme = {
   ...webDarkTheme,
-  ...fontFamilyTokens,
-  ...vscodeTokenOverrides,
-};
-
-export const lightTheme: VscTheme = {
-  ...webLightTheme,
   ...fontFamilyTokens,
   ...vscodeTokenOverrides,
 };

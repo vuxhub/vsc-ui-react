@@ -21,6 +21,12 @@ const meta = {
       },
     },
   },
+  argTypes: {
+    size: {
+      control: 'radio',
+      options: ['small', 'medium'],
+    },
+  },
 } satisfies Meta<typeof VscTabList>;
 
 export default meta;
@@ -44,32 +50,16 @@ export const Default: Story = {
 
 /* ── Default Tabs ────────────────────────────────────────────────── */
 
-export const DefaultTabs: Story = {
+export const SmallTabs: Story = {
   render: () => (
-    <>
-      <Section
-        title="Default (28px)"
-        description="Body1 typography, 20px icons."
-      >
-        <VscTabList defaultSelectedValue="general">
-          <VscTab value="general">General</VscTab>
-          <VscTab value="editor">Editor</VscTab>
-          <VscTab value="terminal">Terminal</VscTab>
-          <VscTab value="extensions">Extensions</VscTab>
-        </VscTabList>
-      </Section>
-      <Section
-        title="Small (22px)"
-        description="Caption1 typography, 16px icons."
-      >
-        <VscTabList size="small" defaultSelectedValue="general">
-          <VscTab value="general">General</VscTab>
-          <VscTab value="editor">Editor</VscTab>
-          <VscTab value="terminal">Terminal</VscTab>
-          <VscTab value="extensions">Extensions</VscTab>
-        </VscTabList>
-      </Section>
-    </>
+    <Section title="Small (12px text size)">
+      <VscTabList size="small" defaultSelectedValue="general">
+        <VscTab value="general">General</VscTab>
+        <VscTab value="editor">Editor</VscTab>
+        <VscTab value="terminal">Terminal</VscTab>
+        <VscTab value="extensions">Extensions</VscTab>
+      </VscTabList>
+    </Section>
   ),
 };
 
@@ -77,7 +67,10 @@ export const DefaultTabs: Story = {
 
 export const WithDisabledTab: Story = {
   render: () => (
-    <Section title="Disabled Tab">
+    <Section
+      title="Disabled Tab"
+      description="Use disabled prop to disable a tab"
+    >
       <VscTabList defaultSelectedValue="problems">
         <VscTab value="problems">Problems</VscTab>
         <VscTab value="output">Output</VscTab>
@@ -108,39 +101,21 @@ export const VerticalTabs: Story = {
 
 export const WithIcons: Story = {
   render: () => (
-    <>
-      <Section title="Default with Icons" description="20px icons.">
-        <VscTabList defaultSelectedValue="general">
-          <VscTab value="general" icon={<SettingsRegular />}>
-            General
-          </VscTab>
-          <VscTab value="editor" icon={<CodeRegular />}>
-            Editor
-          </VscTab>
-          <VscTab value="terminal" icon={<WindowRegular />}>
-            Terminal
-          </VscTab>
-          <VscTab value="extensions" icon={<PuzzlePieceRegular />}>
-            Extensions
-          </VscTab>
-        </VscTabList>
-      </Section>
-      <Section title="Small with Icons" description="16px icons.">
-        <VscTabList size="small" defaultSelectedValue="general">
-          <VscTab value="general" icon={<SettingsRegular />}>
-            General
-          </VscTab>
-          <VscTab value="editor" icon={<CodeRegular />}>
-            Editor
-          </VscTab>
-          <VscTab value="terminal" icon={<WindowRegular />}>
-            Terminal
-          </VscTab>
-          <VscTab value="extensions" icon={<PuzzlePieceRegular />}>
-            Extensions
-          </VscTab>
-        </VscTabList>
-      </Section>
-    </>
+    <Section title="Default with Icons" description="20px icons.">
+      <VscTabList defaultSelectedValue="general">
+        <VscTab value="general" icon={<SettingsRegular />}>
+          General
+        </VscTab>
+        <VscTab value="editor" icon={<CodeRegular />}>
+          Editor
+        </VscTab>
+        <VscTab value="terminal" icon={<WindowRegular />}>
+          Terminal
+        </VscTab>
+        <VscTab value="extensions" icon={<PuzzlePieceRegular />}>
+          Extensions
+        </VscTab>
+      </VscTabList>
+    </Section>
   ),
 };
