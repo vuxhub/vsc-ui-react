@@ -47,6 +47,7 @@ import {
   VscDialogContent,
   VscDialogActions,
   VscAccordion,
+  VscDivider,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -1654,6 +1655,88 @@ function TabListSection() {
   );
 }
 
+function DividerSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>Divider</h2>
+
+      <div>
+        <div style={gridHeadStyle}>Horizontal – Large</div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            marginTop: 8,
+          }}
+        >
+          <VscDivider alignContent="center" size="large">
+            Text
+          </VscDivider>
+          <VscDivider alignContent="start" size="large">
+            Text
+          </VscDivider>
+          <VscDivider alignContent="end" size="large">
+            Text
+          </VscDivider>
+        </div>
+      </div>
+
+      <div>
+        <div style={gridHeadStyle}>Horizontal – Small</div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            marginTop: 8,
+          }}
+        >
+          <VscDivider alignContent="center" size="small">
+            Text
+          </VscDivider>
+          <VscDivider alignContent="start" size="small">
+            Text
+          </VscDivider>
+          <VscDivider alignContent="end" size="small">
+            Text
+          </VscDivider>
+        </div>
+      </div>
+
+      <div>
+        <div style={gridHeadStyle}>Vertical – Large</div>
+        <div style={{ display: 'flex', gap: 48, height: 200, marginTop: 8 }}>
+          <VscDivider orientation="vertical" alignContent="start" size="large">
+            Text
+          </VscDivider>
+          <VscDivider orientation="vertical" alignContent="center" size="large">
+            Text
+          </VscDivider>
+          <VscDivider orientation="vertical" alignContent="end" size="large">
+            Text
+          </VscDivider>
+        </div>
+      </div>
+
+      <div>
+        <div style={gridHeadStyle}>Vertical – Small</div>
+        <div style={{ display: 'flex', gap: 48, height: 200, marginTop: 8 }}>
+          <VscDivider orientation="vertical" alignContent="start" size="small">
+            Text
+          </VscDivider>
+          <VscDivider orientation="vertical" alignContent="center" size="small">
+            Text
+          </VscDivider>
+          <VscDivider orientation="vertical" alignContent="end" size="small">
+            Text
+          </VscDivider>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LiveHoverDemo() {
   return (
     <section style={sectionStyle}>
@@ -2005,6 +2088,7 @@ function Playground() {
           <TabListSection />
           <DialogSection />
           <AccordionSection />
+          <DividerSection />
           <LiveHoverDemo />
         </div>
       </div>

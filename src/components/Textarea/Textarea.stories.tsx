@@ -11,6 +11,24 @@ const meta = {
   args: {
     onChange: fn(),
   },
+  argTypes: {
+    validationState: {
+      control: 'radio',
+      options: ['none', 'error', 'warning', 'info'],
+      mapping: {
+        none: undefined,
+        error: 'error',
+        warning: 'warning',
+        info: 'info',
+      },
+      description:
+        'Applies VS Code validation styling to the field and child input.',
+    },
+    resize: {
+      control: 'radio',
+      options: ['none', 'vertical', 'horizontal', 'both'],
+    },
+  },
   parameters: {
     docs: {
       description: {
@@ -30,6 +48,7 @@ export const Default: Story = {
   args: {
     placeholder: 'Describe your issue...',
     rows: 4,
+    resize: 'none',
   },
 };
 
