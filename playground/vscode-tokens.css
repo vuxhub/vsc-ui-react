@@ -122,11 +122,15 @@
 
   /* Checkbox */
   --vscode-checkbox-background: transparent;
-  --vscode-checkbox-foreground: #f0f0f0;
-  --vscode-checkbox-border: #f0f0f0;
+  --vscode-checkbox-foreground: #cccccc;
+  --vscode-checkbox-border: #cccccc;
+  --vscode-checkbox-hoverForeground: #ffffff;
+  --vscode-checkbox-hoverBorder: #ffffff;
   --vscode-checkbox-selectBackground: #0078d4;
   --vscode-checkbox-selectBorder: #0078d4;
   --vscode-checkbox-selectForeground: #242424;
+  --vscode-checkbox-selectHoverBackground: #4e94ce;
+  --vscode-checkbox-selectHoverBorder: #4e94ce;
 
   /* Divider */
   --vscode-divider-background: #454545;
@@ -239,9 +243,13 @@
   --vscode-checkbox-background: #ffffff;
   --vscode-checkbox-foreground: #3b3b3b;
   --vscode-checkbox-border: #3b3b3b;
+  --vscode-checkbox-hoverForeground: #000000;
+  --vscode-checkbox-hoverBorder: #000000;
   --vscode-checkbox-selectBackground: #005fb8;
   --vscode-checkbox-selectBorder: #005fb8;
   --vscode-checkbox-selectForeground: #ffffff;
+  --vscode-checkbox-selectHoverBackground: #0258a8;
+  --vscode-checkbox-selectHoverBorder: #0258a8;
 
   /* Divider */
   --vscode-divider-background: #e5e5e5;
@@ -340,6 +348,56 @@ body {
  */
 
 /*
+ * Checkbox visuals are painted by the indicator's ::before pseudo-element
+ * (positioned at `inset: var(--vsc-checkbox-indicator-padding)`), driven by
+ * CSS custom properties. We must set those variables — NOT paint the
+ * indicator wrapper directly, which would flood-fill the full 24×24 slot.
+ */
+.vsc-force-hover .fui-Checkbox .fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox .fui-Checkbox__indicator {
+  --vsc-checkbox-indicator-background: var(
+    --vscode-checkbox-background
+  ) !important;
+  --vsc-checkbox-indicator-border: var(
+    --vscode-checkbox-hoverBorder
+  ) !important;
+  --vsc-checkbox-indicator-foreground: var(
+    --vscode-checkbox-hoverForeground
+  ) !important;
+}
+
+.vsc-force-hover .fui-Checkbox .fui-Checkbox__label,
+.vsc-force-focus .fui-Checkbox .fui-Checkbox__label {
+  color: var(--vscode-checkbox-hoverForeground) !important;
+}
+
+.vsc-force-hover .fui-Checkbox input:checked ~ .fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox input:checked ~ .fui-Checkbox__indicator {
+  --vsc-checkbox-indicator-background: var(
+    --vscode-checkbox-selectHoverBackground
+  ) !important;
+  --vsc-checkbox-indicator-border: var(
+    --vscode-checkbox-selectHoverBorder
+  ) !important;
+  --vsc-checkbox-indicator-foreground: var(
+    --vscode-checkbox-selectForeground
+  ) !important;
+}
+
+.vsc-force-hover .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator {
+  --vsc-checkbox-indicator-background: var(
+    --vscode-checkbox-background
+  ) !important;
+  --vsc-checkbox-indicator-border: var(
+    --vscode-checkbox-selectHoverBorder
+  ) !important;
+  --vsc-checkbox-indicator-foreground: var(
+    --vscode-checkbox-selectHoverBackground
+  ) !important;
+}
+
+/*
  * Force-focus for inputs/textareas/dropdowns/searchbox: paint the focus
  * border statically so the "Focus" column reflects what the component would
  * look like with keyboard focus.
@@ -357,7 +415,7 @@ body {
 
 .vsc-force-focus .fui-Checkbox {
   outline: 1px solid var(--vscode-focusBorder) !important;
-  outline-offset: 6px !important;
+  outline-offset: 0 !important;
   border-radius: 4px !important;
 }
 
