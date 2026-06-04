@@ -64,6 +64,10 @@
   --vscode-menu-selectionForeground: #ffffff;
   --vscode-menu-separatorBackground: #454545;
 
+    /* Divider */
+  --vscode-divider-background: #454545;
+  --vscode-divider-foreground: #9D9D9D;
+
   /* Focus */
   --vscode-focusBorder: #007fd4;
 
@@ -201,4 +205,7 @@ body.light-mode {
   --code-border: #e0e0e0;
   --badge-bg: rgba(0, 0, 0, 0.06);
   --badge-text: #424242;
+
+  --vscode-divider-background: #e5e5e5;
+  --vscode-divider-foreground: #9D9D9D;
 }

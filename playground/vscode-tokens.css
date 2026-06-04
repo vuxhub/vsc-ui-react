@@ -31,6 +31,7 @@
   --vscode-widget-shadow: rgba(0, 0, 0, 0.36);
   --vscode-dialog-overlay: rgba(0, 0, 0, 0.4);
   --vscode-toolbar-hoverBackground: rgba(90, 93, 94, 0.31);
+  --vscode-toolbar-activeBackground: rgba(99, 102, 103, 0.31);
 
   /* Editor + workbench surfaces */
   --vscode-editor-background: #1f1f1f;
@@ -126,6 +127,18 @@
   --vscode-checkbox-selectBackground: #0078d4;
   --vscode-checkbox-selectBorder: #0078d4;
   --vscode-checkbox-selectForeground: #242424;
+
+  /* Divider */
+  --vscode-divider-background: #454545;
+  --vscode-divider-foreground: #9D9D9D;
+
+  /* Settings */
+  --vscode-settings-checkboxBackground: #313131;
+  --vscode-settings-checkboxBorder: #3c3c3c;
+  --vscode-settings-checkboxForeground: #f0f0f0;
+
+  /* Panel */
+  --vscode-panel-border: #2b2b2b;
 }
 
 :root.theme-light {
@@ -143,6 +156,7 @@
   --vscode-widget-shadow: rgba(0, 0, 0, 0.16);
   --vscode-dialog-overlay: rgba(0, 0, 0, 0.4);
   --vscode-toolbar-hoverBackground: rgba(0, 0, 0, 0.1);
+  --vscode-toolbar-activeBackground: rgba(0, 0, 0, 0.15);
 
   --vscode-editor-background: #ffffff;
   --vscode-editor-foreground: #3b3b3b;
@@ -228,6 +242,18 @@
   --vscode-checkbox-selectBackground: #005fb8;
   --vscode-checkbox-selectBorder: #005fb8;
   --vscode-checkbox-selectForeground: #ffffff;
+
+  /* Divider */
+  --vscode-divider-background: #e5e5e5;
+  --vscode-divider-foreground: #9D9D9D;
+
+  /* Settings */
+  --vscode-settings-checkboxBackground: #ffffff;
+  --vscode-settings-checkboxBorder: #919191;
+  --vscode-settings-checkboxForeground: #3b3b3b;
+
+  /* Panel */
+  --vscode-panel-border: #e5e5e5;
 }
 
 html,

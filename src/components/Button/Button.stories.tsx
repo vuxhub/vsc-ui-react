@@ -21,6 +21,18 @@ import {
 } from '../Menu';
 import { Section, Row, Inline } from '../../stories/helpers/helpers';
 
+/* ── Icon mapping for controls ────────────────────────────────────── */
+
+const iconMap: Record<string, React.ReactNode> = {
+  none: undefined,
+  add: <AddRegular />,
+  edit: <EditRegular />,
+  folderOpen: <FolderOpenRegular />,
+  info: <InfoRegular />,
+  play: <PlayRegular />,
+  sync: <ArrowSyncRegular />,
+};
+
 const meta = {
   title: 'Components/Button',
   component: VscButton,
@@ -35,13 +47,15 @@ const meta = {
       description: 'Visual style of the button.',
     },
     size: {
-      control: 'select',
+      control: 'radio',
       options: ['medium', 'small', 'compact'],
       description:
         'Size variant. Includes `compact` (15 px) in addition to Fluent built-in sizes.',
     },
     icon: {
-      control: false,
+      control: 'select',
+      options: Object.keys(iconMap),
+      mapping: iconMap,
       description: 'Optional leading icon element.',
     },
     iconPosition: {

@@ -1,33 +1,97 @@
 <!--
-  Minimal overrides for the Storybook docs preview iframe.
-  The DocsContainer dynamically switches the Storybook theme (dark/light),
-  so most chrome styling is handled natively. These rules only cover
-  elements that need VS Code-specific treatment.
+  CSS overrides for the Storybook preview iframe (both canvas and docs views).
+
+  WHY THIS FILE EXISTS
+  ────────────────────
+  Storybook's built-in styles assume its own color system. Our components use
+  --vscode-* CSS custom properties (injected by playground/vscode-tokens.css)
+  for all colors. These rules bridge the gap by making Storybook's chrome
+  elements (backgrounds, borders, text) follow the VS Code token values so
+  the preview looks like a real VS Code webview.
+
+  MAINTENANCE NOTES
+  ─────────────────
+  • Targets Storybook 10.x internal class names. Re-check after major upgrades.
+  • !important is required throughout because Storybook injects its own styles
+    with high specificity via Emotion or inline styles.
+  • All colors MUST use var(--vscode-*) tokens — never hardcode hex values.
+    Fallback values (e.g. #1e1e1e) are only for the brief moment before the
+    token CSS file loads.
 -->
+<!-- Codicon icon font — required for validation message icons in Field -->
+<link
+  rel="stylesheet"
+  href="https://microsoft.github.io/vscode-codicons/dist/codicon.css"
+/>
 <style>
-  /* ── Docs padding ─────────────────────────────────────────────── */
+  /*
+   * Docs page content padding.
+   * Storybook 10 defaults to tighter padding; 20px gives breathing room
+   * that matches VS Code's webview panel spacing.
+   * Target: #storybook-docs > div (Storybook 10.x docs root wrapper)
+   */
   #storybook-docs > div {
     padding: 20px !important;
   }
 
-  /* ── Canvas story background follows VS Code theme ────────────── */
+  /*
+   * Canvas & body background.
+   * .sb-show-main is Storybook's body class in canvas (single-story) view.
+   * This ensures both canvas and docs views render on the VS Code editor
+   * background instead of Storybook's default white/dark grey.
+   * Color is left to Storybook's theme system to avoid conflicts with
+   * the controls table and other Storybook chrome.
+   * Targets: .sb-show-main (Storybook 10.x canvas body class), body
+   */
   .sb-show-main,
   body {
-    background: var(--sb-docs-bg, #1e1e1e) !important;
+    background: var(--vscode-editor-background, #1e1e1e) !important;
   }
 
-  /* ── Story preview container ──────────────────────────────────── */
+  /*
+   * Story preview area in docs view.
+   * Each story rendered in the docs page is wrapped in .docs-story.
+   * Without this, the preview area uses Storybook's theme background
+   * (white or dark grey) instead of the VS Code editor background.
+   * Target: .docs-story (Storybook 10.x docs inline story wrapper)
+   */
   .docs-story {
-    background: var(--sb-docs-bg, #1e1e1e) !important;
+    background: var(--vscode-editor-background, #1e1e1e) !important;
   }
 
+  /*
+   * Story preview card border treatment.
+   * .sbdocs.sbdocs-preview is the outer card around each story in docs.
+   * Storybook's default border is too prominent; this gives a subtle
+   * shadow + thin border that looks closer to VS Code's panel styling.
+   * Target: .sbdocs.sbdocs-preview (Storybook 10.x docs preview card)
+   */
   .sbdocs.sbdocs-preview {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px !important;
     border: 1px solid rgba(38, 74, 115, 0.15) !important;
   }
 
-  /* ── ArgsTable type values (Emotion-styled spans) ─────────────── */
+  /*
+   * ArgsTable type-value spans.
+   * Storybook's ArgsTable renders prop type values in <span> elements
+   * styled via Emotion with hardcoded colors that clash with our theme.
+   * Forcing color: inherit lets them pick up the docs page text color.
+   * Target: .docblock-argstable td span (Storybook 10.x ArgsTable)
+   */
   .docblock-argstable tbody td span {
     color: inherit !important;
+  }
+
+  /*
+   * Reset color-scheme for Storybook's form controls.
+   * The vscode-tokens.css file sets color-scheme: dark globally,
+   * which forces native radio/checkbox inputs to use dark mode appearance.
+   * Storybook's controls should use Storybook's own theme, not ours.
+   * Reset to light to let the browser render controls naturally,
+   * and let Storybook's CSS handle styling.
+   */
+  .sbdocs input[type='radio'],
+  .sbdocs input[type='checkbox'] {
+    color-scheme: light;
   }
 </style>

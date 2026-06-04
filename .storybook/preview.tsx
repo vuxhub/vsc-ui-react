@@ -3,21 +3,19 @@ import type { Preview, Decorator } from '@storybook/react';
 import { FluentProvider } from '@fluentui/react-components';
 
 /* ── Global CSS ─────────────────────────────────────────────────── */
-import './theme-tokens.css';
+import '../playground/vscode-tokens.css';
 
-import { darkTheme, lightTheme } from './themes';
+import { vscTheme } from './themes';
 import { DocsContainer } from './DocsContainer';
 import { ThemeEffect } from './ThemeEffect';
 
 /* ── FluentProvider decorator ───────────────────────────────────── */
 const withFluent: Decorator = (Story, context) => {
   const scheme = (context.globals.scheme ?? 'dark') as 'dark' | 'light';
-  const isDark = scheme === 'dark';
-  const theme = isDark ? darkTheme : lightTheme;
 
   return (
-    <FluentProvider theme={theme}>
-      <ThemeEffect isDark={isDark} />
+    <FluentProvider theme={vscTheme}>
+      <ThemeEffect isDark={scheme === 'dark'} />
       <div
         style={{
           display: 'flex',
