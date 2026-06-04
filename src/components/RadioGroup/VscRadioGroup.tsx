@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import {
   Radio,
   RadioGroup,
@@ -36,19 +36,33 @@ VscRadioGroup.displayName = 'VscRadioGroup';
 
 export type VscRadioProps = Omit<RadioProps, 'labelPosition' | 'indicator'> & {
   size?: 'small' | 'medium' | 'large';
+  /** Secondary description text rendered below the radio label. */
+  subtext?: ReactNode;
 };
 
 export const VscRadio = forwardRef<HTMLInputElement, VscRadioProps>(
-  ({ size, disabled, className, ...rest }, ref) => {
-    const { rootClassName } = useRadioStyles({ size, disabled, className });
+  ({ size, disabled, className, subtext, ...rest }, ref) => {
+    const { rootClassName, wrapperClassName, subtextClassName } =
+      useRadioStyles({ size, disabled, className });
 
-    return (
+    const radio = (
       <Radio
         ref={ref}
         disabled={disabled}
         className={rootClassName}
         {...rest}
       />
+    );
+
+    if (!subtext) {
+      return radio;
+    }
+
+    return (
+      <span className={wrapperClassName}>
+        {radio}
+        <span className={subtextClassName}>{subtext}</span>
+      </span>
     );
   },
 );

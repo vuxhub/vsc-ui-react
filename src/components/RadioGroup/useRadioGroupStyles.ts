@@ -160,6 +160,38 @@ const useRadioPermStyles = makeStyles({
 });
 
 // ---------------------------------------------------------------------------
+//  Radio – Subtext styles
+// ---------------------------------------------------------------------------
+
+const useRadioSubtextStyles = makeStyles({
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  subtext: {
+    fontFamily: vscFontFamily,
+    fontSize: '12px',
+    lineHeight: '16px',
+    color: 'var(--vscode-descriptionForeground)',
+    // Align with the label text — offset by indicator width + its margins
+    paddingLeft: `calc(16px + 2 * ${tokens.spacingHorizontalS})`,
+  },
+
+  subtextSmall: {
+    fontSize: '10px',
+    lineHeight: '14px',
+    paddingLeft: `calc(8px + 2 * ${tokens.spacingHorizontalXS})`,
+  },
+
+  subtextMedium: {
+    fontSize: '11px',
+    lineHeight: '15px',
+    paddingLeft: `calc(12px + 2 * ${tokens.spacingHorizontalSNudge})`,
+  },
+});
+
+// ---------------------------------------------------------------------------
 //  Exported hooks
 // ---------------------------------------------------------------------------
 
@@ -187,12 +219,14 @@ export interface UseRadioStylesOptions {
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   className?: string;
+  hasSubtext?: boolean;
 }
 
 export function useRadioStyles(options: UseRadioStylesOptions) {
   const { size, disabled, className } = options;
   const base = useRadioBaseStyles();
   const classes = useRadioPermStyles();
+  const subtextClasses = useRadioSubtextStyles();
 
   const rootClassName = mergeClasses(
     base.root,
@@ -202,5 +236,13 @@ export function useRadioStyles(options: UseRadioStylesOptions) {
     className,
   );
 
-  return { rootClassName };
+  const wrapperClassName = subtextClasses.wrapper;
+
+  const subtextClassName = mergeClasses(
+    subtextClasses.subtext,
+    size === 'small' && subtextClasses.subtextSmall,
+    size === 'medium' && subtextClasses.subtextMedium,
+  );
+
+  return { rootClassName, wrapperClassName, subtextClassName };
 }

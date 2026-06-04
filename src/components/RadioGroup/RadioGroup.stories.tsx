@@ -2,7 +2,13 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import { VscRadioGroup, VscRadio } from '.';
+import { VscField } from './../Field';
 import { Row, Inline } from '../../stories/helpers/helpers';
+
+type RadioGroupStoryArgs = React.ComponentProps<typeof VscRadioGroup> & {
+  /** Story-only control for piping text into the first VscRadio's subtext prop. */
+  subtext?: string;
+};
 
 const meta = {
   title: 'Components/RadioGroup',
@@ -19,23 +25,39 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof VscRadioGroup>;
+  // TODO(v-dlachman): Consider a dedicated VscRadio story file so radio-specific
+  // controls (like subtext) are documented without story-only args on RadioGroup.
+  argTypes: {
+    subtext: {
+      control: 'text',
+      description: 'Secondary description text for the first radio (demo only)',
+      table: {
+        disable: true,
+      },
+    },
+  },
+} satisfies Meta<RadioGroupStoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+type StoryWithRadioArgs = StoryObj<RadioGroupStoryArgs>;
 
 /* ── Default ─────────────────────────────────────────────────────── */
 
-export const Default: Story = {
-  render: (args) => (
-    <VscRadioGroup {...args}>
-      <VscRadio value="apple" label="Apple" />
-      <VscRadio value="banana" label="Banana" />
-      <VscRadio value="cherry" label="Cherry" />
-    </VscRadioGroup>
-  ),
+export const Default: StoryWithRadioArgs = {
+  render: (args) => {
+    const { subtext, ...rest } = args;
+    return (
+      <VscRadioGroup {...rest}>
+        <VscRadio value="apple" label="Apple" subtext={subtext} />
+        <VscRadio value="banana" label="Banana" />
+        <VscRadio value="cherry" label="Cherry" />
+      </VscRadioGroup>
+    );
+  },
   args: {
     defaultValue: 'banana',
+    subtext: 'Optional description text',
   },
 };
 
@@ -120,6 +142,25 @@ export const WithoutLabel: Story = {
   ),
 };
 
+/* ── Subtext ─────────────────────────────────────────────────────── */
+
+export const Subtext: Story = {
+  render: () => (
+    <VscRadioGroup defaultValue="light">
+      <VscRadio
+        value="light"
+        label="Light theme"
+        subtext="Uses light colors optimized for daytime use"
+      />
+      <VscRadio
+        value="dark"
+        label="Dark theme"
+        subtext="Uses dark colors optimized for low-light environments"
+      />
+    </VscRadioGroup>
+  ),
+};
+
 /* ── Individual Disabled ─────────────────────────────────────────── */
 
 export const IndividualDisabled: Story = {
@@ -129,5 +170,23 @@ export const IndividualDisabled: Story = {
       <VscRadio value="b" label="Disabled option" disabled />
       <VscRadio value="c" label="Also available" />
     </VscRadioGroup>
+  ),
+};
+
+/* ── Inside VscField ─────────────────────────────────────────────── */
+
+export const InsideVscField: Story = {
+  render: () => (
+    <VscField
+      label="Preferred environment"
+      required
+      tooltipContent="Environment is required to use this feature."
+    >
+      <VscRadioGroup defaultValue="dev">
+        <VscRadio value="dev" label="Development" />
+        <VscRadio value="test" label="Testing" />
+        <VscRadio value="prod" label="Production" />
+      </VscRadioGroup>
+    </VscField>
   ),
 };
