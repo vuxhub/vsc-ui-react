@@ -95,8 +95,14 @@
   --vscode-menu-border: #313131;
 
   /* Badges, links */
-  --vscode-badge-background: #616161;
-  --vscode-badge-foreground: #f8f8f8;
+  --vscode-badge-background: #0078d4;
+  --vscode-badge-errorBackground: #f14c4c;
+  --vscode-badge-successBackground: #2e825c;
+  --vscode-badge-successForeground: #89d185;
+  --vscode-badge-neutralBackground: #f8f8f8;
+  --vscode-badge-neutralForeground: #404040;
+  --vscode-badge-neutralContrastBackground: #000000;
+  --vscode-badge-neutralContrastForeground: #707070;
   --vscode-textLink-foreground: #4daafc;
   --vscode-textLink-activeForeground: #4daafc;
 
@@ -207,8 +213,14 @@
   --vscode-menu-separatorBackground: #e5e5e5;
   --vscode-menu-border: #cecece;
 
-  --vscode-badge-background: #cccccc;
-  --vscode-badge-foreground: #3b3b3b;
+  --vscode-badge-background: #005fb8;
+  --vscode-badge-errorBackground: #e51400;
+  --vscode-badge-successBackground: #2e825c;
+  --vscode-badge-successForeground: #388a34;
+  --vscode-badge-neutralBackground: #3b3b3b;
+  --vscode-badge-neutralForeground: #d3d3d3;
+  --vscode-badge-neutralContrastBackground: #f0f0f0;
+  --vscode-badge-neutralContrastForeground: #939393;
   --vscode-textLink-foreground: #005fb8;
   --vscode-textLink-activeForeground: #005fb8;
 
