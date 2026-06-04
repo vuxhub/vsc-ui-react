@@ -56,15 +56,15 @@ const useBaseStyles = makeStyles({
   root: {
     fontFamily: vscFontFamily,
     transition: 'none',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: '0',
-    '--vsc-checkbox-control-size': '24px',
-    '--vsc-checkbox-indicator-padding': '6px',
+    '--vsc-checkbox-control-size': '22px',
+    '--vsc-checkbox-indicator-padding': '5px',
     '--vsc-checkbox-indicator-background': checkboxBackground,
     '--vsc-checkbox-indicator-border': checkboxBorder,
     '--vsc-checkbox-indicator-foreground': checkboxForeground,
-    '--vsc-checkbox-check-icon-size': '6px',
-    '--vsc-checkbox-mixed-icon-size': '6px',
+    '--vsc-checkbox-check-icon-size': '12px',
+    '--vsc-checkbox-mixed-icon-size': '12px',
 
     [`& ${checkboxInput}`]: {
       width: 'var(--vsc-checkbox-control-size)',
@@ -117,9 +117,6 @@ const useBaseStyles = makeStyles({
         display: 'block',
         position: 'relative',
         zIndex: 1,
-        width: 'var(--vsc-checkbox-check-icon-size)',
-        height: 'var(--vsc-checkbox-check-icon-size)',
-        fontSize: 'var(--vsc-checkbox-check-icon-size)',
         color: 'inherit',
         fill: 'currentColor',
       },
@@ -133,9 +130,10 @@ const useBaseStyles = makeStyles({
     },
 
     [`${checkedIndicator} > svg`]: {
-      width: 'var(--vsc-checkbox-check-icon-size)',
-      height: 'var(--vsc-checkbox-check-icon-size)',
-      fontSize: 'var(--vsc-checkbox-check-icon-size)',
+      width: 'var(--vsc-checkbox-check-icon-width)',
+      height: 'var(--vsc-checkbox-check-icon-height)',
+      color: 'var(--vsc-checkbox-indicator-foreground)',
+      fill: 'currentColor',
     },
 
     [mixedIndicator]: {
@@ -223,14 +221,12 @@ const useBaseStyles = makeStyles({
       '--vsc-checkbox-indicator-foreground': checkboxSelectedBackground,
     },
 
-    // Label trailing/leading padding matches the indicator's internal
-    // padding (the transparent space inside the 24x24 indicator slot around
-    // the 12x12 visible box). This keeps the focus outline equidistant from
-    // the visible box on the indicator side and from the text on the label
-    // side. `:last-child` covers labelPosition="after" (default) and
-    // `:first-child` covers labelPosition="before".
     '& .fui-Checkbox__label': {
-      alignSelf: 'flex-start',
+      alignSelf: 'center',
+      boxSizing: 'border-box',
+      display: 'flex',
+      alignItems: 'center',
+      minHeight: 'var(--vsc-checkbox-control-size)',
       fontFamily: vscFontFamily,
       fontSize: 'var(--fontSizeBase200, 12px)',
       lineHeight: 'var(--lineHeightBase200, 16px)',
@@ -239,26 +235,18 @@ const useBaseStyles = makeStyles({
       marginRight: '0',
       marginBottom: '0',
       marginLeft: '0',
-      paddingTop: '4px',
-      paddingRight: '0',
-      paddingBottom: '4px',
+      paddingTop: '0',
+      paddingRight: '8px',
+      paddingBottom: '0',
       paddingLeft: '0',
       cursor: 'pointer',
-    },
-
-    '& .fui-Checkbox__label:last-child': {
-      paddingRight: 'var(--vsc-checkbox-indicator-padding)',
-    },
-
-    '& .fui-Checkbox__label:first-child': {
-      paddingLeft: 'var(--vsc-checkbox-indicator-padding)',
     },
 
     '&:focus-visible, &[data-fui-focus-within]:focus-within': {
       outlineStyle: 'solid',
       outlineWidth: '1px',
       outlineColor: 'var(--vscode-focusBorder)',
-      outlineOffset: '2px',
+      outlineOffset: '0',
       borderRadius: '4px',
     },
 
@@ -292,28 +280,25 @@ const useStyles = makeStyles({
   },
 
   small: {
-    '--vsc-checkbox-control-size': '20px',
-    '--vsc-checkbox-indicator-padding': '5px',
-    '--vsc-checkbox-check-icon-size': '5px',
-    '--vsc-checkbox-mixed-icon-size': '5px',
+    '--vsc-checkbox-control-size': '16px',
+    '--vsc-checkbox-indicator-padding': '3px',
+    '--vsc-checkbox-mixed-icon-size': '10px',
 
     [`& ${checkboxIndicator}`]: {
       fontSize: '10px',
     },
 
     '& .fui-Checkbox__label': {
-      fontSize: 'var(--fontSizeBase100, 11px)',
+      fontSize: 'var(--fontSizeBase100, 10px)',
       lineHeight: 'var(--lineHeightBase100, 14px)',
-      paddingTop: '3px',
-      paddingBottom: '3px',
+      paddingRight: '4px',
     },
   },
 
   large: {
     '--vsc-checkbox-control-size': '28px',
     '--vsc-checkbox-indicator-padding': '6px',
-    '--vsc-checkbox-check-icon-size': '8px',
-    '--vsc-checkbox-mixed-icon-size': '8px',
+    '--vsc-checkbox-mixed-icon-size': '16px',
 
     [`& ${checkboxIndicator}`]: {
       fontSize: '16px',
@@ -322,8 +307,6 @@ const useStyles = makeStyles({
     '& .fui-Checkbox__label': {
       fontSize: 'var(--fontSizeBase300, 14px)',
       lineHeight: 'var(--lineHeightBase300, 20px)',
-      paddingTop: '4px',
-      paddingBottom: '4px',
     },
   },
 });

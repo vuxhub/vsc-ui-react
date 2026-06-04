@@ -377,7 +377,7 @@ body {
 
 .vsc-force-focus .fui-Checkbox {
   outline: 1px solid var(--vscode-focusBorder) !important;
-  outline-offset: 2px !important;
+  outline-offset: 0 !important;
   border-radius: 4px !important;
 }
 
