@@ -135,3 +135,7 @@ export type {
 // Divider
 export { VscDivider } from './components/Divider';
 export type { VscDividerProps } from './components/Divider';
+
+// Accordion
+export { VscAccordion } from './components/Accordion';
+export type { VscAccordionProps } from './components/Accordion';

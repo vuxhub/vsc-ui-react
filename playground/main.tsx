@@ -48,6 +48,7 @@ import {
   VscDialogSeparator,
   VscDialogContent,
   VscDialogActions,
+  VscAccordion,
   VscDivider,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
@@ -1921,6 +1922,148 @@ function LiveHoverDemo() {
   );
 }
 
+function AccordionSection() {
+  const sizes = ['small', 'medium', 'large', 'extra-large'] as const;
+
+  const smallCircleIcon = (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  );
+
+  const largeCircleIcon = (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  );
+
+  const headerWithIcon = (size: (typeof sizes)[number]) => {
+    const icon =
+      size === 'large' || size === 'extra-large'
+        ? largeCircleIcon
+        : smallCircleIcon;
+    return (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+        {icon} Text
+      </span>
+    );
+  };
+
+  const contentPlaceholder = (
+    <div
+      style={{
+        marginTop: 4,
+        padding: '6px 12px',
+        fontSize: 10,
+        fontWeight: 400,
+        letterSpacing: '0.06em',
+        textTransform: 'uppercase',
+        textAlign: 'center',
+        color: '#479EF5',
+        backgroundColor: '#082338',
+        borderRadius: 2,
+        maxWidth: 200,
+      }}
+    >
+      Swap with content component
+    </div>
+  );
+
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>Accordion</h2>
+
+      {/* Icon Before */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div style={gridHeadStyle}>Icon Before</div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gap: 48,
+          }}
+        >
+          <span style={gridHeadStyle}>Expanded</span>
+          <span style={gridHeadStyle}>Collapsed</span>
+          <span style={gridHeadStyle}>Disabled</span>
+        </div>
+        {sizes.map((size) => (
+          <div
+            key={`before-${size}`}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr',
+              gap: 48,
+              alignItems: 'start',
+            }}
+          >
+            <VscAccordion size={size} header={headerWithIcon(size)} defaultOpen>
+              {contentPlaceholder}
+            </VscAccordion>
+            <VscAccordion size={size} header={headerWithIcon(size)}>
+              <div>Content</div>
+            </VscAccordion>
+            <VscAccordion size={size} header={headerWithIcon(size)} disabled>
+              <div>Content</div>
+            </VscAccordion>
+          </div>
+        ))}
+
+        <div style={gridHeadStyle}>Icon After</div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gap: 48,
+          }}
+        >
+          <span style={gridHeadStyle}>Expanded</span>
+          <span style={gridHeadStyle}>Collapsed</span>
+          <span style={gridHeadStyle}>Disabled</span>
+        </div>
+        {sizes.map((size) => (
+          <div
+            key={`after-${size}`}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr',
+              gap: 48,
+              alignItems: 'start',
+            }}
+          >
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+              defaultOpen
+            >
+              {contentPlaceholder}
+            </VscAccordion>
+            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)}>
+              <div>Content</div>
+            </VscAccordion>
+            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)} disabled>
+              <div>Content</div>
+            </VscAccordion>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Playground() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
@@ -2007,6 +2150,7 @@ function Playground() {
           <MenuSection />
           <TabListSection />
           <DialogSection />
+          <AccordionSection />
           <DividerSection />
           <LiveHoverDemo />
         </div>
