@@ -122,6 +122,10 @@
   --vscode-checkbox-selectBorder: #0078d4;
   --vscode-checkbox-selectForeground: #242424;
 
+  /* Divider */
+  --vscode-divider-background: #454545;
+  --vscode-divider-foreground: #9D9D9D;
+
   /* Settings */
   --vscode-settings-checkboxBackground: #313131;
   --vscode-settings-checkboxBorder: #3c3c3c;
@@ -226,6 +230,10 @@
   --vscode-checkbox-selectBackground: #005fb8;
   --vscode-checkbox-selectBorder: #005fb8;
   --vscode-checkbox-selectForeground: #ffffff;
+
+  /* Divider */
+  --vscode-divider-background: #e5e5e5;
+  --vscode-divider-foreground: #9D9D9D;
 
   /* Settings */
   --vscode-settings-checkboxBackground: #ffffff;
