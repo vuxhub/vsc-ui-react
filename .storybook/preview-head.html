@@ -49,6 +49,18 @@
   }
 
   /*
+   * Docs page outer wrapper background.
+   * Storybook's DocsContainer renders .sbdocs-wrapper with an Emotion-
+   * generated class whose background is driven by the Storybook theme object
+   * (appContentBg). Override it with the VS Code editor background so the
+   * docs page always matches the active VS Code theme.
+   * Target: .sbdocs.sbdocs-wrapper (Storybook 10.x docs outer wrapper)
+   */
+  .sbdocs.sbdocs-wrapper {
+    background: var(--vscode-editor-background, #1e1e1e) !important;
+  }
+
+  /*
    * Story preview area in docs view.
    * Each story rendered in the docs page is wrapped in .docs-story.
    * Without this, the preview area uses Storybook's theme background
