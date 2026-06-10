@@ -90,15 +90,15 @@ const useButtonSizeStyles = makeStyles({
 
 const useButtonCurrentStyles = makeStyles({
   current: {
-    color: 'var(--vscode-button-foreground)',
+    color: 'var(--vscode-inputOption-activeForeground)',
     fontWeight: 600,
 
     ':hover': {
-      color: 'var(--vscode-button-foreground)',
+      color: 'var(--vscode-inputOption-activeForeground)',
     },
 
     ':active': {
-      color: 'var(--vscode-button-foreground)',
+      color: 'var(--vscode-inputOption-activeForeground)',
     },
   },
 });
