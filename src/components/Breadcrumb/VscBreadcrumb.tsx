@@ -27,11 +27,17 @@ export type VscBreadcrumbProps = Omit<BreadcrumbProps, 'size'> & {
 };
 
 export const VscBreadcrumb = forwardRef<HTMLElement, VscBreadcrumbProps>(
-  ({ className, size = 'medium', ...rest }, ref) => {
+  ({ className, size = 'medium', focusMode = 'arrow', ...rest }, ref) => {
     const mergedClassName = useBreadcrumbStyles({ className });
 
     return (
-      <Breadcrumb ref={ref} size={size} className={mergedClassName} {...rest} />
+      <Breadcrumb
+        ref={ref}
+        size={size}
+        focusMode={focusMode}
+        className={mergedClassName}
+        {...rest}
+      />
     );
   },
 );
