@@ -47,7 +47,7 @@ const useButtonBaseStyles = makeStyles({
       outlineStyle: 'solid',
       outlineWidth: '1px',
       outlineColor: 'var(--vscode-focusBorder)',
-      outlineOffset: '2px',
+      outlineOffset: '-1px',
       ...shorthands.borderColor('transparent'),
     },
 
