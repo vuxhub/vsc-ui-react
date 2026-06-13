@@ -866,6 +866,8 @@ function SearchBoxSection() {
   return (
     <section style={sectionStyle}>
       <h2 style={headerStyle}>VscSearchBox</h2>
+
+      <h3 style={headerStyle}>Outline Appearance</h3>
       <Matrix
         rows={[
           { key: 'small', label: 'Small' },
@@ -876,7 +878,28 @@ function SearchBoxSection() {
         rowLabelWidth={100}
         cellRender={(row, col) => (
           <VscSearchBox
-            placeholder="Search"
+            placeholder="Placeholder text"
+            appearance="outline"
+            size={row as 'small' | 'medium' | 'large'}
+            disabled={col === 'disabled'}
+            style={{ width: 220 }}
+          />
+        )}
+      />
+
+      <h3 style={headerStyle}>Transparent Appearance</h3>
+      <Matrix
+        rows={[
+          { key: 'small', label: 'Small' },
+          { key: 'medium', label: 'Medium' },
+          { key: 'large', label: 'Large' },
+        ]}
+        columns={SEARCHBOX_STATE_COLUMNS}
+        rowLabelWidth={100}
+        cellRender={(row, col) => (
+          <VscSearchBox
+            placeholder="Placeholder text"
+            appearance="transparent"
             size={row as 'small' | 'medium' | 'large'}
             disabled={col === 'disabled'}
             style={{ width: 220 }}
@@ -2094,10 +2117,19 @@ function AccordionSection() {
             >
               {contentPlaceholder}
             </VscAccordion>
-            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)}>
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+            >
               <div>Content</div>
             </VscAccordion>
-            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)} disabled>
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+              disabled
+            >
               <div>Content</div>
             </VscAccordion>
           </div>

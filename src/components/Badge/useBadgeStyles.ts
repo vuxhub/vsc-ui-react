@@ -346,9 +346,7 @@ const useColorAppearanceStyles = makeStyles({
     color: 'var(--vscode-button-foreground)',
     ...shorthands.borderWidth('1px'),
     ...shorthands.borderStyle('solid'),
-    ...shorthands.borderColor(
-      'var(--vscode-badge-successBackground)',
-    ),
+    ...shorthands.borderColor('var(--vscode-badge-successBackground)'),
 
     '& .fui-Badge__icon': {
       color: 'var(--vscode-button-foreground)',
@@ -360,9 +358,7 @@ const useColorAppearanceStyles = makeStyles({
     color: 'var(--vscode-badge-successForeground)',
     ...shorthands.borderWidth('1px'),
     ...shorthands.borderStyle('solid'),
-    ...shorthands.borderColor(
-      'var(--vscode-badge-successForeground)',
-    ),
+    ...shorthands.borderColor('var(--vscode-badge-successForeground)'),
 
     '& .fui-Badge__icon': {
       color: 'var(--vscode-badge-successForeground)',
@@ -373,9 +369,7 @@ const useColorAppearanceStyles = makeStyles({
     color: 'var(--vscode-badge-successForeground)',
     ...shorthands.borderWidth('1px'),
     ...shorthands.borderStyle('solid'),
-    ...shorthands.borderColor(
-      'var(--vscode-badge-successForeground)',
-    ),
+    ...shorthands.borderColor('var(--vscode-badge-successForeground)'),
 
     '& .fui-Badge__icon': {
       color: 'var(--vscode-badge-successForeground)',
@@ -441,9 +435,7 @@ const useColorAppearanceStyles = makeStyles({
     color: 'var(--vscode-button-secondaryForeground)',
     ...shorthands.borderWidth('1px'),
     ...shorthands.borderStyle('solid'),
-    ...shorthands.borderColor(
-      'var(--vscode-badge-neutralContrastBackground)',
-    ),
+    ...shorthands.borderColor('var(--vscode-badge-neutralContrastBackground)'),
 
     '& .fui-Badge__icon': {
       color: 'var(--vscode-button-secondaryForeground)',
@@ -454,9 +446,7 @@ const useColorAppearanceStyles = makeStyles({
     color: 'var(--vscode-button-secondaryForeground)',
     ...shorthands.borderWidth('1px'),
     ...shorthands.borderStyle('solid'),
-    ...shorthands.borderColor(
-      'var(--vscode-badge-neutralContrastForeground)',
-    ),
+    ...shorthands.borderColor('var(--vscode-badge-neutralContrastForeground)'),
 
     '& .fui-Badge__icon': {
       color: 'var(--vscode-button-secondaryForeground)',
@@ -467,9 +457,7 @@ const useColorAppearanceStyles = makeStyles({
     color: 'var(--vscode-button-secondaryForeground)',
     ...shorthands.borderWidth('1px'),
     ...shorthands.borderStyle('solid'),
-    ...shorthands.borderColor(
-      'var(--vscode-badge-neutralContrastForeground)',
-    ),
+    ...shorthands.borderColor('var(--vscode-badge-neutralContrastForeground)'),
 
     '& .fui-Badge__icon': {
       color: 'var(--vscode-button-secondaryForeground)',

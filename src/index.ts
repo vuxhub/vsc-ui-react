@@ -27,7 +27,10 @@ export type { VscFieldProps } from './components/Field';
 
 // SearchBox
 export { VscSearchBox } from './components/SearchBox';
-export type { VscSearchBoxProps } from './components/SearchBox';
+export type {
+  VscSearchBoxProps,
+  VscSearchBoxAppearance,
+} from './components/SearchBox';
 
 // Dropdown / Combobox / Listbox
 export {

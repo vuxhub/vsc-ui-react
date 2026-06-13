@@ -6,6 +6,8 @@ import {
 
 import { vscFontFamily } from '../../styles/tokens';
 
+export type VscSearchBoxAppearance = 'outline' | 'transparent';
+
 // ---------------------------------------------------------------------------
 //  Base – root override styles via makeStyles
 // ---------------------------------------------------------------------------
@@ -17,8 +19,8 @@ const useBaseStyles = makeStyles({
     minHeight: '24px',
     padding: '0 8px',
     borderRadius: '2px',
-    border: '1px solid var(--vscode-input-border)',
-    backgroundColor: 'var(--vscode-input-background)',
+    border: '1px solid #3C3C3C',
+    backgroundColor: '#313131',
     boxShadow: 'none',
     boxSizing: 'border-box',
     transition: 'none',
@@ -67,6 +69,7 @@ const useBaseStyles = makeStyles({
       fontSize: '14px',
       width: '14px',
       height: '14px',
+      visibility: 'hidden' as const,
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -79,6 +82,7 @@ const useBaseStyles = makeStyles({
     },
 
     '& .fui-Input__contentAfter': {
+      visibility: 'hidden' as const,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -98,9 +102,37 @@ const useBaseStyles = makeStyles({
     },
 
     '&.fui-Input:focus-within': {
-      ...shorthands.borderColor('var(--vscode-focusBorder)'),
-      outline: 'none',
+      borderTopColor: 'transparent',
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderBottomColor: 'var(--vscode-focusBorder)',
+
+      '& .fui-SearchBox__dismiss': {
+        visibility: 'visible' as const,
+      },
+      '& .fui-Input__contentAfter': {
+        visibility: 'visible' as const,
+      },
     },
+  },
+});
+
+// ---------------------------------------------------------------------------
+//  Appearance styles via makeStyles
+// ---------------------------------------------------------------------------
+
+const useAppearanceStyles = makeStyles({
+  outline: {
+    backgroundColor: '#313131',
+    border: '1px solid #3C3C3C',
+    borderRadius: '2px',
+  },
+
+  transparent: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    borderBottom: '1px solid #3C3C3C',
+    borderRadius: '0',
   },
 });
 
@@ -196,18 +228,27 @@ const useStyles = makeStyles({
 
 export interface UseSearchBoxStylesOptions {
   size?: 'small' | 'medium' | 'large';
+  appearance?: VscSearchBoxAppearance;
   disabled?: boolean;
   className?: string;
 }
 
 export function useSearchBoxStyles(options: UseSearchBoxStylesOptions): string {
-  const { size = 'small', disabled, className } = options;
+  const {
+    size = 'small',
+    appearance = 'outline',
+    disabled,
+    className,
+  } = options;
 
   const base = useBaseStyles();
   const classes = useStyles();
+  const appearanceClasses = useAppearanceStyles();
 
   return mergeClasses(
     base.root,
+    appearance === 'outline' && appearanceClasses.outline,
+    appearance === 'transparent' && appearanceClasses.transparent,
     size === 'medium' && classes.medium,
     size === 'large' && classes.large,
     disabled && classes.disabled,

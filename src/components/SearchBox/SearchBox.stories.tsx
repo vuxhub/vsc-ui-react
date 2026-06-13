@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A search-specific input with a built-in search icon and dismiss action, styled to match VS Code. Defaults to `small` size.',
+          'A search-specific input with a built-in search icon and dismiss action, styled to match VS Code. Defaults to `small` size and `outline` appearance.',
       },
     },
   },
@@ -23,6 +23,10 @@ const meta = {
     size: {
       control: 'radio',
       options: ['small', 'medium', 'large'],
+    },
+    appearance: {
+      control: 'radio',
+      options: ['outline', 'transparent'],
     },
   },
 } satisfies Meta<typeof VscSearchBox>;
@@ -52,6 +56,81 @@ export const SizeVariants: Story = {
         </Inline>
         <Inline label="Large">
           <VscSearchBox size="large" placeholder="Search everything..." />
+        </Inline>
+      </Row>
+    </Section>
+  ),
+};
+
+/* ── Appearance Variants ─────────────────────────────────────────── */
+
+export const AppearanceVariants: Story = {
+  render: () => (
+    <Section title="Appearance Variants">
+      <Row>
+        <Inline label="Outline (default)">
+          <VscSearchBox appearance="outline" placeholder="Placeholder text" />
+        </Inline>
+        <Inline label="Transparent">
+          <VscSearchBox
+            appearance="transparent"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+      </Row>
+    </Section>
+  ),
+};
+
+/* ── Appearance × Size ───────────────────────────────────────────── */
+
+export const AppearanceBySize: Story = {
+  render: () => (
+    <Section title="Appearance × Size">
+      <Row>
+        <Inline label="Outline Small">
+          <VscSearchBox
+            appearance="outline"
+            size="small"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+        <Inline label="Outline Medium">
+          <VscSearchBox
+            appearance="outline"
+            size="medium"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+        <Inline label="Outline Large">
+          <VscSearchBox
+            appearance="outline"
+            size="large"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+      </Row>
+      <Row>
+        <Inline label="Transparent Small">
+          <VscSearchBox
+            appearance="transparent"
+            size="small"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+        <Inline label="Transparent Medium">
+          <VscSearchBox
+            appearance="transparent"
+            size="medium"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+        <Inline label="Transparent Large">
+          <VscSearchBox
+            appearance="transparent"
+            size="large"
+            placeholder="Placeholder text"
+          />
         </Inline>
       </Row>
     </Section>
