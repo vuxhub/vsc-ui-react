@@ -413,11 +413,13 @@ body {
 }
 
 .vsc-force-focus .fui-SearchBox {
-  border-top-color: transparent !important;
-  border-left-color: transparent !important;
-  border-right-color: transparent !important;
-  border-bottom-color: var(--vscode-focusBorder) !important;
+  border-color: var(--vscode-input-border) !important;
   outline: none !important;
+}
+
+.vsc-force-focus .fui-SearchBox::after {
+  transform: scaleX(1) !important;
+  opacity: 1 !important;
 }
 
 .vsc-force-focus .fui-SearchBox .fui-SearchBox__dismiss,

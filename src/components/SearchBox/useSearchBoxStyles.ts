@@ -19,8 +19,8 @@ const useBaseStyles = makeStyles({
     minHeight: '24px',
     padding: '0 8px',
     borderRadius: '2px',
-    border: '1px solid #3C3C3C',
-    backgroundColor: '#313131',
+    border: '1px solid var(--vscode-input-border)',
+    backgroundColor: 'var(--vscode-input-background)',
     boxShadow: 'none',
     boxSizing: 'border-box',
     transition: 'none',
@@ -98,10 +98,6 @@ const useBaseStyles = makeStyles({
     },
 
     '&.fui-Input:focus-within': {
-      borderTopColor: 'transparent',
-      borderLeftColor: 'transparent',
-      borderRightColor: 'transparent',
-
       '& .fui-SearchBox__dismiss': {
         visibility: 'visible' as const,
       },
@@ -118,16 +114,28 @@ const useBaseStyles = makeStyles({
 
 const useAppearanceStyles = makeStyles({
   outline: {
-    backgroundColor: '#313131',
-    border: '1px solid #3C3C3C',
+    backgroundColor: 'var(--vscode-input-background)',
+    border: '1px solid var(--vscode-input-border)',
     borderRadius: '2px',
+
+    '&.fui-Input:focus-within': {
+      borderTopColor: 'var(--vscode-input-border)',
+      borderLeftColor: 'var(--vscode-input-border)',
+      borderRightColor: 'var(--vscode-input-border)',
+    },
   },
 
   transparent: {
     backgroundColor: 'transparent',
     border: 'none',
-    borderBottom: '1px solid #3C3C3C',
+    borderBottom: '1px solid var(--vscode-input-border)',
     borderRadius: '0',
+
+    '&.fui-Input:focus-within': {
+      borderTopColor: 'transparent',
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+    },
   },
 });
 
