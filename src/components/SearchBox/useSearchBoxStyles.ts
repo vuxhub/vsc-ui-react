@@ -25,10 +25,6 @@ const useBaseStyles = makeStyles({
     boxSizing: 'border-box',
     transition: 'none',
 
-    '::after': {
-      display: 'none' as const,
-    },
-
     '& .fui-Input__input': {
       alignSelf: 'center',
       padding: '0',
@@ -105,7 +101,6 @@ const useBaseStyles = makeStyles({
       borderTopColor: 'transparent',
       borderLeftColor: 'transparent',
       borderRightColor: 'transparent',
-      borderBottomColor: 'var(--vscode-focusBorder)',
 
       '& .fui-SearchBox__dismiss': {
         visibility: 'visible' as const,
