@@ -2094,10 +2094,19 @@ function AccordionSection() {
             >
               {contentPlaceholder}
             </VscAccordion>
-            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)}>
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+            >
               <div>Content</div>
             </VscAccordion>
-            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)} disabled>
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+              disabled
+            >
               <div>Content</div>
             </VscAccordion>
           </div>
