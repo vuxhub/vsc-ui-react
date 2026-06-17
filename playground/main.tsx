@@ -50,6 +50,7 @@ import {
   VscDialogActions,
   VscAccordion,
   VscDivider,
+  VscTag,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -1842,6 +1843,71 @@ function DividerSection() {
   );
 }
 
+function TagSection() {
+  const tagIcon = <CircleRegular />;
+  const sizes = ['large', 'medium', 'small'] as const;
+  const appearances = ['default', 'outline', 'brand'] as const;
+
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscTag</h2>
+
+      {/* 1-line tags */}
+      <h3 style={headerStyle}>Single Line</h3>
+      {appearances.map((appearance) => (
+        <div
+          key={appearance}
+          style={{
+            display: 'flex',
+            gap: 12,
+            alignItems: 'center',
+            marginBottom: 8,
+          }}
+        >
+          <span style={gridHeadStyle}>{appearance}</span>
+          {sizes.map((size) => (
+            <VscTag
+              key={size}
+              appearance={appearance}
+              size={size}
+              icon={tagIcon}
+            >
+              Primary text
+            </VscTag>
+          ))}
+          <VscTag appearance={appearance} size="large" icon={tagIcon} disabled>
+            Primary text
+          </VscTag>
+        </div>
+      ))}
+
+      {/* 2-line tags – large only */}
+      <h3 style={headerStyle}>With Secondary Text</h3>
+      {appearances.map((appearance) => (
+        <div
+          key={appearance}
+          style={{
+            display: 'flex',
+            gap: 12,
+            alignItems: 'center',
+            marginBottom: 8,
+          }}
+        >
+          <span style={gridHeadStyle}>{appearance}</span>
+          <VscTag
+            appearance={appearance}
+            size="large"
+            icon={tagIcon}
+            secondaryText="Secondary"
+          >
+            Primary text
+          </VscTag>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 function LiveHoverDemo() {
   return (
     <section style={sectionStyle}>
@@ -2094,10 +2160,19 @@ function AccordionSection() {
             >
               {contentPlaceholder}
             </VscAccordion>
-            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)}>
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+            >
               <div>Content</div>
             </VscAccordion>
-            <VscAccordion size={size} iconPosition="after" header={headerWithIcon(size)} disabled>
+            <VscAccordion
+              size={size}
+              iconPosition="after"
+              header={headerWithIcon(size)}
+              disabled
+            >
               <div>Content</div>
             </VscAccordion>
           </div>
@@ -2195,6 +2270,7 @@ function Playground() {
           <DialogSection />
           <AccordionSection />
           <DividerSection />
+          <TagSection />
           <LiveHoverDemo />
         </div>
       </div>
