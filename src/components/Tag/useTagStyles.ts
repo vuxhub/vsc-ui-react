@@ -198,13 +198,14 @@ const useDismissStyles = makeStyles({
     borderRadius: '9999px',
     transition: 'none',
 
-    ':hover': {
-      color: '#4DAAFC',
-    },
-
     ':focus-visible': {
       outline: '1px solid var(--vscode-focusBorder)',
       outlineOffset: '1px',
+    },
+  },
+  hoverAccent: {
+    ':hover': {
+      color: 'var(--vscode-textLink-foreground)',
     },
   },
   small: {
@@ -279,6 +280,7 @@ export function useTagStyles(options: UseTagStylesOptions) {
 
   const dismissClassName = mergeClasses(
     dismissClasses.base,
+    appearance !== 'brand' && dismissClasses.hoverAccent,
     dismissClasses[size],
   );
 
