@@ -109,7 +109,7 @@ export const WithOverflow: Story = {
         </VscBreadcrumbItem>
         <VscBreadcrumbDivider />
         <VscBreadcrumbItem>
-          <VscBreadcrumbButton>Text</VscBreadcrumbButton>
+          <VscBreadcrumbButton icon={<MoreHorizontalRegular />} />
         </VscBreadcrumbItem>
         <VscBreadcrumbDivider />
         <VscBreadcrumbItem>
@@ -117,11 +117,7 @@ export const WithOverflow: Story = {
         </VscBreadcrumbItem>
         <VscBreadcrumbDivider />
         <VscBreadcrumbItem>
-          <VscBreadcrumbButton>Text</VscBreadcrumbButton>
-        </VscBreadcrumbItem>
-        <VscBreadcrumbDivider />
-        <VscBreadcrumbItem>
-          <VscBreadcrumbButton current icon={<MoreHorizontalRegular />} />
+          <VscBreadcrumbButton current>Text</VscBreadcrumbButton>
         </VscBreadcrumbItem>
       </VscBreadcrumb>
     </Row>

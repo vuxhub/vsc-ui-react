@@ -1849,7 +1849,7 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+              <VscBreadcrumbButton size="small" icon={<MoreHorizontalRegular />} />
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
@@ -1857,11 +1857,7 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
-            </VscBreadcrumbItem>
-            <VscBreadcrumbDivider size="small" />
-            <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small" current icon={<MoreHorizontalRegular />} />
+              <VscBreadcrumbButton size="small" current>Text</VscBreadcrumbButton>
             </VscBreadcrumbItem>
           </VscBreadcrumb>
         </div>
@@ -1907,7 +1903,7 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+              <VscBreadcrumbButton size="medium" icon={<MoreHorizontalRegular />} />
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
@@ -1915,11 +1911,7 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
-            </VscBreadcrumbItem>
-            <VscBreadcrumbDivider size="medium" />
-            <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium" current icon={<MoreHorizontalRegular />} />
+              <VscBreadcrumbButton size="medium" current>Text</VscBreadcrumbButton>
             </VscBreadcrumbItem>
           </VscBreadcrumb>
         </div>
@@ -1990,7 +1982,6 @@ function BreadcrumbSection() {
               <div style={gridHeadStyle}>Icon Only – {size === 'small' ? 'Small' : 'Medium'}</div>
               <Matrix
                 rows={[
-                  { key: 'current', label: 'Current' },
                   { key: 'regular', label: 'Regular' },
                 ]}
                 columns={[
@@ -2005,7 +1996,6 @@ function BreadcrumbSection() {
                   <span style={{ display: 'inline-flex', alignItems: 'center' }}>
                     <VscBreadcrumbButton
                       size={size}
-                      current={row === 'current'}
                       disabled={col === 'disabled'}
                       icon={<MoreHorizontalRegular />}
                     />
