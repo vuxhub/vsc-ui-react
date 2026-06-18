@@ -5,12 +5,18 @@ import { CircleRegular } from '@fluentui/react-icons';
 import { VscTag } from '.';
 import { Section, Row } from '../../stories/helpers/helpers';
 
+const iconMap: Record<string, React.ReactNode> = {
+  none: undefined,
+  circle: <CircleRegular />,
+};
+
 const meta = {
   title: 'Components/Tag',
   component: VscTag,
   tags: ['autodocs'],
   args: {
     children: 'Primary text',
+    icon: 'circle',
     onDismiss: fn(),
   },
   argTypes: {
@@ -28,17 +34,30 @@ const meta = {
       control: 'boolean',
       description: 'Whether the tag is disabled.',
     },
-    dismissible: {
-      control: 'boolean',
-      description: 'Whether the dismiss button is shown.',
-    },
     children: {
       control: 'text',
       description: 'Primary text content.',
     },
     secondaryText: {
       control: 'text',
-      description: 'Optional secondary text below primary.',
+      description: 'Optional secondary text below primary. Large only.',
+      if: {
+        arg: 'size',
+        eq: 'large',
+      },
+    },
+    icon: {
+      control: 'select',
+      options: Object.keys(iconMap),
+      mapping: iconMap,
+      description: 'Optional icon shown before text.',
+    },
+    onDismiss: {
+      action: 'dismissed',
+      description: 'Called when the dismiss button is clicked.',
+      table: {
+        category: 'Events',
+      },
     },
   },
   parameters: {
@@ -59,7 +78,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Primary text',
-    icon: <CircleRegular />,
+    size: 'large',
   },
 };
 
