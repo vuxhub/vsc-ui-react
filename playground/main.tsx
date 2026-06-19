@@ -749,7 +749,7 @@ function SliderSection() {
   const sizes = ['small', 'medium'] as const;
   const columns = [
     { key: 'rest', label: 'Rest' },
-    { key: 'focus', label: 'Focus' },
+    { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
     { key: 'disabled', label: 'Disabled' },
   ];
   const values: Record<string, number> = {
@@ -775,7 +775,6 @@ function SliderSection() {
                 size={size}
                 defaultValue={values[col]}
                 disabled={col === 'disabled'}
-                autoFocus={col === 'focus'}
                 aria-label={`${size} ${col}`}
               />
             </div>

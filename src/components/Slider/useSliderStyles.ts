@@ -49,9 +49,9 @@ const useBaseStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-descriptionForeground)'),
     },
 
-    // Focus ring -> VS Code focus border
     '&.fui-Slider[data-fui-focus-within]:focus-within::after': {
       ...shorthands.borderColor('var(--vscode-focusBorder)'),
+      ...shorthands.borderWidth('1px'),
     },
   },
 });
