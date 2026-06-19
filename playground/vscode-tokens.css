@@ -426,6 +426,16 @@ body {
 }
 
 /*
+ * Force-focus for links: VS Code links use a double underline as the focus
+ * affordance, so statically render it for the "Focus" column.
+ */
+.vsc-force-focus .fui-Link {
+  text-decoration-line: underline !important;
+  text-decoration-style: double !important;
+  color: var(--vscode-textLink-foreground) !important;
+}
+
+/*
  * Force-selected for form controls: mirrors an active/selected surface using
  * VS Code input-option active tokens so selected columns are clearly visible.
  */

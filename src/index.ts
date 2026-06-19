@@ -92,6 +92,10 @@ export type { VscCheckboxProps } from './components/Checkbox';
 export { VscLabel } from './components/Label';
 export type { VscLabelProps } from './components/Label';
 
+// Link
+export { VscLink } from './components/Link';
+export type { VscLinkProps, VscLinkSize } from './components/Link';
+
 // Switch
 export { VscSwitch } from './components/Switch';
 export type { VscSwitchProps } from './components/Switch';
