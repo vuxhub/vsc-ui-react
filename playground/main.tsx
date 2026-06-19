@@ -39,6 +39,7 @@ import {
   VscLabel,
   VscBadge,
   VscSwitch,
+  VscSlider,
   VscDialog,
   VscDialogTrigger,
   VscDialogSurface,
@@ -739,6 +740,47 @@ function SwitchSection() {
             </React.Fragment>
           ))}
         </React.Fragment>
+      ))}
+    </section>
+  );
+}
+
+function SliderSection() {
+  const sizes = ['small', 'medium'] as const;
+  const columns = [
+    { key: 'rest', label: 'Rest' },
+    { key: 'focus', label: 'Focus' },
+    { key: 'disabled', label: 'Disabled' },
+  ];
+  const values: Record<string, number> = {
+    rest: 70,
+    focus: 70,
+    disabled: 40,
+  };
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscSlider</h2>
+      {sizes.map((size) => (
+        <Matrix
+          key={size}
+          rows={[{ key: size, label: size }]}
+          columns={columns}
+          columnWidthMode="content"
+          rowLabelWidth={120}
+          rowGap={24}
+          columnGap={28}
+          cellRender={(_row, col) => (
+            <div style={{ width: 160 }}>
+              <VscSlider
+                size={size}
+                defaultValue={values[col]}
+                disabled={col === 'disabled'}
+                autoFocus={col === 'focus'}
+                aria-label={`${size} ${col}`}
+              />
+            </div>
+          )}
+        />
       ))}
     </section>
   );
@@ -2192,6 +2234,7 @@ function Playground() {
           <SplitButtonSection />
           <CheckboxSection />
           <SwitchSection />
+          <SliderSection />
           <InputSection />
           <TextareaSection />
           <SearchBoxSection />
