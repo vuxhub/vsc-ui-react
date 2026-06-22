@@ -96,6 +96,7 @@
 
   /* Badges, links */
   --vscode-badge-background: #0078d4;
+  --vscode-badge-foreground: #ffffff;
   --vscode-badge-errorBackground: #f14c4c;
   --vscode-badge-successBackground: #2e825c;
   --vscode-badge-successForeground: #89d185;
@@ -218,6 +219,7 @@
   --vscode-menu-border: #cecece;
 
   --vscode-badge-background: #005fb8;
+  --vscode-badge-foreground: #ffffff;
   --vscode-badge-errorBackground: #e51400;
   --vscode-badge-successBackground: #2e825c;
   --vscode-badge-successForeground: #388a34;
