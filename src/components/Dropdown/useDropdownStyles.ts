@@ -423,7 +423,8 @@ const useComboboxStyles = makeStyles({
 const useListboxBaseStyles = makeStyles({
   root: {
     fontFamily: vscFontFamily,
-    backgroundColor: 'var(--vscode-dropdown-listBackground)',
+    backgroundColor:
+      'var(--vscode-dropdown-listBackground, var(--vscode-dropdown-background))',
     border: '1px solid var(--vscode-dropdown-border)',
     borderRadius: '2px',
     boxShadow: 'none',
