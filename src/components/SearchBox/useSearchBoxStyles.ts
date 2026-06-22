@@ -6,6 +6,8 @@ import {
 
 import { vscFontFamily } from '../../styles/tokens';
 
+export type VscSearchBoxAppearance = 'outline' | 'transparent';
+
 // ---------------------------------------------------------------------------
 //  Base – root override styles via makeStyles
 // ---------------------------------------------------------------------------
@@ -22,10 +24,6 @@ const useBaseStyles = makeStyles({
     boxShadow: 'none',
     boxSizing: 'border-box',
     transition: 'none',
-
-    '::after': {
-      display: 'none' as const,
-    },
 
     '& .fui-Input__input': {
       alignSelf: 'center',
@@ -67,6 +65,7 @@ const useBaseStyles = makeStyles({
       fontSize: '14px',
       width: '14px',
       height: '14px',
+      visibility: 'hidden' as const,
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -79,6 +78,7 @@ const useBaseStyles = makeStyles({
     },
 
     '& .fui-Input__contentAfter': {
+      visibility: 'hidden' as const,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -98,8 +98,43 @@ const useBaseStyles = makeStyles({
     },
 
     '&.fui-Input:focus-within': {
-      ...shorthands.borderColor('var(--vscode-focusBorder)'),
-      outline: 'none',
+      '& .fui-SearchBox__dismiss': {
+        visibility: 'visible' as const,
+      },
+      '& .fui-Input__contentAfter': {
+        visibility: 'visible' as const,
+      },
+    },
+  },
+});
+
+// ---------------------------------------------------------------------------
+//  Appearance styles via makeStyles
+// ---------------------------------------------------------------------------
+
+const useAppearanceStyles = makeStyles({
+  outline: {
+    backgroundColor: 'var(--vscode-input-background)',
+    border: '1px solid var(--vscode-input-border)',
+    borderRadius: '2px',
+
+    '&.fui-Input:focus-within': {
+      borderTopColor: 'var(--vscode-input-border)',
+      borderLeftColor: 'var(--vscode-input-border)',
+      borderRightColor: 'var(--vscode-input-border)',
+    },
+  },
+
+  transparent: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    borderBottom: '1px solid var(--vscode-input-border)',
+    borderRadius: '0',
+
+    '&.fui-Input:focus-within': {
+      borderTopColor: 'transparent',
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
     },
   },
 });
@@ -196,18 +231,27 @@ const useStyles = makeStyles({
 
 export interface UseSearchBoxStylesOptions {
   size?: 'small' | 'medium' | 'large';
+  appearance?: VscSearchBoxAppearance;
   disabled?: boolean;
   className?: string;
 }
 
 export function useSearchBoxStyles(options: UseSearchBoxStylesOptions): string {
-  const { size = 'small', disabled, className } = options;
+  const {
+    size = 'small',
+    appearance = 'outline',
+    disabled,
+    className,
+  } = options;
 
   const base = useBaseStyles();
   const classes = useStyles();
+  const appearanceClasses = useAppearanceStyles();
 
   return mergeClasses(
     base.root,
+    appearance === 'outline' && appearanceClasses.outline,
+    appearance === 'transparent' && appearanceClasses.transparent,
     size === 'medium' && classes.medium,
     size === 'large' && classes.large,
     disabled && classes.disabled,

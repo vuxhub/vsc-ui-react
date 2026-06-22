@@ -408,12 +408,26 @@ body {
 .vsc-force-focus .fui-Textarea,
 .vsc-force-focus .fui-Combobox,
 .vsc-force-focus .fui-Dropdown,
-.vsc-force-focus .fui-SearchBox,
 .vsc-force-focus .fui-BreadcrumbButton,
 .vsc-force-focus button[role='combobox'] {
   border-color: var(--vscode-focusBorder) !important;
   outline: 1px solid var(--vscode-focusBorder) !important;
   outline-offset: -1px !important;
+}
+
+.vsc-force-focus .fui-SearchBox {
+  border-color: var(--vscode-input-border) !important;
+  outline: none !important;
+}
+
+.vsc-force-focus .fui-SearchBox::after {
+  transform: scaleX(1) !important;
+  opacity: 1 !important;
+}
+
+.vsc-force-focus .fui-SearchBox .fui-SearchBox__dismiss,
+.vsc-force-focus .fui-SearchBox .fui-Input__contentAfter {
+  visibility: visible !important;
 }
 
 .vsc-force-focus .fui-Checkbox {
