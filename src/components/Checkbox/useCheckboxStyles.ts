@@ -63,7 +63,9 @@ const useBaseStyles = makeStyles({
     '--vsc-checkbox-indicator-background': checkboxBackground,
     '--vsc-checkbox-indicator-border': checkboxBorder,
     '--vsc-checkbox-indicator-foreground': checkboxForeground,
-    '--vsc-checkbox-check-icon-size': '12px',
+    '--vsc-checkbox-radius': '1.5px',
+    '--vsc-checkbox-check-icon-width': '9.6px',
+    '--vsc-checkbox-check-icon-height': '9.6px',
     '--vsc-checkbox-mixed-icon-size': '12px',
 
     [`& ${checkboxInput}`]: {
@@ -104,7 +106,7 @@ const useBaseStyles = makeStyles({
         ...shorthands.borderStyle('solid'),
         ...shorthands.borderColor('var(--vsc-checkbox-indicator-border)'),
         ...shorthands.borderWidth('1px'),
-        ...shorthands.borderRadius('2px'),
+        ...shorthands.borderRadius('var(--vsc-checkbox-radius)'),
         backgroundColor: 'var(--vsc-checkbox-indicator-background)',
         transition: 'none',
       },
@@ -283,6 +285,8 @@ const useStyles = makeStyles({
     '--vsc-checkbox-control-size': '16px',
     '--vsc-checkbox-indicator-padding': '3px',
     '--vsc-checkbox-mixed-icon-size': '10px',
+    '--vsc-checkbox-check-icon-width': '8px',
+    '--vsc-checkbox-check-icon-height': '8px',
 
     [`& ${checkboxIndicator}`]: {
       fontSize: '10px',
@@ -299,6 +303,9 @@ const useStyles = makeStyles({
     '--vsc-checkbox-control-size': '28px',
     '--vsc-checkbox-indicator-padding': '6px',
     '--vsc-checkbox-mixed-icon-size': '16px',
+    '--vsc-checkbox-radius': '2px',
+    '--vsc-checkbox-check-icon-width': '12.8px',
+    '--vsc-checkbox-check-icon-height': '12.8px',
 
     [`& ${checkboxIndicator}`]: {
       fontSize: '16px',
