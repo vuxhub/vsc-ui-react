@@ -139,6 +139,29 @@ export type {
 export { VscDivider } from './components/Divider';
 export type { VscDividerProps } from './components/Divider';
 
+// Tag
+export { VscTag } from './components/Tag';
+export type {
+  VscTagProps,
+  VscTagAppearance,
+  VscTagSize,
+} from './components/Tag';
+
 // Accordion
 export { VscAccordion } from './components/Accordion';
 export type { VscAccordionProps } from './components/Accordion';
+
+// Breadcrumb
+export {
+  VscBreadcrumb,
+  VscBreadcrumbItem,
+  VscBreadcrumbButton,
+  VscBreadcrumbDivider,
+} from './components/Breadcrumb';
+export type {
+  VscBreadcrumbProps,
+  VscBreadcrumbItemProps,
+  VscBreadcrumbButtonProps,
+  VscBreadcrumbDividerProps,
+  VscBreadcrumbSize,
+} from './components/Breadcrumb';
