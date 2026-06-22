@@ -12,6 +12,7 @@ import {
   EyeOffRegular,
   EyeRegular,
   OpenRegular,
+  MoreHorizontalRegular,
 } from '@fluentui/react-icons';
 
 import {
@@ -52,6 +53,11 @@ import {
   VscDialogActions,
   VscAccordion,
   VscDivider,
+  VscTag,
+  VscBreadcrumb,
+  VscBreadcrumbItem,
+  VscBreadcrumbButton,
+  VscBreadcrumbDivider,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -868,6 +874,8 @@ function SearchBoxSection() {
   return (
     <section style={sectionStyle}>
       <h2 style={headerStyle}>VscSearchBox</h2>
+
+      <h3 style={headerStyle}>Outline Appearance</h3>
       <Matrix
         rows={[
           { key: 'small', label: 'Small' },
@@ -878,7 +886,28 @@ function SearchBoxSection() {
         rowLabelWidth={100}
         cellRender={(row, col) => (
           <VscSearchBox
-            placeholder="Search"
+            placeholder="Placeholder text"
+            appearance="outline"
+            size={row as 'small' | 'medium' | 'large'}
+            disabled={col === 'disabled'}
+            style={{ width: 220 }}
+          />
+        )}
+      />
+
+      <h3 style={headerStyle}>Transparent Appearance</h3>
+      <Matrix
+        rows={[
+          { key: 'small', label: 'Small' },
+          { key: 'medium', label: 'Medium' },
+          { key: 'large', label: 'Large' },
+        ]}
+        columns={SEARCHBOX_STATE_COLUMNS}
+        rowLabelWidth={100}
+        cellRender={(row, col) => (
+          <VscSearchBox
+            placeholder="Placeholder text"
+            appearance="transparent"
             size={row as 'small' | 'medium' | 'large'}
             disabled={col === 'disabled'}
             style={{ width: 220 }}
@@ -1888,6 +1917,278 @@ function DividerSection() {
   );
 }
 
+function TagSection() {
+  const tagIcon = <CircleRegular />;
+  const sizes = ['large', 'medium', 'small'] as const;
+  const appearances = ['default', 'outline', 'brand'] as const;
+
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscTag</h2>
+
+      {/* 1-line tags */}
+      <h3 style={headerStyle}>Single Line</h3>
+      {appearances.map((appearance) => (
+        <div
+          key={appearance}
+          style={{
+            display: 'flex',
+            gap: 12,
+            alignItems: 'center',
+            marginBottom: 8,
+          }}
+        >
+          <span style={gridHeadStyle}>{appearance}</span>
+          {sizes.map((size) => (
+            <VscTag
+              key={size}
+              appearance={appearance}
+              size={size}
+              icon={tagIcon}
+            >
+              Primary text
+            </VscTag>
+          ))}
+          <VscTag appearance={appearance} size="large" icon={tagIcon} disabled>
+            Primary text
+          </VscTag>
+        </div>
+      ))}
+
+      {/* 2-line tags – large only */}
+      <h3 style={headerStyle}>With Secondary Text</h3>
+      {appearances.map((appearance) => (
+        <div
+          key={appearance}
+          style={{
+            display: 'flex',
+            gap: 12,
+            alignItems: 'center',
+            marginBottom: 8,
+          }}
+        >
+          <span style={gridHeadStyle}>{appearance}</span>
+          <VscTag
+            appearance={appearance}
+            size="large"
+            icon={tagIcon}
+            secondaryText="Secondary"
+          >
+            Primary text
+          </VscTag>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+function BreadcrumbSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>Breadcrumb</h2>
+
+      <div>
+        <div style={gridHeadStyle}>Small</div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+            marginTop: 8,
+          }}
+        >
+          <VscBreadcrumb size="small">
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small" current>
+                Text
+              </VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+          </VscBreadcrumb>
+
+          <VscBreadcrumb size="small">
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small" icon={<MoreHorizontalRegular />} />
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="small" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="small" current>Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+          </VscBreadcrumb>
+        </div>
+      </div>
+
+      <div>
+        <div style={gridHeadStyle}>Medium</div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+            marginTop: 8,
+          }}
+        >
+          <VscBreadcrumb size="medium">
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium" current>
+                Text
+              </VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+          </VscBreadcrumb>
+
+          <VscBreadcrumb size="medium">
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium" icon={<MoreHorizontalRegular />} />
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium">Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+            <VscBreadcrumbDivider size="medium" />
+            <VscBreadcrumbItem>
+              <VscBreadcrumbButton size="medium" current>Text</VscBreadcrumbButton>
+            </VscBreadcrumbItem>
+          </VscBreadcrumb>
+        </div>
+      </div>
+
+      <div>
+        <div style={gridHeadStyle}>Breadcrumb Item States</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 8 }}>
+          {(['small', 'medium'] as const).map((size) => (
+            <React.Fragment key={size}>
+              <div style={gridHeadStyle}>With Icon and Text – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <Matrix
+                rows={[
+                  { key: 'current', label: 'Current' },
+                  { key: 'regular', label: 'Regular' },
+                ]}
+                columns={[
+                  { key: 'default', label: 'Default' },
+                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
+                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  { key: 'disabled', label: 'Disabled' },
+                ]}
+                columnWidthMode="content"
+                rowLabelWidth={100}
+                cellRender={(row, col) => (
+                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <VscBreadcrumbButton
+                      size={size}
+                      current={row === 'current'}
+                      disabled={col === 'disabled'}
+                      icon={<CircleRegular />}
+                    >
+                      Text
+                    </VscBreadcrumbButton>
+                    {row === 'regular' && <VscBreadcrumbDivider size={size} />}
+                  </span>
+                )}
+              />
+
+              <div style={gridHeadStyle}>Text Only – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <Matrix
+                rows={[
+                  { key: 'current', label: 'Current' },
+                  { key: 'regular', label: 'Regular' },
+                ]}
+                columns={[
+                  { key: 'default', label: 'Default' },
+                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
+                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  { key: 'disabled', label: 'Disabled' },
+                ]}
+                columnWidthMode="content"
+                rowLabelWidth={100}
+                cellRender={(row, col) => (
+                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <VscBreadcrumbButton
+                      size={size}
+                      current={row === 'current'}
+                      disabled={col === 'disabled'}
+                    >
+                      Text
+                    </VscBreadcrumbButton>
+                    {row === 'regular' && <VscBreadcrumbDivider size={size} />}
+                  </span>
+                )}
+              />
+
+              <div style={gridHeadStyle}>Icon Only – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <Matrix
+                rows={[
+                  { key: 'regular', label: 'Regular' },
+                ]}
+                columns={[
+                  { key: 'default', label: 'Default' },
+                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
+                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  { key: 'disabled', label: 'Disabled' },
+                ]}
+                columnWidthMode="content"
+                rowLabelWidth={100}
+                cellRender={(row, col) => (
+                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <VscBreadcrumbButton
+                      size={size}
+                      disabled={col === 'disabled'}
+                      icon={<MoreHorizontalRegular />}
+                    />
+                    {row === 'regular' && <VscBreadcrumbDivider size={size} />}
+                  </span>
+                )}
+              />
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LiveHoverDemo() {
   return (
     <section style={sectionStyle}>
@@ -2251,6 +2552,8 @@ function Playground() {
           <DialogSection />
           <AccordionSection />
           <DividerSection />
+          <TagSection />
+          <BreadcrumbSection />
           <LiveHoverDemo />
         </div>
       </div>
