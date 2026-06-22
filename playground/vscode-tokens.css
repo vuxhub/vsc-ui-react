@@ -407,6 +407,7 @@ body {
 .vsc-force-focus .fui-Combobox,
 .vsc-force-focus .fui-Dropdown,
 .vsc-force-focus .fui-SearchBox,
+.vsc-force-focus .fui-BreadcrumbButton,
 .vsc-force-focus button[role='combobox'] {
   border-color: var(--vscode-focusBorder) !important;
   outline: 1px solid var(--vscode-focusBorder) !important;
