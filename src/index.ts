@@ -165,3 +165,22 @@ export type {
   VscBreadcrumbDividerProps,
   VscBreadcrumbSize,
 } from './components/Breadcrumb';
+
+// MessageBar
+export {
+  VscMessageBar,
+  VscMessageBarBody,
+  VscMessageBarTitle,
+  VscMessageBarActions,
+  VscMessageBarGroup,
+} from './components/MessageBar';
+export type {
+  VscMessageBarProps,
+  VscMessageBarBodyProps,
+  VscMessageBarTitleProps,
+  VscMessageBarActionsProps,
+  VscMessageBarGroupProps,
+  VscMessageBarIntent,
+  VscMessageBarLayout,
+  VscMessageBarShape,
+} from './components/MessageBar';
