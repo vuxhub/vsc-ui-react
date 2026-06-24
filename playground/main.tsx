@@ -19,6 +19,7 @@ import {
   VscMenuButton,
   VscSplitButton,
   VscInput,
+  VscSpinButton,
   VscTextarea,
   VscField,
   VscSearchBox,
@@ -783,6 +784,52 @@ function InputSection() {
           return (
             <VscInput
               placeholder="Input"
+              validationState={
+                row === 'none' ? undefined : inputValidationFor(row)
+              }
+              readOnly={col === 'readonly'}
+              disabled={col === 'disabled'}
+            />
+          );
+        }}
+      />
+    </section>
+  );
+}
+
+function SpinButtonSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscSpinButton</h2>
+      <h3 style={headerStyle}>Sizes</h3>
+      <Matrix
+        rows={CONTROL_SIZE_ROWS}
+        columns={FORM_STATE_COLUMNS_NO_SELECTED}
+        cellRender={(row, col) => (
+          <VscSpinButton
+            defaultValue={10}
+            size={row as 'small' | 'medium' | 'large'}
+            readOnly={col === 'readonly'}
+            disabled={col === 'disabled'}
+          />
+        )}
+      />
+
+      <h3 style={headerStyle}>Validation</h3>
+      <Matrix
+        rows={INPUT_TEXTAREA_VALIDATION_ROWS}
+        columns={FORM_STATE_COLUMNS_NO_SELECTED}
+        cellRender={(row, col) => {
+          const isInvalid = row === 'error' || row === 'warning';
+          const isUnavailable =
+            isInvalid && (col === 'readonly' || col === 'disabled');
+          if (isUnavailable) {
+            return <span style={gridHeadStyle}>-</span>;
+          }
+
+          return (
+            <VscSpinButton
+              defaultValue={10}
               validationState={
                 row === 'none' ? undefined : inputValidationFor(row)
               }
@@ -1981,7 +2028,10 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small" icon={<MoreHorizontalRegular />} />
+              <VscBreadcrumbButton
+                size="small"
+                icon={<MoreHorizontalRegular />}
+              />
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
@@ -1989,7 +2039,9 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small" current>Text</VscBreadcrumbButton>
+              <VscBreadcrumbButton size="small" current>
+                Text
+              </VscBreadcrumbButton>
             </VscBreadcrumbItem>
           </VscBreadcrumb>
         </div>
@@ -2035,7 +2087,10 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium" icon={<MoreHorizontalRegular />} />
+              <VscBreadcrumbButton
+                size="medium"
+                icon={<MoreHorizontalRegular />}
+              />
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
@@ -2043,7 +2098,9 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium" current>Text</VscBreadcrumbButton>
+              <VscBreadcrumbButton size="medium" current>
+                Text
+              </VscBreadcrumbButton>
             </VscBreadcrumbItem>
           </VscBreadcrumb>
         </div>
@@ -2051,10 +2108,19 @@ function BreadcrumbSection() {
 
       <div>
         <div style={gridHeadStyle}>Breadcrumb Item States</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 8 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            marginTop: 8,
+          }}
+        >
           {(['small', 'medium'] as const).map((size) => (
             <React.Fragment key={size}>
-              <div style={gridHeadStyle}>With Icon and Text – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <div style={gridHeadStyle}>
+                With Icon and Text – {size === 'small' ? 'Small' : 'Medium'}
+              </div>
               <Matrix
                 rows={[
                   { key: 'current', label: 'Current' },
@@ -2062,14 +2128,24 @@ function BreadcrumbSection() {
                 ]}
                 columns={[
                   { key: 'default', label: 'Default' },
-                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
-                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  {
+                    key: 'hover',
+                    label: 'Hover',
+                    className: 'vsc-force-hover',
+                  },
+                  {
+                    key: 'focus',
+                    label: 'Focus',
+                    className: 'vsc-force-focus',
+                  },
                   { key: 'disabled', label: 'Disabled' },
                 ]}
                 columnWidthMode="content"
                 rowLabelWidth={100}
                 cellRender={(row, col) => (
-                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
                     <VscBreadcrumbButton
                       size={size}
                       current={row === 'current'}
@@ -2083,7 +2159,9 @@ function BreadcrumbSection() {
                 )}
               />
 
-              <div style={gridHeadStyle}>Text Only – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <div style={gridHeadStyle}>
+                Text Only – {size === 'small' ? 'Small' : 'Medium'}
+              </div>
               <Matrix
                 rows={[
                   { key: 'current', label: 'Current' },
@@ -2091,14 +2169,24 @@ function BreadcrumbSection() {
                 ]}
                 columns={[
                   { key: 'default', label: 'Default' },
-                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
-                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  {
+                    key: 'hover',
+                    label: 'Hover',
+                    className: 'vsc-force-hover',
+                  },
+                  {
+                    key: 'focus',
+                    label: 'Focus',
+                    className: 'vsc-force-focus',
+                  },
                   { key: 'disabled', label: 'Disabled' },
                 ]}
                 columnWidthMode="content"
                 rowLabelWidth={100}
                 cellRender={(row, col) => (
-                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
                     <VscBreadcrumbButton
                       size={size}
                       current={row === 'current'}
@@ -2111,21 +2199,31 @@ function BreadcrumbSection() {
                 )}
               />
 
-              <div style={gridHeadStyle}>Icon Only – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <div style={gridHeadStyle}>
+                Icon Only – {size === 'small' ? 'Small' : 'Medium'}
+              </div>
               <Matrix
-                rows={[
-                  { key: 'regular', label: 'Regular' },
-                ]}
+                rows={[{ key: 'regular', label: 'Regular' }]}
                 columns={[
                   { key: 'default', label: 'Default' },
-                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
-                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  {
+                    key: 'hover',
+                    label: 'Hover',
+                    className: 'vsc-force-hover',
+                  },
+                  {
+                    key: 'focus',
+                    label: 'Focus',
+                    className: 'vsc-force-focus',
+                  },
                   { key: 'disabled', label: 'Disabled' },
                 ]}
                 columnWidthMode="content"
                 rowLabelWidth={100}
                 cellRender={(row, col) => (
-                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
                     <VscBreadcrumbButton
                       size={size}
                       disabled={col === 'disabled'}
@@ -2494,6 +2592,7 @@ function Playground() {
           <CheckboxSection />
           <SwitchSection />
           <InputSection />
+          <SpinButtonSection />
           <TextareaSection />
           <SearchBoxSection />
           <DropdownSection />

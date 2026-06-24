@@ -309,7 +309,9 @@ body {
 .vsc-force-hover
   button:not([data-appearance]):not(.fui-SplitButton__primaryActionButton):not(
     .fui-SplitButton__menuButton
-  ):not(.fui-Tab),
+  ):not(.fui-Tab):not(.fui-SpinButton__incrementButton):not(
+    .fui-SpinButton__decrementButton
+  ),
 .vsc-force-hover
   button[data-appearance='secondary']:not(
     .fui-SplitButton__primaryActionButton
@@ -348,6 +350,15 @@ body {
  * are applied by the component's CSS-in-JS, which includes :hover rules that
  * preserve validation border colors. The component handles all cases.
  */
+
+/*
+ * SpinButton hover lives on the stepper buttons (the root border is unchanged
+ * on hover). Mirror the component's button hover background on a single button
+ * (the decrement) so the Hover column reflects hovering one stepper button.
+ */
+.vsc-force-hover .fui-SpinButton__decrementButton {
+  background-color: var(--vscode-scrollbarSlider-hoverBackground) !important;
+}
 
 /*
  * Checkbox visuals are painted by the indicator's ::before pseudo-element
@@ -418,6 +429,17 @@ body {
 .vsc-force-focus .fui-SearchBox {
   border-color: var(--vscode-input-border) !important;
   outline: none !important;
+}
+
+/*
+ * SpinButton paints its border on the root ::before pseudo-element, so the
+ * generic .fui-Input focus rule above does not reach it. Mirror the
+ * component's :focus-within::before by recolouring the ::before border. This
+ * also overrides the error/warning resting border, matching the component
+ * (focus shows the focus colour for all validation states).
+ */
+.vsc-force-focus .fui-SpinButton::before {
+  border-color: var(--vscode-focusBorder) !important;
 }
 
 .vsc-force-focus .fui-SearchBox::after {
@@ -537,7 +559,7 @@ body {
   [data-appearance='secondary']:not(.fui-SplitButton)
   > button:not(.fui-Tab),
 .vsc-force-hover
-  :not([data-appearance]):not(.fui-SplitButton)
+  :not([data-appearance]):not(.fui-SplitButton):not(.fui-SpinButton)
   > button:not(.fui-Tab) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
 }
