@@ -96,6 +96,7 @@
 
   /* Badges, links */
   --vscode-badge-background: #0078d4;
+  --vscode-badge-foreground: #ffffff;
   --vscode-badge-errorBackground: #f14c4c;
   --vscode-badge-successBackground: #2e825c;
   --vscode-badge-successForeground: #89d185;
@@ -143,6 +144,10 @@
 
   /* Panel */
   --vscode-panel-border: #2b2b2b;
+
+  /* Slider */
+  --vscode-slider-railBackground: #cccccc;
+  --vscode-slider-progressBackground: #4daafc;
 }
 
 :root.theme-light {
@@ -218,6 +223,7 @@
   --vscode-menu-border: #cecece;
 
   --vscode-badge-background: #005fb8;
+  --vscode-badge-foreground: #ffffff;
   --vscode-badge-errorBackground: #e51400;
   --vscode-badge-successBackground: #2e825c;
   --vscode-badge-successForeground: #388a34;
@@ -262,6 +268,10 @@
 
   /* Panel */
   --vscode-panel-border: #e5e5e5;
+
+  /* Slider */
+  --vscode-slider-railBackground: #cccccc;
+  --vscode-slider-progressBackground: #4daafc;
 }
 
 html,
@@ -406,11 +416,26 @@ body {
 .vsc-force-focus .fui-Textarea,
 .vsc-force-focus .fui-Combobox,
 .vsc-force-focus .fui-Dropdown,
-.vsc-force-focus .fui-SearchBox,
+.vsc-force-focus .fui-BreadcrumbButton,
 .vsc-force-focus button[role='combobox'] {
   border-color: var(--vscode-focusBorder) !important;
   outline: 1px solid var(--vscode-focusBorder) !important;
   outline-offset: -1px !important;
+}
+
+.vsc-force-focus .fui-SearchBox {
+  border-color: var(--vscode-input-border) !important;
+  outline: none !important;
+}
+
+.vsc-force-focus .fui-SearchBox::after {
+  transform: scaleX(1) !important;
+  opacity: 1 !important;
+}
+
+.vsc-force-focus .fui-SearchBox .fui-SearchBox__dismiss,
+.vsc-force-focus .fui-SearchBox .fui-Input__contentAfter {
+  visibility: visible !important;
 }
 
 .vsc-force-focus .fui-Checkbox {
@@ -422,6 +447,11 @@ body {
 .vsc-force-focus .fui-Switch {
   outline: 1px solid var(--vscode-focusBorder) !important;
   outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+.vsc-force-focus .fui-Slider {
+  outline: 1px solid var(--vscode-focusBorder) !important;
   border-radius: 4px !important;
 }
 
