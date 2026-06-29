@@ -99,6 +99,10 @@ export type { VscLabelProps } from './components/Label';
 export { VscSwitch } from './components/Switch';
 export type { VscSwitchProps } from './components/Switch';
 
+// Slider
+export { VscSlider } from './components/Slider';
+export type { VscSliderProps } from './components/Slider';
+
 // Badge
 export { VscBadge } from './components/Badge';
 export type {
