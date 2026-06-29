@@ -11,8 +11,8 @@ import {
   CircleRegular,
   EyeOffRegular,
   EyeRegular,
-  MoreHorizontalRegular,
   OpenRegular,
+  MoreHorizontalRegular,
 } from '@fluentui/react-icons';
 
 import {
