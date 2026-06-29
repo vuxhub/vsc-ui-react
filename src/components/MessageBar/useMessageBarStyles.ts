@@ -43,6 +43,35 @@ const useBaseStyles = makeStyles({
     '& a:active, & a:hover': {
       color: 'var(--vscode-textLink-activeForeground)',
     },
+
+    // Dismiss (container action) button — 22px instead of Fluent's 28px.
+    '& .fui-MessageBarActions__containerAction .fui-Button': {
+      minWidth: '22px',
+      maxWidth: '22px',
+      height: '22px',
+      minHeight: '22px',
+      maxHeight: '22px',
+      padding: '0',
+    },
+
+    // Dismiss icon — 14px per Figma (Fluent's default is 16px).
+    '& .fui-MessageBarActions__containerAction .fui-Button__icon': {
+      fontSize: '14px',
+      width: '14px',
+      height: '14px',
+    },
+
+    '& .fui-MessageBarActions__containerAction .fui-Button__icon svg': {
+      width: '14px',
+      height: '14px',
+    },
+
+    // In multiline (incl. auto-reflow) Fluent uses 12px actions padding-right;
+    // restore it over our 8px singleline value. The bottomReflowSpacer is only
+    // rendered when the bar is multiline, so it's a reliable runtime marker.
+    '&:has(.fui-MessageBar__bottomReflowSpacer) .fui-MessageBarActions': {
+      paddingRight: '12px',
+    },
   },
 });
 
@@ -131,6 +160,12 @@ const useTitleStyles = makeStyles({
 const useActionsStyles = makeStyles({
   root: {
     fontFamily: vscFontFamily,
+
+    // Tighten the gap between secondary action buttons (Fluent default 12px).
+    '&.fui-MessageBarActions': {
+      columnGap: '8px',
+      paddingRight: '8px',
+    },
   },
 });
 
