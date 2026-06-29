@@ -9,12 +9,22 @@ export type VscSpinButtonProps = Omit<SpinButtonProps, 'size'> & {
   size?: 'small' | 'medium' | 'large';
   /** Applies VS Code validation border color. */
   validationState?: VscInputValidationState;
+  /** Renders the spin button as read-only (non-interactive steppers + input). */
+  readOnly?: boolean;
 };
 
 export const VscSpinButton = forwardRef<HTMLInputElement, VscSpinButtonProps>(
-  ({ size = 'medium', validationState, className, disabled, ...rest }, ref) => {
-    const readOnly = (rest as { readOnly?: boolean }).readOnly;
-
+  (
+    {
+      size = 'medium',
+      validationState,
+      className,
+      disabled,
+      readOnly,
+      ...rest
+    },
+    ref,
+  ) => {
     const { rootClassName } = useSpinButtonStyles({
       size,
       validationState,
@@ -31,6 +41,7 @@ export const VscSpinButton = forwardRef<HTMLInputElement, VscSpinButtonProps>(
         disabled={disabled}
         className={rootClassName}
         data-validation-state={validationState}
+        input={{ readOnly }}
         {...rest}
       />
     );
