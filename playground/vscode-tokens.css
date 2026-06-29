@@ -144,6 +144,10 @@
 
   /* Panel */
   --vscode-panel-border: #2b2b2b;
+
+  /* Slider */
+  --vscode-slider-railBackground: #cccccc;
+  --vscode-slider-progressBackground: #4daafc;
 }
 
 :root.theme-light {
@@ -264,6 +268,10 @@
 
   /* Panel */
   --vscode-panel-border: #e5e5e5;
+
+  /* Slider */
+  --vscode-slider-railBackground: #cccccc;
+  --vscode-slider-progressBackground: #4daafc;
 }
 
 html,
@@ -461,6 +469,11 @@ body {
 .vsc-force-focus .fui-Switch {
   outline: 1px solid var(--vscode-focusBorder) !important;
   outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+.vsc-force-focus .fui-Slider {
+  outline: 1px solid var(--vscode-focusBorder) !important;
   border-radius: 4px !important;
 }
 
