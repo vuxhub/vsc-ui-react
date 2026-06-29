@@ -27,6 +27,8 @@ const useBaseStyles = makeStyles({
       textDecorationColor: 'var(--vscode-textLink-foreground)',
     },
     ':focus-visible': {
+      textDecorationLine: 'underline',
+      textDecorationStyle: 'double',
       textDecorationColor: 'var(--vscode-textLink-foreground)',
     },
   },
