@@ -83,8 +83,7 @@ const useAppearanceStyles = makeStyles({
   outline: {
     backgroundColor: 'transparent',
     color: 'var(--vscode-foreground)',
-    border:
-      '1px solid var(--vscode-badge-neutralContrastForeground)',
+    border: '1px solid var(--vscode-badge-neutralContrastForeground)',
   },
   brand: {
     backgroundColor: 'var(--vscode-button-background)',

@@ -1,4 +1,8 @@
-import { makeStyles, mergeClasses, shorthands } from '@fluentui/react-components';
+import {
+  makeStyles,
+  mergeClasses,
+  shorthands,
+} from '@fluentui/react-components';
 import { vscFontFamily } from '../../styles/tokens';
 
 // ---------------------------------------------------------------------------

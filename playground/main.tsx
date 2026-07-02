@@ -57,6 +57,9 @@ import {
   VscBreadcrumbItem,
   VscBreadcrumbButton,
   VscBreadcrumbDivider,
+  VscPopover,
+  VscPopoverTrigger,
+  VscPopoverSurface,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -1778,6 +1781,103 @@ function DialogSection() {
   );
 }
 
+function PopoverSection() {
+  const renderExample = (appearance: 'default' | 'brand') => {
+    const onBrand = appearance === 'brand';
+    const mutedColor = onBrand
+      ? 'var(--vscode-button-foreground)'
+      : 'var(--vscode-descriptionForeground)';
+    return (
+      <VscPopover withArrow>
+        <VscPopoverTrigger>
+          <VscButton appearance={onBrand ? 'primary' : undefined}>
+            Open popover
+          </VscButton>
+        </VscPopoverTrigger>
+        <VscPopoverSurface appearance={appearance}>
+          <div style={{ width: 280 }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: 8,
+              }}
+            >
+              <strong style={{ fontSize: 13 }}>Your apps</strong>
+              <button
+                type="button"
+                aria-label="Close"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 22,
+                  height: 22,
+                  padding: 0,
+                  border: 'none',
+                  borderRadius: 4,
+                  background: 'transparent',
+                  color: 'inherit',
+                  cursor: 'pointer',
+                  lineHeight: 0,
+                }}
+              >
+                <CircleRegular />
+              </button>
+            </div>
+            <div
+              style={{
+                height: 96,
+                borderRadius: 4,
+                marginBottom: 8,
+                background: onBrand
+                  ? 'rgba(0, 0, 0, 0.2)'
+                  : 'var(--vscode-editorWidget-background)',
+              }}
+            />
+            <p style={{ margin: '0 0 12px', fontSize: 12, color: mutedColor }}>
+              Expand the App Launcher to see all of your Microsoft 365 apps.
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span style={{ fontSize: 12, color: mutedColor }}>1 of 6</span>
+              <VscButton appearance={onBrand ? undefined : 'primary'}>
+                Next
+              </VscButton>
+            </div>
+          </div>
+        </VscPopoverSurface>
+      </VscPopover>
+    );
+  };
+
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscPopover</h2>
+      <p style={helperNoteStyle}>
+        Contextual overlay anchored to a trigger. Supports default (neutral) and
+        brand (accent) appearances, each with an ambient + key drop shadow.
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={gridHeadStyle}>Default</div>
+          {renderExample('default')}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={gridHeadStyle}>Brand</div>
+          {renderExample('brand')}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TabListSection() {
   return (
     <section style={sectionStyle}>
@@ -2022,7 +2122,10 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small" icon={<MoreHorizontalRegular />} />
+              <VscBreadcrumbButton
+                size="small"
+                icon={<MoreHorizontalRegular />}
+              />
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
@@ -2030,7 +2133,9 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="small" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="small" current>Text</VscBreadcrumbButton>
+              <VscBreadcrumbButton size="small" current>
+                Text
+              </VscBreadcrumbButton>
             </VscBreadcrumbItem>
           </VscBreadcrumb>
         </div>
@@ -2076,7 +2181,10 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium" icon={<MoreHorizontalRegular />} />
+              <VscBreadcrumbButton
+                size="medium"
+                icon={<MoreHorizontalRegular />}
+              />
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
@@ -2084,7 +2192,9 @@ function BreadcrumbSection() {
             </VscBreadcrumbItem>
             <VscBreadcrumbDivider size="medium" />
             <VscBreadcrumbItem>
-              <VscBreadcrumbButton size="medium" current>Text</VscBreadcrumbButton>
+              <VscBreadcrumbButton size="medium" current>
+                Text
+              </VscBreadcrumbButton>
             </VscBreadcrumbItem>
           </VscBreadcrumb>
         </div>
@@ -2092,10 +2202,19 @@ function BreadcrumbSection() {
 
       <div>
         <div style={gridHeadStyle}>Breadcrumb Item States</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 8 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            marginTop: 8,
+          }}
+        >
           {(['small', 'medium'] as const).map((size) => (
             <React.Fragment key={size}>
-              <div style={gridHeadStyle}>With Icon and Text – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <div style={gridHeadStyle}>
+                With Icon and Text – {size === 'small' ? 'Small' : 'Medium'}
+              </div>
               <Matrix
                 rows={[
                   { key: 'current', label: 'Current' },
@@ -2103,14 +2222,24 @@ function BreadcrumbSection() {
                 ]}
                 columns={[
                   { key: 'default', label: 'Default' },
-                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
-                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  {
+                    key: 'hover',
+                    label: 'Hover',
+                    className: 'vsc-force-hover',
+                  },
+                  {
+                    key: 'focus',
+                    label: 'Focus',
+                    className: 'vsc-force-focus',
+                  },
                   { key: 'disabled', label: 'Disabled' },
                 ]}
                 columnWidthMode="content"
                 rowLabelWidth={100}
                 cellRender={(row, col) => (
-                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
                     <VscBreadcrumbButton
                       size={size}
                       current={row === 'current'}
@@ -2124,7 +2253,9 @@ function BreadcrumbSection() {
                 )}
               />
 
-              <div style={gridHeadStyle}>Text Only – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <div style={gridHeadStyle}>
+                Text Only – {size === 'small' ? 'Small' : 'Medium'}
+              </div>
               <Matrix
                 rows={[
                   { key: 'current', label: 'Current' },
@@ -2132,14 +2263,24 @@ function BreadcrumbSection() {
                 ]}
                 columns={[
                   { key: 'default', label: 'Default' },
-                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
-                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  {
+                    key: 'hover',
+                    label: 'Hover',
+                    className: 'vsc-force-hover',
+                  },
+                  {
+                    key: 'focus',
+                    label: 'Focus',
+                    className: 'vsc-force-focus',
+                  },
                   { key: 'disabled', label: 'Disabled' },
                 ]}
                 columnWidthMode="content"
                 rowLabelWidth={100}
                 cellRender={(row, col) => (
-                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
                     <VscBreadcrumbButton
                       size={size}
                       current={row === 'current'}
@@ -2152,21 +2293,31 @@ function BreadcrumbSection() {
                 )}
               />
 
-              <div style={gridHeadStyle}>Icon Only – {size === 'small' ? 'Small' : 'Medium'}</div>
+              <div style={gridHeadStyle}>
+                Icon Only – {size === 'small' ? 'Small' : 'Medium'}
+              </div>
               <Matrix
-                rows={[
-                  { key: 'regular', label: 'Regular' },
-                ]}
+                rows={[{ key: 'regular', label: 'Regular' }]}
                 columns={[
                   { key: 'default', label: 'Default' },
-                  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
-                  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+                  {
+                    key: 'hover',
+                    label: 'Hover',
+                    className: 'vsc-force-hover',
+                  },
+                  {
+                    key: 'focus',
+                    label: 'Focus',
+                    className: 'vsc-force-focus',
+                  },
                   { key: 'disabled', label: 'Disabled' },
                 ]}
                 columnWidthMode="content"
                 rowLabelWidth={100}
                 cellRender={(row, col) => (
-                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span
+                    style={{ display: 'inline-flex', alignItems: 'center' }}
+                  >
                     <VscBreadcrumbButton
                       size={size}
                       disabled={col === 'disabled'}
@@ -2545,6 +2696,7 @@ function Playground() {
           <MenuSection />
           <TabListSection />
           <DialogSection />
+          <PopoverSection />
           <AccordionSection />
           <DividerSection />
           <TagSection />
