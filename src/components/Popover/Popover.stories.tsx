@@ -32,13 +32,18 @@ type Story = StoryObj<typeof meta>;
 /* ── Example content ─────────────────────────────────────────────── */
 
 function ExamplePopover({ appearance }: { appearance: VscPopoverAppearance }) {
+  const [open, setOpen] = React.useState(false);
   const onBrand = appearance === 'brand';
   const mutedColor = onBrand
     ? 'var(--vscode-button-foreground)'
     : 'var(--vscode-descriptionForeground)';
 
   return (
-    <VscPopover withArrow>
+    <VscPopover
+      withArrow
+      open={open}
+      onOpenChange={(_, data) => setOpen(data.open)}
+    >
       <VscPopoverTrigger>
         <VscButton appearance={onBrand ? 'primary' : undefined}>
           Open popover
@@ -58,6 +63,7 @@ function ExamplePopover({ appearance }: { appearance: VscPopoverAppearance }) {
             <button
               type="button"
               aria-label="Close"
+              onClick={() => setOpen(false)}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
