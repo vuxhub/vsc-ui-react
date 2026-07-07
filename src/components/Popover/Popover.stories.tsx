@@ -20,7 +20,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A VS Code–styled popover built on top of Fluent UI. Composed from `VscPopover`, `VscPopoverTrigger`, and `VscPopoverSurface`. The surface supports two appearances: `default` (neutral hover-widget background) and `brand` (VS Code accent background). Both include an ambient + key drop shadow to match VS Code widget elevation, and respond to the light/dark theme toggle.',
+          'A VS Code–styled popover built on top of Fluent UI. Composed from `VscPopover`, `VscPopoverTrigger`, and `VscPopoverSurface`. The surface supports two appearances: `default` (neutral hover-widget background) and `brand` (VS Code accent background). Both include an ambient + key drop shadow to match VS Code widget elevation, and respond to the light/dark theme toggle. Enter/exit motion is disabled by the base styles to match VS Code’s snappy feel, so the Fluent `surfaceMotion` prop has no visible effect here.',
       },
     },
   },
@@ -299,33 +299,6 @@ export const ControllingOpenAndClose: Story = {
     },
   },
   render: () => <ControlledPopover />,
-};
-
-/* ── Motion disabled ─────────────────────────────────────────────── */
-
-export const MotionDisabled: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'To disable the popover transition animation, set the `surfaceMotion` prop to `null`.',
-      },
-    },
-  },
-  render: () => (
-    <VscPopover surfaceMotion={null}>
-      <VscPopoverTrigger>
-        <VscButton>Open popover</VscButton>
-      </VscPopoverTrigger>
-      <VscPopoverSurface>
-        <div style={{ maxWidth: 240 }}>
-          <p style={{ margin: 0, fontSize: 12 }}>
-            This popover opens and closes without a transition animation.
-          </p>
-        </div>
-      </VscPopoverSurface>
-    </VscPopover>
-  ),
 };
 
 /* ── Nested popovers ─────────────────────────────────────────────── */

@@ -1,8 +1,4 @@
-import {
-  makeStyles,
-  mergeClasses,
-  shorthands,
-} from '@fluentui/react-components';
+import { makeStyles, mergeClasses } from '@fluentui/react-components';
 
 import { vscFontFamily } from '../../styles/tokens';
 
@@ -17,6 +13,9 @@ const useSurfaceBaseStyles = makeStyles({
     fontFamily: vscFontFamily,
     borderRadius: '4px',
     boxSizing: 'border-box',
+    // Cancel Fluent's transition + @keyframes enter/exit motion to match
+    // VS Code's snappy, motionless widgets. This makes the Fluent
+    // `surfaceMotion` prop a no-op for VscPopover by design.
     transition: 'none',
     animation: 'none',
     // Ambient + key drop shadow (matches VS Code widget elevation).
@@ -39,21 +38,23 @@ const useSurfaceBaseStyles = makeStyles({
 // ---------------------------------------------------------------------------
 //  Permutations – appearance variants via makeStyles
 // ---------------------------------------------------------------------------
+//
+//  The `withArrow` beak inherits its fill from the surface: Fluent's arrow
+//  element (and its ::before tip) use `background-color: inherit`, so setting
+//  `backgroundColor` on the surface root below propagates to the arrow. This
+//  is verified for both appearances — the brand arrow computes to
+//  `--vscode-button-background` (#0078D4), matching the surface.
 
 const useSurfaceAppearanceStyles = makeStyles({
   default: {
     backgroundColor: 'var(--vscode-editorHoverWidget-background)',
     color: 'var(--vscode-editorHoverWidget-foreground)',
-    ...shorthands.border(
-      '1px',
-      'solid',
-      'var(--vscode-editorHoverWidget-border)',
-    ),
+    border: '1px solid var(--vscode-editorHoverWidget-border)',
   },
   brand: {
     backgroundColor: 'var(--vscode-button-background)',
     color: 'var(--vscode-button-foreground)',
-    ...shorthands.border('1px', 'solid', 'var(--vscode-button-border)'),
+    border: '1px solid var(--vscode-button-border)',
   },
 });
 
