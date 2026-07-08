@@ -231,21 +231,19 @@ export const WithArrowAutosize: Story = {
 
 /* ── Trapping focus ──────────────────────────────────────────────── */
 
-export const TrappingFocus: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'When a popover contains focusable elements, use `trapFocus` to apply the modal dialog pattern. Elements outside the trap are hidden from screen readers until the popover closes.',
-      },
-    },
-  },
-  render: () => (
-    <VscPopover trapFocus>
+function FocusTrapPopover() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <VscPopover
+      trapFocus
+      open={open}
+      onOpenChange={(_, data) => setOpen(data.open)}
+    >
       <VscPopoverTrigger>
         <VscButton>Open popover</VscButton>
       </VscPopoverTrigger>
-      <VscPopoverSurface>
+      <VscPopoverSurface aria-labelledby="rename-item-title">
         <div
           style={{
             display: 'flex',
@@ -254,16 +252,32 @@ export const TrappingFocus: Story = {
             width: 240,
           }}
         >
-          <strong style={{ fontSize: 13 }}>Rename item</strong>
+          <strong id="rename-item-title" style={{ fontSize: 13 }}>
+            Rename item
+          </strong>
           <VscInput placeholder="New name" />
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-            <VscButton>Cancel</VscButton>
-            <VscButton appearance="primary">Save</VscButton>
+            <VscButton onClick={() => setOpen(false)}>Cancel</VscButton>
+            <VscButton appearance="primary" onClick={() => setOpen(false)}>
+              Save
+            </VscButton>
           </div>
         </div>
       </VscPopoverSurface>
     </VscPopover>
-  ),
+  );
+}
+
+export const TrappingFocus: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'When a popover contains focusable elements, use `trapFocus` to apply the modal dialog pattern. Elements outside the trap are hidden from screen readers until the popover closes. Because `trapFocus` blocks outside-click dismissal, the popover is controlled so the Cancel and Save buttons can close it.',
+      },
+    },
+  },
+  render: () => <FocusTrapPopover />,
 };
 
 /* ── Controlling open and close ──────────────────────────────────── */
@@ -317,7 +331,7 @@ export const NestedPopovers: Story = {
       <VscPopoverTrigger>
         <VscButton>Root trigger</VscButton>
       </VscPopoverTrigger>
-      <VscPopoverSurface>
+      <VscPopoverSurface aria-labelledby="nested-root-title">
         <div
           style={{
             display: 'flex',
@@ -326,7 +340,9 @@ export const NestedPopovers: Story = {
             maxWidth: 240,
           }}
         >
-          <strong style={{ fontSize: 13 }}>Root popover</strong>
+          <strong id="nested-root-title" style={{ fontSize: 13 }}>
+            Root popover
+          </strong>
           <p style={{ margin: 0, fontSize: 12 }}>
             Open a nested popover from within this one.
           </p>
@@ -334,7 +350,7 @@ export const NestedPopovers: Story = {
             <VscPopoverTrigger>
               <VscButton>Nested trigger</VscButton>
             </VscPopoverTrigger>
-            <VscPopoverSurface appearance="brand">
+            <VscPopoverSurface appearance="brand" aria-label="Nested popover">
               <div style={{ maxWidth: 220 }}>
                 <p style={{ margin: 0, fontSize: 12 }}>
                   Nested popover content.
