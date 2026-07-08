@@ -103,7 +103,10 @@ function ExamplePopover({ appearance }: { appearance: VscPopoverAppearance }) {
             }}
           >
             <span style={{ fontSize: 12, color: mutedColor }}>1 of 6</span>
-            <VscButton appearance={onBrand ? undefined : 'primary'}>
+            <VscButton
+              appearance={onBrand ? undefined : 'primary'}
+              style={onBrand ? { backgroundColor: '#313131' } : undefined}
+            >
               Next
             </VscButton>
           </div>
