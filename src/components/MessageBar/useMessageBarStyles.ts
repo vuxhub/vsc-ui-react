@@ -117,7 +117,7 @@ const useIntentStyles = makeStyles({
       ...shorthands.borderColor('var(--vscode-badge-successBackground)'),
     },
     '& .fui-MessageBar__icon': {
-      color: 'var(--vscode-badge-successForeground)',
+      color: 'var(--vscode-badge-successBackground)',
     },
   },
 });
