@@ -21,6 +21,7 @@ export const VscSpinButton = forwardRef<HTMLInputElement, VscSpinButtonProps>(
       className,
       disabled,
       readOnly,
+      input,
       ...rest
     },
     ref,
@@ -41,7 +42,7 @@ export const VscSpinButton = forwardRef<HTMLInputElement, VscSpinButtonProps>(
         disabled={disabled}
         className={rootClassName}
         data-validation-state={validationState}
-        input={{ readOnly }}
+        input={{ readOnly, ...(typeof input === 'object' ? input : {}) }}
         {...rest}
       />
     );

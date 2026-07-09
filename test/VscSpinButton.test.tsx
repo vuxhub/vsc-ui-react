@@ -107,5 +107,20 @@ describe('VscSpinButton', () => {
     });
     const input = container.querySelector('input')!;
     expect(input).not.toBeDisabled();
+    expect(input).toHaveAttribute('readonly');
+  });
+
+  it('keeps readOnly when a consumer supplies an input slot', () => {
+    const { container } = render(
+      <VscSpinButton
+        defaultValue={0}
+        readOnly
+        input={{ 'aria-label': 'amount' }}
+      />,
+      { wrapper },
+    );
+    const input = container.querySelector('input')!;
+    expect(input).toHaveAttribute('readonly');
+    expect(input).toHaveAttribute('aria-label', 'amount');
   });
 });
