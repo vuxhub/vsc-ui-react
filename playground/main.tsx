@@ -12,6 +12,7 @@ import {
   DismissRegular,
   EyeOffRegular,
   EyeRegular,
+  OpenRegular,
   MoreHorizontalRegular,
 } from '@fluentui/react-icons';
 
@@ -20,6 +21,7 @@ import {
   VscMenuButton,
   VscSplitButton,
   VscInput,
+  VscSpinButton,
   VscTextarea,
   VscField,
   VscSearchBox,
@@ -40,6 +42,7 @@ import {
   VscCheckbox,
   VscLabel,
   VscBadge,
+  VscLink,
   VscSwitch,
   VscSlider,
   VscDialog,
@@ -62,6 +65,9 @@ import {
   VscMessageBarBody,
   VscMessageBarTitle,
   VscMessageBarActions,
+  VscPopover,
+  VscPopoverTrigger,
+  VscPopoverSurface,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -842,6 +848,52 @@ function InputSection() {
   );
 }
 
+function SpinButtonSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscSpinButton</h2>
+      <h3 style={headerStyle}>Sizes</h3>
+      <Matrix
+        rows={CONTROL_SIZE_ROWS}
+        columns={FORM_STATE_COLUMNS_NO_SELECTED}
+        cellRender={(row, col) => (
+          <VscSpinButton
+            defaultValue={10}
+            size={row as 'small' | 'medium' | 'large'}
+            readOnly={col === 'readonly'}
+            disabled={col === 'disabled'}
+          />
+        )}
+      />
+
+      <h3 style={headerStyle}>Validation</h3>
+      <Matrix
+        rows={INPUT_TEXTAREA_VALIDATION_ROWS}
+        columns={FORM_STATE_COLUMNS_NO_SELECTED}
+        cellRender={(row, col) => {
+          const isInvalid = row === 'error' || row === 'warning';
+          const isUnavailable =
+            isInvalid && (col === 'readonly' || col === 'disabled');
+          if (isUnavailable) {
+            return <span style={gridHeadStyle}>-</span>;
+          }
+
+          return (
+            <VscSpinButton
+              defaultValue={10}
+              validationState={
+                row === 'none' ? undefined : inputValidationFor(row)
+              }
+              readOnly={col === 'readonly'}
+              disabled={col === 'disabled'}
+            />
+          );
+        }}
+      />
+    </section>
+  );
+}
+
 function TextareaSection() {
   return (
     <section style={sectionStyle}>
@@ -1466,6 +1518,50 @@ function LabelSection() {
   );
 }
 
+const LINK_COLUMNS = [
+  { key: 'rest', label: 'Rest' },
+  { key: 'underline', label: 'Underline' },
+  { key: 'icon', label: 'Icon' },
+  { key: 'icon-underline', label: 'Icon + underline' },
+  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+  { key: 'disabled', label: 'Disabled' },
+];
+
+function LinkSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscLink</h2>
+      <p style={helperNoteStyle}>
+        Hover for an underline; focus (Tab) shows a double underline. The Focus
+        column is statically rendered to preview the focused state.
+      </p>
+      <Matrix
+        rows={CONTROL_SIZE_ROWS}
+        columns={LINK_COLUMNS}
+        columnWidthMode="content"
+        cellRender={(row, col) => {
+          const size = row as 'small' | 'medium' | 'large';
+          const underline = col === 'underline' || col === 'icon-underline';
+          const withIcon = col === 'icon' || col === 'icon-underline';
+          const disabled = col === 'disabled';
+          return (
+            <VscLink
+              href="#"
+              size={size}
+              underline={underline}
+              disabled={disabled}
+              icon={withIcon ? <OpenRegular /> : undefined}
+              onClick={(e) => e.preventDefault()}
+            >
+              Link
+            </VscLink>
+          );
+        }}
+      />
+    </section>
+  );
+}
+
 const BADGE_APPEARANCE_COLUMNS = [
   { key: 'filled', label: 'Filled' },
   { key: 'tint', label: 'Tint' },
@@ -1777,6 +1873,112 @@ function DialogSection() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             <McpToolDialog />
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PopoverExample({ appearance }: { appearance: 'default' | 'brand' }) {
+  const [open, setOpen] = React.useState(false);
+  const onBrand = appearance === 'brand';
+  const mutedColor = onBrand
+    ? 'var(--vscode-button-foreground)'
+    : 'var(--vscode-descriptionForeground)';
+  return (
+    <VscPopover
+      withArrow
+      open={open}
+      onOpenChange={(_, data) => setOpen(data.open)}
+    >
+      <VscPopoverTrigger>
+        <VscButton appearance={onBrand ? 'primary' : undefined}>
+          Open popover
+        </VscButton>
+      </VscPopoverTrigger>
+      <VscPopoverSurface appearance={appearance}>
+        <div style={{ width: 280 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 8,
+            }}
+          >
+            <strong style={{ fontSize: 13 }}>Your apps</strong>
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={() => setOpen(false)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 22,
+                height: 22,
+                padding: 0,
+                border: 'none',
+                borderRadius: 4,
+                background: 'transparent',
+                color: 'inherit',
+                cursor: 'pointer',
+                lineHeight: 0,
+              }}
+            >
+              <DismissRegular />
+            </button>
+          </div>
+          <div
+            style={{
+              height: 96,
+              borderRadius: 4,
+              marginBottom: 8,
+              background: onBrand
+                ? 'rgba(0, 0, 0, 0.2)'
+                : 'var(--vscode-editorWidget-background)',
+            }}
+          />
+          <p style={{ margin: '0 0 12px', fontSize: 12, color: mutedColor }}>
+            Expand the App Launcher to see all of your Microsoft 365 apps.
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <span style={{ fontSize: 12, color: mutedColor }}>1 of 6</span>
+            <VscButton
+              appearance={onBrand ? undefined : 'primary'}
+              style={onBrand ? { backgroundColor: '#313131' } : undefined}
+            >
+              Next
+            </VscButton>
+          </div>
+        </div>
+      </VscPopoverSurface>
+    </VscPopover>
+  );
+}
+
+function PopoverSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscPopover</h2>
+      <p style={helperNoteStyle}>
+        Contextual overlay anchored to a trigger. Supports default (neutral) and
+        brand (accent) appearances, each with an ambient + key drop shadow.
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={gridHeadStyle}>Default</div>
+          <PopoverExample appearance="default" />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={gridHeadStyle}>Brand</div>
+          <PopoverExample appearance="brand" />
         </div>
       </div>
     </section>
@@ -2670,15 +2872,18 @@ function Playground() {
           <SwitchSection />
           <SliderSection />
           <InputSection />
+          <SpinButtonSection />
           <TextareaSection />
           <SearchBoxSection />
           <DropdownSection />
           <FieldSection />
           <LabelSection />
           <BadgeSection />
+          <LinkSection />
           <MenuSection />
           <TabListSection />
           <DialogSection />
+          <PopoverSection />
           <AccordionSection />
           <DividerSection />
           <TagSection />

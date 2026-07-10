@@ -14,6 +14,10 @@ export type { VscMenuButtonProps } from './components/Button';
 export { VscInput } from './components/Input';
 export type { VscInputProps } from './components/Input';
 
+// SpinButton
+export { VscSpinButton } from './components/SpinButton';
+export type { VscSpinButtonProps } from './components/SpinButton';
+
 // Textarea
 export { VscTextarea } from './components/Textarea';
 export type {
@@ -94,6 +98,10 @@ export type { VscCheckboxProps } from './components/Checkbox';
 // Label
 export { VscLabel } from './components/Label';
 export type { VscLabelProps } from './components/Label';
+
+// Link
+export { VscLink } from './components/Link';
+export type { VscLinkProps, VscLinkSize } from './components/Link';
 
 // Switch
 export { VscSwitch } from './components/Switch';
@@ -188,3 +196,15 @@ export type {
   VscMessageBarLayout,
   VscMessageBarShape,
 } from './components/MessageBar';
+// Popover
+export {
+  VscPopover,
+  VscPopoverTrigger,
+  VscPopoverSurface,
+} from './components/Popover';
+export type {
+  VscPopoverProps,
+  VscPopoverTriggerProps,
+  VscPopoverSurfaceProps,
+  VscPopoverAppearance,
+} from './components/Popover';
