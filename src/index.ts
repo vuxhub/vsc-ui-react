@@ -14,6 +14,10 @@ export type { VscMenuButtonProps } from './components/Button';
 export { VscInput } from './components/Input';
 export type { VscInputProps } from './components/Input';
 
+// SpinButton
+export { VscSpinButton } from './components/SpinButton';
+export type { VscSpinButtonProps } from './components/SpinButton';
+
 // Textarea
 export { VscTextarea } from './components/Textarea';
 export type {
