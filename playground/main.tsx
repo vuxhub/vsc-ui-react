@@ -11,6 +11,7 @@ import {
   CircleRegular,
   EyeOffRegular,
   EyeRegular,
+  OpenRegular,
   MoreHorizontalRegular,
 } from '@fluentui/react-icons';
 
@@ -39,6 +40,7 @@ import {
   VscCheckbox,
   VscLabel,
   VscBadge,
+  VscLink,
   VscSwitch,
   VscSlider,
   VscDialog,
@@ -1461,6 +1463,50 @@ function LabelSection() {
   );
 }
 
+const LINK_COLUMNS = [
+  { key: 'rest', label: 'Rest' },
+  { key: 'underline', label: 'Underline' },
+  { key: 'icon', label: 'Icon' },
+  { key: 'icon-underline', label: 'Icon + underline' },
+  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+  { key: 'disabled', label: 'Disabled' },
+];
+
+function LinkSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscLink</h2>
+      <p style={helperNoteStyle}>
+        Hover for an underline; focus (Tab) shows a double underline. The Focus
+        column is statically rendered to preview the focused state.
+      </p>
+      <Matrix
+        rows={CONTROL_SIZE_ROWS}
+        columns={LINK_COLUMNS}
+        columnWidthMode="content"
+        cellRender={(row, col) => {
+          const size = row as 'small' | 'medium' | 'large';
+          const underline = col === 'underline' || col === 'icon-underline';
+          const withIcon = col === 'icon' || col === 'icon-underline';
+          const disabled = col === 'disabled';
+          return (
+            <VscLink
+              href="#"
+              size={size}
+              underline={underline}
+              disabled={disabled}
+              icon={withIcon ? <OpenRegular /> : undefined}
+              onClick={(e) => e.preventDefault()}
+            >
+              Link
+            </VscLink>
+          );
+        }}
+      />
+    </section>
+  );
+}
+
 const BADGE_APPEARANCE_COLUMNS = [
   { key: 'filled', label: 'Filled' },
   { key: 'tint', label: 'Tint' },
@@ -2542,6 +2588,7 @@ function Playground() {
           <FieldSection />
           <LabelSection />
           <BadgeSection />
+          <LinkSection />
           <MenuSection />
           <TabListSection />
           <DialogSection />
