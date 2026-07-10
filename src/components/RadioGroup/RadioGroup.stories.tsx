@@ -146,18 +146,31 @@ export const WithoutLabel: Story = {
 
 export const Subtext: Story = {
   render: () => (
-    <VscRadioGroup defaultValue="light">
-      <VscRadio
-        value="light"
-        label="Light theme"
-        subtext="Uses light colors optimized for daytime use"
-      />
-      <VscRadio
-        value="dark"
-        label="Dark theme"
-        subtext="Uses dark colors optimized for low-light environments"
-      />
-    </VscRadioGroup>
+    <>
+      <VscRadioGroup defaultValue="large">
+        <VscRadio
+          value="large"
+          label="Large button"
+          subtext="This is a large button with subtext"
+        />
+      </VscRadioGroup>
+      <VscRadioGroup defaultValue="medium">
+        <VscRadio
+          value="medium"
+          label="Medium button"
+          size="medium"
+          subtext="This is a medium button with subtext"
+        />
+      </VscRadioGroup>
+      <VscRadioGroup defaultValue="small">
+        <VscRadio
+          value="small"
+          label="Small button"
+          size="small"
+          subtext="This is a small button with subtext"
+        />
+      </VscRadioGroup>
+    </>
   ),
 };
 

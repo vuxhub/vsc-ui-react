@@ -36,14 +36,14 @@ const useRadioBaseStyles = makeStyles({
       ),
       ...shorthands.borderWidth('1px'),
       ...shorthands.borderRadius('50%'),
-      margin: `${tokens.spacingVerticalS} ${tokens.spacingHorizontalS}`,
+      margin: '6px',
       backgroundColor:
         'var(--vscode-radio-background, var(--vscode-checkbox-background))',
       color: 'transparent',
       boxShadow: 'none',
       transition: 'none',
-      width: '16px',
-      height: '16px',
+      // width: '16px',
+      // height: '16px',
     },
 
     '& .fui-Radio__indicator.fui-Radio__indicator::after': {
@@ -68,6 +68,7 @@ const useRadioBaseStyles = makeStyles({
       color: 'var(--vscode-foreground)',
       paddingTop: '0',
       paddingBottom: '0',
+      paddingLeft: '0',
     },
 
     // --- Hover: checked radios shift to the hover border + dot color ---
@@ -149,7 +150,7 @@ const useRadioPermStyles = makeStyles({
     '& .fui-Radio__indicator.fui-Radio__indicator': {
       width: '12px',
       height: '12px',
-      margin: `${tokens.spacingVerticalSNudge} ${tokens.spacingHorizontalSNudge}`,
+      margin: '5px',
     },
 
     '& .fui-Radio__label': {
@@ -167,6 +168,22 @@ const useRadioSubtextStyles = makeStyles({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
+
+    // When subtext exists, focus ring should include both radio row and subtext row.
+    '&:focus-within': {
+      outlineStyle: 'solid',
+      outlineWidth: '1px',
+      outlineColor: 'var(--vscode-focusBorder)',
+      outlineOffset: '2px',
+      ...shorthands.borderRadius('4px'),
+    },
+  },
+
+  // Suppress the inner Radio root outline when wrapper handles focus outline.
+  suppressInnerFocusOutline: {
+    '&:focus-within': {
+      outlineStyle: 'none',
+    },
   },
 
   subtext: {
@@ -175,7 +192,7 @@ const useRadioSubtextStyles = makeStyles({
     lineHeight: '16px',
     color: 'var(--vscode-descriptionForeground)',
     // Align with the label text — offset by indicator width + its margins
-    paddingLeft: `calc(16px + 2 * ${tokens.spacingHorizontalS})`,
+    paddingLeft: '28px',
   },
 
   subtextSmall: {
@@ -187,7 +204,7 @@ const useRadioSubtextStyles = makeStyles({
   subtextMedium: {
     fontSize: '11px',
     lineHeight: '15px',
-    paddingLeft: `calc(12px + 2 * ${tokens.spacingHorizontalSNudge})`,
+    paddingLeft: '22px',
   },
 });
 
@@ -223,7 +240,7 @@ export interface UseRadioStylesOptions {
 }
 
 export function useRadioStyles(options: UseRadioStylesOptions) {
-  const { size, disabled, className } = options;
+  const { size, disabled, className, hasSubtext } = options;
   const base = useRadioBaseStyles();
   const classes = useRadioPermStyles();
   const subtextClasses = useRadioSubtextStyles();
@@ -233,6 +250,7 @@ export function useRadioStyles(options: UseRadioStylesOptions) {
     size === 'small' && classes.small,
     size === 'medium' && classes.medium,
     disabled && classes.disabled,
+    hasSubtext && subtextClasses.suppressInnerFocusOutline,
     className,
   );
 

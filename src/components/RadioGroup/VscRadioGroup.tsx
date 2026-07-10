@@ -2,6 +2,7 @@ import { forwardRef, type ReactNode } from 'react';
 import {
   Radio,
   RadioGroup,
+  useId,
   type RadioProps,
   type RadioGroupProps,
 } from '@fluentui/react-components';
@@ -41,27 +42,51 @@ export type VscRadioProps = Omit<RadioProps, 'labelPosition' | 'indicator'> & {
 };
 
 export const VscRadio = forwardRef<HTMLInputElement, VscRadioProps>(
-  ({ size, disabled, className, subtext, ...rest }, ref) => {
-    const { rootClassName, wrapperClassName, subtextClassName } =
-      useRadioStyles({ size, disabled, className });
+  (
+    {
+      size,
+      disabled,
+      className,
+      subtext,
+      'aria-describedby': ariaDescribedBy,
+      ...rest
+    },
+    ref,
+  ) => {
+    const hasSubtext = Boolean(subtext);
+    const subtextId = useId('vsc-radio-subtext');
+
+    const { rootClassName, wrapperClassName, subtextClassName } = useRadioStyles({
+      size,
+      disabled,
+      className,
+      hasSubtext,
+    });
+
+    const mergedAriaDescribedBy = [ariaDescribedBy, hasSubtext ? subtextId : undefined]
+      .filter(Boolean)
+      .join(' ') || undefined;
 
     const radio = (
       <Radio
         ref={ref}
         disabled={disabled}
         className={rootClassName}
+        aria-describedby={mergedAriaDescribedBy}
         {...rest}
       />
     );
 
-    if (!subtext) {
+    if (!hasSubtext) {
       return radio;
     }
 
     return (
       <span className={wrapperClassName}>
         {radio}
-        <span className={subtextClassName}>{subtext}</span>
+        <span id={subtextId} className={subtextClassName}>
+          {subtext}
+        </span>
       </span>
     );
   },
