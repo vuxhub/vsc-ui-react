@@ -9,6 +9,7 @@ import {
   AddRegular,
   ChevronDownRegular,
   CircleRegular,
+  DismissRegular,
   EyeOffRegular,
   EyeRegular,
   OpenRegular,
@@ -60,6 +61,9 @@ import {
   VscBreadcrumbItem,
   VscBreadcrumbButton,
   VscBreadcrumbDivider,
+  VscPopover,
+  VscPopoverTrigger,
+  VscPopoverSurface,
 } from '../src';
 import type { VscInputValidationState, VscValidationState } from '../src';
 
@@ -1871,6 +1875,112 @@ function DialogSection() {
   );
 }
 
+function PopoverExample({ appearance }: { appearance: 'default' | 'brand' }) {
+  const [open, setOpen] = React.useState(false);
+  const onBrand = appearance === 'brand';
+  const mutedColor = onBrand
+    ? 'var(--vscode-button-foreground)'
+    : 'var(--vscode-descriptionForeground)';
+  return (
+    <VscPopover
+      withArrow
+      open={open}
+      onOpenChange={(_, data) => setOpen(data.open)}
+    >
+      <VscPopoverTrigger>
+        <VscButton appearance={onBrand ? 'primary' : undefined}>
+          Open popover
+        </VscButton>
+      </VscPopoverTrigger>
+      <VscPopoverSurface appearance={appearance}>
+        <div style={{ width: 280 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 8,
+            }}
+          >
+            <strong style={{ fontSize: 13 }}>Your apps</strong>
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={() => setOpen(false)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 22,
+                height: 22,
+                padding: 0,
+                border: 'none',
+                borderRadius: 4,
+                background: 'transparent',
+                color: 'inherit',
+                cursor: 'pointer',
+                lineHeight: 0,
+              }}
+            >
+              <DismissRegular />
+            </button>
+          </div>
+          <div
+            style={{
+              height: 96,
+              borderRadius: 4,
+              marginBottom: 8,
+              background: onBrand
+                ? 'rgba(0, 0, 0, 0.2)'
+                : 'var(--vscode-editorWidget-background)',
+            }}
+          />
+          <p style={{ margin: '0 0 12px', fontSize: 12, color: mutedColor }}>
+            Expand the App Launcher to see all of your Microsoft 365 apps.
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <span style={{ fontSize: 12, color: mutedColor }}>1 of 6</span>
+            <VscButton
+              appearance={onBrand ? undefined : 'primary'}
+              style={onBrand ? { backgroundColor: '#313131' } : undefined}
+            >
+              Next
+            </VscButton>
+          </div>
+        </div>
+      </VscPopoverSurface>
+    </VscPopover>
+  );
+}
+
+function PopoverSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscPopover</h2>
+      <p style={helperNoteStyle}>
+        Contextual overlay anchored to a trigger. Supports default (neutral) and
+        brand (accent) appearances, each with an ambient + key drop shadow.
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={gridHeadStyle}>Default</div>
+          <PopoverExample appearance="default" />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={gridHeadStyle}>Brand</div>
+          <PopoverExample appearance="brand" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TabListSection() {
   return (
     <section style={sectionStyle}>
@@ -2691,6 +2801,7 @@ function Playground() {
           <MenuSection />
           <TabListSection />
           <DialogSection />
+          <PopoverSection />
           <AccordionSection />
           <DividerSection />
           <TagSection />

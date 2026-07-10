@@ -103,6 +103,9 @@
   --vscode-editor-foreground: #cccccc;
   --vscode-editorWidget-background: #252526;
   --vscode-editorWidget-foreground: #cccccc;
+  --vscode-editorHoverWidget-background: #000000;
+  --vscode-editorHoverWidget-foreground: #cccccc;
+  --vscode-editorHoverWidget-border: #313131;
   --vscode-editorInfo-foreground: #3794ff;
   --vscode-editorWarning-foreground: #cca700;
 
@@ -195,6 +198,9 @@ body.light-mode {
   --vscode-editor-foreground: #3b3b3b;
   --vscode-editorWidget-background: #f8f8f8;
   --vscode-editorWidget-foreground: #3b3b3b;
+  --vscode-editorHoverWidget-background: #ffffff;
+  --vscode-editorHoverWidget-foreground: #3b3b3b;
+  --vscode-editorHoverWidget-border: #e5e5e5;
   --vscode-editorInfo-foreground: #005fb8;
   --vscode-editorWarning-foreground: #855f00;
 

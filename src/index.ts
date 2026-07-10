@@ -177,3 +177,16 @@ export type {
   VscBreadcrumbDividerProps,
   VscBreadcrumbSize,
 } from './components/Breadcrumb';
+
+// Popover
+export {
+  VscPopover,
+  VscPopoverTrigger,
+  VscPopoverSurface,
+} from './components/Popover';
+export type {
+  VscPopoverProps,
+  VscPopoverTriggerProps,
+  VscPopoverSurfaceProps,
+  VscPopoverAppearance,
+} from './components/Popover';

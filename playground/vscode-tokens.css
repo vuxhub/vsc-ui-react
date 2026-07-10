@@ -39,6 +39,9 @@
   --vscode-editorWidget-background: #202020;
   --vscode-editorWidget-foreground: #cccccc;
   --vscode-editorWidget-border: #313131;
+  --vscode-editorHoverWidget-background: #000000;
+  --vscode-editorHoverWidget-foreground: #cccccc;
+  --vscode-editorHoverWidget-border: #313131;
 
   /* Buttons */
   --vscode-button-background: #0078d4;
@@ -172,6 +175,9 @@
   --vscode-editorWidget-background: #f8f8f8;
   --vscode-editorWidget-foreground: #3b3b3b;
   --vscode-editorWidget-border: #e5e5e5;
+  --vscode-editorHoverWidget-background: #ffffff;
+  --vscode-editorHoverWidget-foreground: #3b3b3b;
+  --vscode-editorHoverWidget-border: #e5e5e5;
 
   --vscode-button-background: #005fb8;
   --vscode-button-foreground: #ffffff;
