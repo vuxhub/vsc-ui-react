@@ -2005,6 +2005,18 @@ function TabListSection() {
           </VscTab>
         </VscTabList>
 
+        <span style={gridHeadStyle}>Primary</span>
+        <VscTabList defaultSelectedValue="selected" appearance="primary">
+          <VscTab value="default">Default</VscTab>
+          <VscTab value="hover" className="vsc-force-hover">
+            Hover
+          </VscTab>
+          <VscTab value="selected">Selected</VscTab>
+          <VscTab value="disabled" disabled>
+            Disabled
+          </VscTab>
+        </VscTabList>
+
         <span style={gridHeadStyle}>Small</span>
         <VscTabList defaultSelectedValue="selected" size="small">
           <VscTab value="default">Default</VscTab>

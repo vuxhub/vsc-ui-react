@@ -26,6 +26,10 @@ const meta = {
       control: 'radio',
       options: ['small', 'medium'],
     },
+    appearance: {
+      control: 'radio',
+      options: ['default', 'primary'],
+    },
   },
 } satisfies Meta<typeof VscTabList>;
 
@@ -113,6 +117,36 @@ export const WithIcons: Story = {
           Terminal
         </VscTab>
         <VscTab value="extensions" icon={<PuzzlePieceRegular />}>
+          Extensions
+        </VscTab>
+      </VscTabList>
+    </Section>
+  ),
+};
+
+/* ── Primary Appearance ──────────────────────────────────── */
+
+export const Primary: Story = {
+  args: {
+    appearance: 'primary',
+    defaultSelectedValue: 'general',
+  },
+  render: (args) => (
+    <Section
+      title="Primary"
+      description="Acts like a primary button — the active tab's icon and label use the VS Code accent blue, with the standard active line indicator."
+    >
+      <VscTabList {...args}>
+        <VscTab value="general" icon={<SettingsRegular />}>
+          General
+        </VscTab>
+        <VscTab value="editor" icon={<CodeRegular />}>
+          Editor
+        </VscTab>
+        <VscTab value="terminal" icon={<WindowRegular />}>
+          Terminal
+        </VscTab>
+        <VscTab value="extensions" icon={<PuzzlePieceRegular />} disabled>
           Extensions
         </VscTab>
       </VscTabList>
