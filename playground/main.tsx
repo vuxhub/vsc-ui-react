@@ -61,6 +61,10 @@ import {
   VscBreadcrumbItem,
   VscBreadcrumbButton,
   VscBreadcrumbDivider,
+  VscMessageBar,
+  VscMessageBarBody,
+  VscMessageBarTitle,
+  VscMessageBarActions,
   VscPopover,
   VscPopoverTrigger,
   VscPopoverSurface,
@@ -2180,6 +2184,84 @@ function TagSection() {
   );
 }
 
+const MESSAGE_BAR_INTENTS = ['default', 'success', 'warning', 'error'] as const;
+
+function MessageBarSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscMessageBar</h2>
+
+      <h3 style={headerStyle}>Single Line (auto)</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {MESSAGE_BAR_INTENTS.map((intent) => (
+          <VscMessageBar key={intent} intent={intent}>
+            <VscMessageBarBody>
+              <VscMessageBarTitle>Descriptive title</VscMessageBarTitle>
+              Message providing information to the user with actionable
+              insights. <a href="#">Link</a>
+            </VscMessageBarBody>
+            <VscMessageBarActions
+              containerAction={
+                <VscButton
+                  appearance="transparent"
+                  aria-label="Dismiss"
+                  icon={<DismissRegular />}
+                />
+              }
+            >
+              <VscButton size="small">Action</VscButton>
+              <VscButton size="small">Action</VscButton>
+            </VscMessageBarActions>
+          </VscMessageBar>
+        ))}
+      </div>
+
+      <h3 style={headerStyle}>Multiline</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {MESSAGE_BAR_INTENTS.map((intent) => (
+          <VscMessageBar key={intent} intent={intent} layout="multiline">
+            <VscMessageBarBody>
+              <VscMessageBarTitle>Descriptive title</VscMessageBarTitle>
+              Message providing information to the user with actionable
+              insights. Message providing information to the user with
+              actionable insights. Message providing information to the user
+              with actionable insights. <a href="#">Link</a>
+            </VscMessageBarBody>
+            <VscMessageBarActions
+              containerAction={
+                <VscButton
+                  appearance="transparent"
+                  aria-label="Dismiss"
+                  icon={<DismissRegular />}
+                />
+              }
+            >
+              <VscButton size="small">Action</VscButton>
+              <VscButton size="small">Action</VscButton>
+            </VscMessageBarActions>
+          </VscMessageBar>
+        ))}
+      </div>
+
+      <h3 style={headerStyle}>Shape</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <VscMessageBar intent="default">
+          <VscMessageBarBody>
+            <VscMessageBarTitle>Rounded shape</VscMessageBarTitle>
+            Component-level message bar with rounded corners.
+          </VscMessageBarBody>
+        </VscMessageBar>
+        <VscMessageBar intent="success" shape="square">
+          <VscMessageBarBody>
+            <VscMessageBarTitle>Square shape</VscMessageBarTitle>
+            Page-level message bar with square corners.
+          </VscMessageBarBody>
+        </VscMessageBar>
+      </div>
+    </section>
+  );
+}
+
 function BreadcrumbSection() {
   return (
     <section style={sectionStyle}>
@@ -2806,6 +2888,7 @@ function Playground() {
           <DividerSection />
           <TagSection />
           <BreadcrumbSection />
+          <MessageBarSection />
           <LiveHoverDemo />
         </div>
       </div>
