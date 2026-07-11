@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   compareVersions,
+  createMergedReleasePlan,
   createVersionPlan,
   findVersionIntroduction,
   getChangedComponents,
@@ -81,5 +82,18 @@ describe('release planning', () => {
     ];
 
     expect(findVersionIntroduction('1.2.3', history)).toBe('release');
+  });
+
+  it('resumes a release whose version pull request already merged', () => {
+    expect(createMergedReleasePlan('v1.2.2', '1.3.0', 'abc123')).toEqual({
+      base_ref: 'v1.2.2',
+      bump: 'none',
+      component_count: 0,
+      mode: 'resume-merged',
+      release_ref: 'HEAD',
+      should_release: true,
+      source_sha: 'abc123',
+      version: '1.3.0',
+    });
   });
 });
