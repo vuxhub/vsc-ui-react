@@ -79,8 +79,8 @@ The package is published to npm by GitHub Actions. The release runs at
 3. It exits without publishing when there are no changes.
 4. Changes in two or more component folders trigger a minor bump.
 5. All other changes trigger a patch bump.
-6. It validates the package, commits the version, and creates the tag.
-7. It publishes the tagged package to npm with provenance.
+6. It validates the package and opens a version bump pull request.
+7. It merges the pull request, creates the tag, and publishes to npm.
 
 The minor rule counts unique folders under `src/components`. A minor
 bump resets the patch number to zero.
@@ -93,11 +93,17 @@ If npm publishing fails after the release tag is pushed, rerun the
 workflow manually. It detects the unpublished tag and retries that exact
 release instead of bumping again.
 
+If the version pull request merges before another release step fails,
+the rerun detects the unpublished version on `main` and resumes without
+creating another version bump.
+
 ### Repository setup
 
 Configure an npm trusted publisher for this GitHub repository and set
 the workflow filename to `publish.yml`. The workflow authenticates with
 OIDC, so an `NPM_TOKEN` secret is not required.
 
-GitHub Actions must have permission to push the version commit and tag
-to `main`. Update the branch protection rule if it blocks the workflow.
+Add a `RELEASE_TOKEN` repository secret containing a fine-grained
+personal access token. Grant it read and write access to repository
+contents and pull requests. The token owner must be able to merge pull
+requests into `main`.

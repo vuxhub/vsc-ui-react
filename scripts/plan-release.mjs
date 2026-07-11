@@ -233,6 +233,19 @@ function noReleasePlan(baseRef, version, sourceSha) {
   };
 }
 
+export function createMergedReleasePlan(baseRef, version, sourceSha) {
+  return {
+    base_ref: baseRef,
+    bump: 'none',
+    component_count: 0,
+    mode: 'resume-merged',
+    release_ref: 'HEAD',
+    should_release: true,
+    source_sha: sourceSha,
+    version,
+  };
+}
+
 function newReleasePlan({
   baseRef,
   changedFiles,
@@ -308,7 +321,14 @@ export function planRelease() {
       );
     }
 
-    if (currentVersion !== tagVersion) {
+    const versionComparison = compareVersions(currentVersion, tagVersion);
+
+    if (versionComparison > 0) {
+      assertTargetIsAvailable(packageName, currentVersion);
+      return createMergedReleasePlan(releaseTag, currentVersion, sourceSha);
+    }
+
+    if (versionComparison < 0) {
       throw new Error(
         `package.json is ${currentVersion}, but ${releaseTag} is latest`,
       );
@@ -366,6 +386,19 @@ export function planRelease() {
   }
 
   if (latestPublishedVersion) {
+    if (compareVersions(currentVersion, latestPublishedVersion) > 0) {
+      const baseRef = findVersionCommit(latestPublishedVersion);
+
+      if (!baseRef) {
+        throw new Error(
+          `Cannot find the commit for published version ` +
+            latestPublishedVersion,
+        );
+      }
+
+      return createMergedReleasePlan(baseRef, currentVersion, sourceSha);
+    }
+
     throw new Error(
       `package.json is ${currentVersion}, but npm is ` + latestPublishedVersion,
     );
