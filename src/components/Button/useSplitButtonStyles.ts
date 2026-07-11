@@ -338,8 +338,8 @@ const useSizeStyles = makeStyles({
   compact: {
     '& .fui-SplitButton__primaryActionButton': {
       ...typographyStyles.caption2,
-      height: '15px',
-      minHeight: '15px',
+      height: '16px',
+      minHeight: '16px',
       minWidth: 'auto',
       gap: '2px',
       padding: '0 4px',
@@ -348,11 +348,11 @@ const useSizeStyles = makeStyles({
     },
     '& .fui-SplitButton__menuButton': {
       ...typographyStyles.caption2,
-      height: '15px',
-      minHeight: '15px',
+      height: '16px',
+      minHeight: '16px',
       gap: '2px',
-      width: '15px',
-      minWidth: '15px',
+      width: '16px',
+      minWidth: '16px',
       padding: '1.5px',
       borderTopLeftRadius: '0',
       borderBottomLeftRadius: '0',
