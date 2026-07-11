@@ -69,17 +69,35 @@ The Storybook instance supports dark/light theme switching via a toolbar toggle.
 
 ## Publishing
 
-The package is published to npm automatically via GitHub Actions. No manual `npm publish` is needed.
+The package is published to npm by GitHub Actions. The release runs at
+18:00 Beijing time every Thursday. It can also be started manually.
 
 ### How it works
 
 1. The workflow is defined in `.github/workflows/publish.yml`.
-2. When a push to `main` changes `package.json`, it compares the version field to the previous commit.
-3. If the version has changed, it runs `npm ci` and `npm publish` using the `NPM_TOKEN` secret.
-4. The `prepublishOnly` script automatically runs `build`, `typecheck`, `lint`, and `test` before publishing.
+2. It compares `main` with the latest `vX.Y.Z` release tag.
+3. It exits without publishing when there are no changes.
+4. Changes in two or more component folders trigger a minor bump.
+5. All other changes trigger a patch bump.
+6. It validates the package, commits the version, and creates the tag.
+7. It publishes the tagged package to npm with provenance.
 
-### Release steps
+The minor rule counts unique folders under `src/components`. A minor
+bump resets the patch number to zero.
 
-1. Bump the `version` in `package.json`.
-2. Commit and push to `main`.
-3. The GitHub Actions workflow handles the rest.
+The first run can bootstrap a repository without tags. It finds the
+commit that introduced the version currently published to npm and uses
+that commit as the comparison base.
+
+If npm publishing fails after the release tag is pushed, rerun the
+workflow manually. It detects the unpublished tag and retries that exact
+release instead of bumping again.
+
+### Repository setup
+
+Configure an npm trusted publisher for this GitHub repository and set
+the workflow filename to `publish.yml`. The workflow authenticates with
+OIDC, so an `NPM_TOKEN` secret is not required.
+
+GitHub Actions must have permission to push the version commit and tag
+to `main`. Update the branch protection rule if it blocks the workflow.
