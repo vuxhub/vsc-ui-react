@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'happy-dom',
+    fileParallelism: false,
     setupFiles: ['./test/setupTests.ts'],
     css: {
       modules: {

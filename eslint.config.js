@@ -29,6 +29,12 @@ export default [
       ],
     },
   },
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
   eslintConfigPrettier,
   ...storybook.configs['flat/recommended'],
 ];

@@ -1,150 +1,104 @@
-name: Publish Package
+name: Weekly NPM Release
 
 on:
+  schedule:
+    - cron: '0 10 * * 4'
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
-  id-token: write # Required for OIDC
-  contents: read
+  contents: write
+  id-token: write
+
+concurrency:
+  group: weekly-npm-release
+  cancel-in-progress: false
 
 jobs:
-  check-version:
+  release:
     runs-on: ubuntu-latest
-    outputs:
-      version_changed: ${{ steps.check.outputs.changed }}
-      new_version: ${{ steps.check.outputs.version }}
     steps:
       - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v6
         with:
-          node-version: '24'
-
-      - name: Check if version changed
-        id: check
-        run: |
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          if PUBLISHED_VERSION=$(npm view "$PACKAGE_NAME" version 2>npm-view-error.log); then
-            :
-          elif grep -qi "E404\|not found" npm-view-error.log; then
-            PUBLISHED_VERSION="0.0.0"
-          else
-            cat npm-view-error.log
-            exit 1
-          fi
-          rm -f npm-view-error.log
-
-          echo "Published version: $PUBLISHED_VERSION"
-          echo "Current version: $CURRENT_VERSION"
-
-          SHOULD_PUBLISH=$(CURRENT="$CURRENT_VERSION" PUBLISHED="$PUBLISHED_VERSION" node -e "
-            const parse = (value) => {
-              const cleaned = value.split('+', 1)[0];
-              const match = cleaned.match(/^(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/);
-
-              if (!match) {
-                throw new Error('Invalid semver: ' + value);
-              }
-
-              return {
-                major: Number(match[1]),
-                minor: Number(match[2]),
-                patch: Number(match[3]),
-                prerelease: match[4] ? match[4].split('.') : [],
-              };
-            };
-
-            const compareIdentifiers = (left, right) => {
-              const leftNumeric = /^\d+$/.test(left);
-              const rightNumeric = /^\d+$/.test(right);
-
-              if (leftNumeric && rightNumeric) {
-                return Number(left) - Number(right);
-              }
-
-              if (leftNumeric) {
-                return -1;
-              }
-
-              if (rightNumeric) {
-                return 1;
-              }
-
-              return left.localeCompare(right);
-            };
-
-            const compareSemver = (leftValue, rightValue) => {
-              const left = parse(leftValue);
-              const right = parse(rightValue);
-
-              for (const key of ['major', 'minor', 'patch']) {
-                if (left[key] !== right[key]) {
-                  return left[key] - right[key];
-                }
-              }
-
-              if (left.prerelease.length === 0 && right.prerelease.length === 0) {
-                return 0;
-              }
-
-              if (left.prerelease.length === 0) {
-                return 1;
-              }
-
-              if (right.prerelease.length === 0) {
-                return -1;
-              }
-
-              const length = Math.max(left.prerelease.length, right.prerelease.length);
-              for (let index = 0; index < length; index += 1) {
-                const leftId = left.prerelease[index];
-                const rightId = right.prerelease[index];
-
-                if (leftId === undefined) {
-                  return -1;
-                }
-
-                if (rightId === undefined) {
-                  return 1;
-                }
-
-                const result = compareIdentifiers(leftId, rightId);
-                if (result !== 0) {
-                  return result;
-                }
-              }
-
-              return 0;
-            };
-
-            console.log(compareSemver(process.env.CURRENT, process.env.PUBLISHED) > 0 ? 'true' : 'false');
-          ")
-
-          if [ "$SHOULD_PUBLISH" = "true" ]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-  publish:
-    needs: check-version
-    if: needs.check-version.outputs.version_changed == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
+          ref: main
+          fetch-depth: 0
 
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-          package-manager-cache: false # never use caching in release builds
+          package-manager-cache: false
 
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
-      - run: npm publish
+      - name: Plan release
+        id: plan
+        run: npm run release:plan
+
+      - name: Summarize release plan
+        env:
+          BASE_REF: ${{ steps.plan.outputs.base_ref }}
+          BUMP: ${{ steps.plan.outputs.bump }}
+          COMPONENT_COUNT: ${{ steps.plan.outputs.component_count }}
+          MODE: ${{ steps.plan.outputs.mode }}
+          SHOULD_RELEASE: ${{ steps.plan.outputs.should_release }}
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          {
+            echo "## Weekly NPM release"
+            echo "- Release: $SHOULD_RELEASE"
+            echo "- Mode: $MODE"
+            echo "- Base: ${BASE_REF:-none}"
+            echo "- Changed components: $COMPONENT_COUNT"
+            echo "- Bump: $BUMP"
+            echo "- Version: $VERSION"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check out pending release
+        if: steps.plan.outputs.mode == 'resume'
+        env:
+          RELEASE_REF: ${{ steps.plan.outputs.release_ref }}
+        run: git checkout --detach "$RELEASE_REF"
+
+      - name: Bump package version
+        if: steps.plan.outputs.mode == 'new'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: npm version "$VERSION" --no-git-tag-version
+
+      - name: Install dependencies
+        if: steps.plan.outputs.should_release == 'true'
+        run: npm ci
+
+      - name: Validate package
+        if: steps.plan.outputs.should_release == 'true'
+        run: npm run prepublishOnly
+
+      - name: Push release commit and tag
+        if: |
+          steps.plan.outputs.should_release == 'true' &&
+          steps.plan.outputs.mode != 'resume'
+        env:
+          MODE: ${{ steps.plan.outputs.mode }}
+          SOURCE_SHA: ${{ steps.plan.outputs.source_sha }}
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ "$MODE" = "new" ]; then
+            git add package.json package-lock.json
+            git commit -m "ci: release v$VERSION"
+          fi
+
+          git tag -a "v$VERSION" -m "v$VERSION"
+          git fetch origin main
+
+          if [ "$(git rev-parse origin/main)" != "$SOURCE_SHA" ]; then
+            echo "main changed while the release was running"
+            exit 1
+          fi
+
+          git push --atomic origin HEAD:main "refs/tags/v$VERSION"
+
+      - name: Publish package
+        if: steps.plan.outputs.should_release == 'true'
+        run: npm publish --access public --provenance --ignore-scripts
