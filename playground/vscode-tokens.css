@@ -645,3 +645,16 @@ body {
   background-color: var(--colorNeutralStroke1Hover) !important;
   border-radius: var(--borderRadiusCircular, 9999px) !important;
 }
+
+/* Primary TabList playground preview: keep forced hover in accent blue. */
+.vsc-tablist-primary-preview .vsc-force-hover.fui-Tab,
+.vsc-tablist-primary-preview .vsc-force-hover .fui-Tab {
+  color: var(--vscode-textLink-foreground) !important;
+}
+
+.vsc-tablist-primary-preview .vsc-force-hover.fui-Tab .fui-Tab__icon,
+.vsc-tablist-primary-preview .vsc-force-hover .fui-Tab .fui-Tab__icon,
+.vsc-tablist-primary-preview .vsc-force-hover.fui-Tab .fui-Tab__content,
+.vsc-tablist-primary-preview .vsc-force-hover .fui-Tab .fui-Tab__content {
+  color: var(--vscode-textLink-foreground) !important;
+}

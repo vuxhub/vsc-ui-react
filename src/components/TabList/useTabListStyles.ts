@@ -46,8 +46,25 @@ const useTabListBaseStyles = makeStyles({
 
 const useTabListAppearanceStyles = makeStyles({
   primary: {
-    /* Only the active tab turns accent blue — all other states inherit
-       the default tab treatment. Line indicator kept from base. */
+    /* All non-disabled tabs use accent blue; line indicator kept from base. */
+    '& [role="tab"]': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"] .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"] .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:hover': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"]:hover .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:hover .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
     '& [role="tab"][aria-selected="true"]': {
       color: 'var(--vscode-textLink-foreground)',
     },
@@ -57,6 +74,19 @@ const useTabListAppearanceStyles = makeStyles({
     '& [role="tab"][aria-selected="true"] .fui-Tab__icon': {
       color: 'var(--vscode-textLink-foreground)' as 'inherit',
     },
+
+    /* Disabled tabs stay neutral gray, matching base treatment. */
+    '& [role="tab"][aria-disabled="true"], & [role="tab"]:disabled': {
+      color: 'var(--vscode-disabledForeground)',
+    },
+    '& [role="tab"][aria-disabled="true"] .fui-Tab__content, & [role="tab"]:disabled .fui-Tab__content':
+      {
+        color: 'var(--vscode-disabledForeground)' as 'inherit',
+      },
+    '& [role="tab"][aria-disabled="true"] .fui-Tab__icon, & [role="tab"]:disabled .fui-Tab__icon':
+      {
+        color: 'var(--vscode-disabledForeground)' as 'inherit',
+      },
   },
 });
 

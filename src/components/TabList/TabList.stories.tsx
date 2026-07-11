@@ -134,7 +134,7 @@ export const Primary: Story = {
   render: (args) => (
     <Section
       title="Primary"
-      description="Acts like a primary button — the active tab's icon and label use the VS Code accent blue, with the standard active line indicator."
+      description="Acts like a primary button — all non-disabled tab icons and labels use the VS Code accent blue, with the standard active line indicator."
     >
       <VscTabList {...args}>
         <VscTab value="general" icon={<SettingsRegular />}>

@@ -2010,7 +2010,11 @@ function TabListSection() {
         </VscTabList>
 
         <span style={gridHeadStyle}>Primary</span>
-        <VscTabList defaultSelectedValue="selected" appearance="primary">
+        <VscTabList
+          defaultSelectedValue="selected"
+          appearance="primary"
+          className="vsc-tablist-primary-preview"
+        >
           <VscTab value="default">Default</VscTab>
           <VscTab value="hover" className="vsc-force-hover">
             Hover
