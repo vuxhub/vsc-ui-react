@@ -65,6 +65,15 @@ const useTabListAppearanceStyles = makeStyles({
     '& [role="tab"]:hover .fui-Tab__icon': {
       color: 'var(--vscode-textLink-foreground)' as 'inherit',
     },
+    '& [role="tab"]:focus-visible': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"]:focus-visible .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:focus-visible .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
     '& [role="tab"][aria-selected="true"]': {
       color: 'var(--vscode-textLink-foreground)',
     },
