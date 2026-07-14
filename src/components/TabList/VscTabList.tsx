@@ -6,13 +6,28 @@ import {
 } from '@fluentui/react-components';
 import { forwardRef } from 'react';
 
-import { useVscTabListStyles, useVscTabStyles } from './useTabListStyles';
+import {
+  useVscTabListStyles,
+  useVscTabStyles,
+  type VscTabListAppearance,
+} from './useTabListStyles';
 
-export type VscTabListProps = TabListProps;
+export type { VscTabListAppearance };
+
+export type VscTabListProps = Omit<TabListProps, 'appearance'> & {
+  /**
+   * Visual style of the tab strip.
+   * - `default` – neutral VS Code panel/editor tabs.
+   * - `primary` – all non-disabled tabs use the VS Code accent blue,
+   *   mirroring a primary button treatment.
+   * @default 'default'
+   */
+  appearance?: VscTabListAppearance;
+};
 
 export const VscTabList = forwardRef<HTMLDivElement, VscTabListProps>(
-  ({ className, size = 'medium', ...rest }, ref) => {
-    const mergedClass = useVscTabListStyles({ size, className });
+  ({ className, size = 'medium', appearance = 'default', ...rest }, ref) => {
+    const mergedClass = useVscTabListStyles({ size, appearance, className });
 
     return <TabList ref={ref} className={mergedClass} size={size} {...rest} />;
   },

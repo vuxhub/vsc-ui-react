@@ -97,4 +97,30 @@ describe('VscTabList', () => {
     );
     expect(selectedTab).toBeTruthy();
   });
+
+  it('applies a distinct class for the primary appearance', () => {
+    const { container: defaultContainer } = render(
+      <VscTabList>
+        <VscTab value="a">A</VscTab>
+      </VscTabList>,
+      { wrapper },
+    );
+    const { container: primaryContainer } = render(
+      <VscTabList appearance="primary">
+        <VscTab value="a">A</VscTab>
+      </VscTabList>,
+      { wrapper },
+    );
+
+    const defaultClass = defaultContainer
+      .querySelector('[role="tablist"]')
+      ?.getAttribute('class');
+    const primaryClass = primaryContainer
+      .querySelector('[role="tablist"]')
+      ?.getAttribute('class');
+
+    expect(defaultClass).toBeTruthy();
+    expect(primaryClass).toBeTruthy();
+    expect(primaryClass).not.toEqual(defaultClass);
+  });
 });
