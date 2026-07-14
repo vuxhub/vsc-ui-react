@@ -40,6 +40,65 @@ const useTabListBaseStyles = makeStyles({
   },
 });
 
+// ---------------------------------------------------------------------------
+//  Appearance — primary (accent) variant applied to all descendant tabs
+// ---------------------------------------------------------------------------
+
+const useTabListAppearanceStyles = makeStyles({
+  primary: {
+    /* All non-disabled tabs use accent blue; line indicator kept from base. */
+    '& [role="tab"]': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"] .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"] .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:hover': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"]:hover .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:hover .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:focus-visible': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"]:focus-visible .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"]:focus-visible .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"][aria-selected="true"]': {
+      color: 'var(--vscode-textLink-foreground)',
+    },
+    '& [role="tab"][aria-selected="true"] .fui-Tab__content': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+    '& [role="tab"][aria-selected="true"] .fui-Tab__icon': {
+      color: 'var(--vscode-textLink-foreground)' as 'inherit',
+    },
+
+    /* Disabled tabs stay neutral gray, matching base treatment. */
+    '& [role="tab"][aria-disabled="true"], & [role="tab"]:disabled': {
+      color: 'var(--vscode-disabledForeground)',
+    },
+    '& [role="tab"][aria-disabled="true"] .fui-Tab__content, & [role="tab"]:disabled .fui-Tab__content':
+      {
+        color: 'var(--vscode-disabledForeground)' as 'inherit',
+      },
+    '& [role="tab"][aria-disabled="true"] .fui-Tab__icon, & [role="tab"]:disabled .fui-Tab__icon':
+      {
+        color: 'var(--vscode-disabledForeground)' as 'inherit',
+      },
+  },
+});
+
 const useTabListSizeStyles = makeStyles({
   small: {
     '& [role="tab"]': {
@@ -172,18 +231,23 @@ const useTabBaseStyles = makeStyles({
 //  Exported hooks
 // ============================================================================
 
+export type VscTabListAppearance = 'default' | 'primary';
+
 export function useVscTabListStyles(options: {
   size?: 'small' | 'medium' | 'large';
+  appearance?: VscTabListAppearance;
   className?: string;
 }): string {
-  const { size, className } = options;
+  const { size, appearance, className } = options;
 
   const base = useTabListBaseStyles();
   const sizeClasses = useTabListSizeStyles();
+  const appearanceClasses = useTabListAppearanceStyles();
 
   return mergeClasses(
     base.root,
     size === 'small' && sizeClasses.small,
+    appearance === 'primary' && appearanceClasses.primary,
     className,
   );
 }

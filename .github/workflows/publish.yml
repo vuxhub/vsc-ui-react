@@ -1,150 +1,185 @@
-name: Publish Package
+name: Weekly NPM Release
 
 on:
+  schedule:
+    - cron: '0 10 * * 4'
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
-  id-token: write # Required for OIDC
-  contents: read
+  contents: write
+  id-token: write
+
+concurrency:
+  group: weekly-npm-release
+  cancel-in-progress: false
 
 jobs:
-  check-version:
+  release:
     runs-on: ubuntu-latest
-    outputs:
-      version_changed: ${{ steps.check.outputs.changed }}
-      new_version: ${{ steps.check.outputs.version }}
     steps:
       - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v6
         with:
-          node-version: '24'
-
-      - name: Check if version changed
-        id: check
-        run: |
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          if PUBLISHED_VERSION=$(npm view "$PACKAGE_NAME" version 2>npm-view-error.log); then
-            :
-          elif grep -qi "E404\|not found" npm-view-error.log; then
-            PUBLISHED_VERSION="0.0.0"
-          else
-            cat npm-view-error.log
-            exit 1
-          fi
-          rm -f npm-view-error.log
-
-          echo "Published version: $PUBLISHED_VERSION"
-          echo "Current version: $CURRENT_VERSION"
-
-          SHOULD_PUBLISH=$(CURRENT="$CURRENT_VERSION" PUBLISHED="$PUBLISHED_VERSION" node -e "
-            const parse = (value) => {
-              const cleaned = value.split('+', 1)[0];
-              const match = cleaned.match(/^(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/);
-
-              if (!match) {
-                throw new Error('Invalid semver: ' + value);
-              }
-
-              return {
-                major: Number(match[1]),
-                minor: Number(match[2]),
-                patch: Number(match[3]),
-                prerelease: match[4] ? match[4].split('.') : [],
-              };
-            };
-
-            const compareIdentifiers = (left, right) => {
-              const leftNumeric = /^\d+$/.test(left);
-              const rightNumeric = /^\d+$/.test(right);
-
-              if (leftNumeric && rightNumeric) {
-                return Number(left) - Number(right);
-              }
-
-              if (leftNumeric) {
-                return -1;
-              }
-
-              if (rightNumeric) {
-                return 1;
-              }
-
-              return left.localeCompare(right);
-            };
-
-            const compareSemver = (leftValue, rightValue) => {
-              const left = parse(leftValue);
-              const right = parse(rightValue);
-
-              for (const key of ['major', 'minor', 'patch']) {
-                if (left[key] !== right[key]) {
-                  return left[key] - right[key];
-                }
-              }
-
-              if (left.prerelease.length === 0 && right.prerelease.length === 0) {
-                return 0;
-              }
-
-              if (left.prerelease.length === 0) {
-                return 1;
-              }
-
-              if (right.prerelease.length === 0) {
-                return -1;
-              }
-
-              const length = Math.max(left.prerelease.length, right.prerelease.length);
-              for (let index = 0; index < length; index += 1) {
-                const leftId = left.prerelease[index];
-                const rightId = right.prerelease[index];
-
-                if (leftId === undefined) {
-                  return -1;
-                }
-
-                if (rightId === undefined) {
-                  return 1;
-                }
-
-                const result = compareIdentifiers(leftId, rightId);
-                if (result !== 0) {
-                  return result;
-                }
-              }
-
-              return 0;
-            };
-
-            console.log(compareSemver(process.env.CURRENT, process.env.PUBLISHED) > 0 ? 'true' : 'false');
-          ")
-
-          if [ "$SHOULD_PUBLISH" = "true" ]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-  publish:
-    needs: check-version
-    if: needs.check-version.outputs.version_changed == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
+          ref: main
+          fetch-depth: 0
 
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-          package-manager-cache: false # never use caching in release builds
+          package-manager-cache: false
 
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
-      - run: npm publish
+      - name: Plan release
+        id: plan
+        run: npm run release:plan
+
+      - name: Summarize release plan
+        env:
+          BASE_REF: ${{ steps.plan.outputs.base_ref }}
+          BUMP: ${{ steps.plan.outputs.bump }}
+          COMPONENT_COUNT: ${{ steps.plan.outputs.component_count }}
+          MODE: ${{ steps.plan.outputs.mode }}
+          SHOULD_RELEASE: ${{ steps.plan.outputs.should_release }}
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          {
+            echo "## Weekly NPM release"
+            echo "- Release: $SHOULD_RELEASE"
+            echo "- Mode: $MODE"
+            echo "- Base: ${BASE_REF:-none}"
+            echo "- Changed components: $COMPONENT_COUNT"
+            echo "- Bump: $BUMP"
+            echo "- Version: $VERSION"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check out pending release
+        if: steps.plan.outputs.mode == 'resume'
+        env:
+          RELEASE_REF: ${{ steps.plan.outputs.release_ref }}
+        run: git checkout --detach "$RELEASE_REF"
+
+      - name: Bump package version
+        if: steps.plan.outputs.mode == 'new'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: npm version "$VERSION" --no-git-tag-version
+
+      - name: Install dependencies
+        if: steps.plan.outputs.should_release == 'true'
+        run: npm ci
+
+      - name: Validate package
+        if: steps.plan.outputs.should_release == 'true'
+        run: npm run prepublishOnly
+
+      - name: Verify release token
+        if: steps.plan.outputs.mode == 'new'
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "RELEASE_TOKEN is not configured"
+            exit 1
+          fi
+
+          gh api "repos/$GITHUB_REPOSITORY" --silent
+
+      - name: Create and merge release pull request
+        id: release_pr
+        if: steps.plan.outputs.mode == 'new'
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          SOURCE_SHA: ${{ steps.plan.outputs.source_sha }}
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add package.json package-lock.json
+          git commit -m "ci: release v$VERSION"
+
+          RELEASE_BRANCH="automation/npm-release-v$VERSION"
+          RELEASE_COMMIT=$(git rev-parse HEAD)
+
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$SOURCE_SHA" ]; then
+            echo "main changed while the release was running"
+            exit 1
+          fi
+
+          if git ls-remote --exit-code --heads \
+            origin "refs/heads/$RELEASE_BRANCH" >/dev/null; then
+            git fetch origin "$RELEASE_BRANCH"
+
+            if ! git diff --quiet "$RELEASE_COMMIT" FETCH_HEAD --; then
+              echo "$RELEASE_BRANCH contains different changes"
+              exit 1
+            fi
+
+            RELEASE_COMMIT=$(git rev-parse FETCH_HEAD)
+          else
+            git push origin "HEAD:refs/heads/$RELEASE_BRANCH"
+          fi
+
+          PR_URL=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head "$RELEASE_BRANCH" \
+            --state open \
+            --json url \
+            --jq '.[0].url')
+
+          if [ -z "$PR_URL" ]; then
+            PR_URL=$(gh pr create \
+              --repo "$GITHUB_REPOSITORY" \
+              --base main \
+              --head "$RELEASE_BRANCH" \
+              --title "ci: release v$VERSION" \
+              --body "Automated weekly npm release.")
+          fi
+
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$SOURCE_SHA" ]; then
+            gh pr close "$PR_URL" \
+              --repo "$GITHUB_REPOSITORY" \
+              --delete-branch
+            echo "main changed before the release PR could merge"
+            exit 1
+          fi
+
+          gh pr merge "$PR_URL" \
+            --repo "$GITHUB_REPOSITORY" \
+            --squash \
+            --delete-branch \
+            --match-head-commit "$RELEASE_COMMIT"
+
+          MERGED_SHA=$(gh pr view "$PR_URL" \
+            --repo "$GITHUB_REPOSITORY" \
+            --json mergeCommit \
+            --jq '.mergeCommit.oid')
+
+          if [ -z "$MERGED_SHA" ] || [ "$MERGED_SHA" = "null" ]; then
+            echo "The release PR did not produce a merge commit"
+            exit 1
+          fi
+
+          git fetch origin main
+          git checkout --detach "$MERGED_SHA"
+          echo "release_ref=$MERGED_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Create release tag
+        if: |
+          steps.plan.outputs.should_release == 'true' &&
+          steps.plan.outputs.mode != 'resume'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$VERSION" -m "v$VERSION"
+          git push origin "refs/tags/v$VERSION"
+
+      - name: Publish package
+        if: steps.plan.outputs.should_release == 'true'
+        run: npm publish --access public --provenance --ignore-scripts
