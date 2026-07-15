@@ -194,8 +194,8 @@ const useSizeStyles = makeStyles({
 
   compact: {
     ...typographyStyles.caption2,
-    height: '15px',
-    minHeight: '15px',
+    height: '16px',
+    minHeight: '16px',
     paddingTop: '0',
     paddingRight: '4px',
     paddingBottom: '0',
@@ -252,12 +252,12 @@ const useIconOnlyStyles = makeStyles({
   },
 
   compact: {
-    width: '15px',
-    height: '15px',
-    minWidth: '15px',
-    minHeight: '15px',
-    maxWidth: '15px',
-    maxHeight: '15px',
+    width: '16px',
+    height: '16px',
+    minWidth: '16px',
+    minHeight: '16px',
+    maxWidth: '16px',
+    maxHeight: '16px',
     padding: '0',
   },
 });
