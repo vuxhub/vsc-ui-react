@@ -203,12 +203,13 @@ const SPLIT_STATE_COLUMNS = [
 const SPLIT_COMBINED_COLUMNS = BUTTON_SIZE_LABELS.flatMap((sizeLabel) =>
   SPLIT_STATE_COLUMNS.map((state) => ({
     key: `${sizeLabel.toLowerCase()}-${state}`,
-    label: `${sizeLabel} ${state === 'selected-left'
+    label: `${sizeLabel} ${
+      state === 'selected-left'
         ? 'Selected L'
         : state === 'selected-right'
           ? 'Selected R'
           : state.charAt(0).toUpperCase() + state.slice(1)
-      }`,
+    }`,
     className: state === 'hover' ? 'vsc-force-hover' : undefined,
   })),
 );
@@ -710,7 +711,7 @@ function CheckboxSection() {
                   size={size}
                   checked={checked}
                   disabled={col === 'disabled'}
-                  onChange={() => { }}
+                  onChange={() => {}}
                 />
               );
             }}
@@ -765,7 +766,7 @@ function RadioGroupSection() {
                 <VscRadioGroup
                   value={isChecked ? 'a' : undefined}
                   defaultValue={!isChecked ? '' : undefined}
-                  onChange={() => { }}
+                  onChange={() => {}}
                 >
                   <VscRadio
                     value="a"
@@ -811,7 +812,7 @@ function SwitchSection() {
                       size={size}
                       checked={checked}
                       disabled={col === 'disabled'}
-                      onChange={() => { }}
+                      onChange={() => {}}
                       autoFocus={col === 'focus'}
                     />
                   );
@@ -2073,11 +2074,7 @@ function TabListSection() {
         </VscTabList>
 
         <span style={gridHeadStyle}>Primary</span>
-        <VscTabList
-          defaultSelectedValue="selected"
-          appearance="primary"
-          className="vsc-tablist-primary-preview"
-        >
+        <VscTabList defaultSelectedValue="selected" appearance="primary">
           <VscTab value="default">Default</VscTab>
           <VscTab value="hover" className="vsc-force-hover">
             Hover
