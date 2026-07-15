@@ -45,6 +45,8 @@ import {
   VscLink,
   VscSwitch,
   VscSlider,
+  VscRadioGroup,
+  VscRadio,
   VscDialog,
   VscDialogTrigger,
   VscDialogSurface,
@@ -201,13 +203,12 @@ const SPLIT_STATE_COLUMNS = [
 const SPLIT_COMBINED_COLUMNS = BUTTON_SIZE_LABELS.flatMap((sizeLabel) =>
   SPLIT_STATE_COLUMNS.map((state) => ({
     key: `${sizeLabel.toLowerCase()}-${state}`,
-    label: `${sizeLabel} ${
-      state === 'selected-left'
+    label: `${sizeLabel} ${state === 'selected-left'
         ? 'Selected L'
         : state === 'selected-right'
           ? 'Selected R'
           : state.charAt(0).toUpperCase() + state.slice(1)
-    }`,
+      }`,
     className: state === 'hover' ? 'vsc-force-hover' : undefined,
   })),
 );
@@ -709,8 +710,70 @@ function CheckboxSection() {
                   size={size}
                   checked={checked}
                   disabled={col === 'disabled'}
-                  onChange={() => {}}
+                  onChange={() => { }}
                 />
+              );
+            }}
+          />
+        </React.Fragment>
+      ))}
+    </section>
+  );
+}
+
+const RADIO_STATE_ROWS = [
+  { key: 'unchecked', label: 'Unchecked' },
+  { key: 'checked', label: 'Checked' },
+];
+
+const RADIO_LAYOUT_ROWS = [
+  { key: 'icon-label', label: 'Icon + Label' },
+  { key: 'icon-only', label: 'Icon Only' },
+];
+
+const RADIO_COLUMNS = [
+  { key: 'default', label: 'Default' },
+  { key: 'hover', label: 'Hover', className: 'vsc-force-hover' },
+  { key: 'focus', label: 'Focus', className: 'vsc-force-focus' },
+  { key: 'disabled', label: 'Disabled' },
+];
+
+function RadioGroupSection() {
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>VscRadioGroup &amp; VscRadio</h2>
+
+      {(['large', 'medium', 'small'] as const).map((size) => (
+        <React.Fragment key={size}>
+          <h3 style={headerStyle}>{size}</h3>
+          <Matrix
+            rows={RADIO_LAYOUT_ROWS.flatMap((layout) =>
+              RADIO_STATE_ROWS.map((state) => ({
+                key: `${layout.key}-${state.key}`,
+                label: `${layout.label} · ${state.label}`,
+              })),
+            )}
+            columns={RADIO_COLUMNS}
+            columnWidthMode="content"
+            rowLabelWidth={160}
+            rowGap={24}
+            columnGap={28}
+            cellRender={(row, col) => {
+              const isChecked = row.endsWith('-checked');
+              const isIconOnly = row.startsWith('icon-only');
+              return (
+                <VscRadioGroup
+                  value={isChecked ? 'a' : undefined}
+                  defaultValue={!isChecked ? '' : undefined}
+                  onChange={() => { }}
+                >
+                  <VscRadio
+                    value="a"
+                    label={isIconOnly ? undefined : 'Label'}
+                    size={size}
+                    disabled={col === 'disabled'}
+                  />
+                </VscRadioGroup>
               );
             }}
           />
@@ -748,7 +811,7 @@ function SwitchSection() {
                       size={size}
                       checked={checked}
                       disabled={col === 'disabled'}
-                      onChange={() => {}}
+                      onChange={() => { }}
                       autoFocus={col === 'focus'}
                     />
                   );
@@ -2885,6 +2948,7 @@ function Playground() {
           <MenuButtonSection />
           <SplitButtonSection />
           <CheckboxSection />
+          <RadioGroupSection />
           <SwitchSection />
           <SliderSection />
           <InputSection />

@@ -140,6 +140,15 @@
   --vscode-divider-background: #454545;
   --vscode-divider-foreground: #9d9d9d;
 
+  /* Radio */
+  --vscode-radio-background: transparent;
+  --vscode-radio-border: #f0f0f0;
+  --vscode-radio-selectBackground: #0078d4;
+  --vscode-radio-selectBorder: #0078d4;
+  --vscode-radio-hoverBackground: rgba(0, 120, 212, 0.1);
+  --vscode-radio-hoverBorder: #4e94ce;
+  --vscode-radio-selectHoverBackground: #4e94ce;
+
   /* Settings */
   --vscode-settings-checkboxBackground: #313131;
   --vscode-settings-checkboxBorder: #3c3c3c;
@@ -259,6 +268,8 @@
   --vscode-checkbox-hoverBorder: #000000;
   --vscode-checkbox-selectBackground: #005fb8;
   --vscode-checkbox-selectBorder: #005fb8;
+  --vscode-checkbox-hoverBackground: #4e94ce;
+  --vscode-checkbox-hoverBorder: #4e94ce;
   --vscode-checkbox-selectForeground: #ffffff;
   --vscode-checkbox-selectHoverBackground: #0258a8;
   --vscode-checkbox-selectHoverBorder: #0258a8;
@@ -266,6 +277,15 @@
   /* Divider */
   --vscode-divider-background: #e5e5e5;
   --vscode-divider-foreground: #9d9d9d;
+
+  /* Radio */
+  --vscode-radio-background: #ffffff;
+  --vscode-radio-border: #3b3b3b;
+  --vscode-radio-selectBackground: #005fb8;
+  --vscode-radio-selectBorder: #005fb8;
+  --vscode-radio-hoverBackground: rgba(0, 95, 184, 0.1);
+  --vscode-radio-hoverBorder: #4e94ce;
+  --vscode-radio-selectHoverBackground: #4e94ce;
 
   /* Settings */
   --vscode-settings-checkboxBackground: #ffffff;
@@ -313,10 +333,7 @@ body {
  * The :not() guards exclude SplitButton internal buttons — they are handled
  * by separate rules further down.
  */
-.vsc-force-hover
-  button[data-appearance='primary']:not(
-    .fui-SplitButton__primaryActionButton
-  ):not(.fui-SplitButton__menuButton) {
+.vsc-force-hover button[data-appearance='primary']:not(.fui-SplitButton__primaryActionButton):not(.fui-SplitButton__menuButton) {
   background-color: var(--vscode-button-hoverBackground) !important;
   color: var(--vscode-button-foreground) !important;
 }
@@ -332,25 +349,19 @@ body {
   ):not(.fui-SplitButton__menuButton):not(.fui-Tab) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
 }
-.vsc-force-hover
-  button[data-appearance='outline']:not(
-    .fui-SplitButton__primaryActionButton
-  ):not(.fui-SplitButton__menuButton) {
+
+.vsc-force-hover button[data-appearance='outline']:not(.fui-SplitButton__primaryActionButton):not(.fui-SplitButton__menuButton) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
   color: var(--vscode-button-secondaryForeground) !important;
 }
-.vsc-force-hover
-  button[data-appearance='subtle']:not(
-    .fui-SplitButton__primaryActionButton
-  ):not(.fui-SplitButton__menuButton) {
+
+.vsc-force-hover button[data-appearance='subtle']:not(.fui-SplitButton__primaryActionButton):not(.fui-SplitButton__menuButton) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
   color: var(--vscode-button-secondaryForeground) !important;
   border-color: var(--vscode-button-border) !important;
 }
-.vsc-force-hover
-  button[data-appearance='transparent']:not(
-    .fui-SplitButton__primaryActionButton
-  ):not(.fui-SplitButton__menuButton) {
+
+.vsc-force-hover button[data-appearance='transparent']:not(.fui-SplitButton__primaryActionButton):not(.fui-SplitButton__menuButton) {
   background-color: transparent !important;
   color: var(--vscode-textLink-foreground) !important;
 }
@@ -382,15 +393,9 @@ body {
  */
 .vsc-force-hover .fui-Checkbox .fui-Checkbox__indicator,
 .vsc-force-focus .fui-Checkbox .fui-Checkbox__indicator {
-  --vsc-checkbox-indicator-background: var(
-    --vscode-checkbox-background
-  ) !important;
-  --vsc-checkbox-indicator-border: var(
-    --vscode-checkbox-hoverBorder
-  ) !important;
-  --vsc-checkbox-indicator-foreground: var(
-    --vscode-checkbox-hoverForeground
-  ) !important;
+  --vsc-checkbox-indicator-background: var(--vscode-checkbox-background) !important;
+  --vsc-checkbox-indicator-border: var(--vscode-checkbox-hoverBorder) !important;
+  --vsc-checkbox-indicator-foreground: var(--vscode-checkbox-hoverForeground) !important;
 }
 
 .vsc-force-hover .fui-Checkbox .fui-Checkbox__label,
@@ -398,30 +403,18 @@ body {
   color: var(--vscode-checkbox-hoverForeground) !important;
 }
 
-.vsc-force-hover .fui-Checkbox input:checked ~ .fui-Checkbox__indicator,
-.vsc-force-focus .fui-Checkbox input:checked ~ .fui-Checkbox__indicator {
-  --vsc-checkbox-indicator-background: var(
-    --vscode-checkbox-selectHoverBackground
-  ) !important;
-  --vsc-checkbox-indicator-border: var(
-    --vscode-checkbox-selectHoverBorder
-  ) !important;
-  --vsc-checkbox-indicator-foreground: var(
-    --vscode-checkbox-selectForeground
-  ) !important;
+.vsc-force-hover .fui-Checkbox input:checked~.fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox input:checked~.fui-Checkbox__indicator {
+  --vsc-checkbox-indicator-background: var(--vscode-checkbox-selectHoverBackground) !important;
+  --vsc-checkbox-indicator-border: var(--vscode-checkbox-selectHoverBorder) !important;
+  --vsc-checkbox-indicator-foreground: var(--vscode-checkbox-selectForeground) !important;
 }
 
-.vsc-force-hover .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator,
-.vsc-force-focus .fui-Checkbox input:indeterminate ~ .fui-Checkbox__indicator {
-  --vsc-checkbox-indicator-background: var(
-    --vscode-checkbox-background
-  ) !important;
-  --vsc-checkbox-indicator-border: var(
-    --vscode-checkbox-selectHoverBorder
-  ) !important;
-  --vsc-checkbox-indicator-foreground: var(
-    --vscode-checkbox-selectHoverBackground
-  ) !important;
+.vsc-force-hover .fui-Checkbox input:indeterminate~.fui-Checkbox__indicator,
+.vsc-force-focus .fui-Checkbox input:indeterminate~.fui-Checkbox__indicator {
+  --vsc-checkbox-indicator-background: var(--vscode-checkbox-background) !important;
+  --vsc-checkbox-indicator-border: var(--vscode-checkbox-selectHoverBorder) !important;
+  --vsc-checkbox-indicator-foreground: var(--vscode-checkbox-selectHoverBackground) !important;
 }
 
 /*
@@ -483,6 +476,43 @@ body {
   border-radius: 4px !important;
 }
 
+.vsc-force-focus .fui-Radio {
+  outline: 1px solid var(--vscode-focusBorder) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+.vsc-force-hover .fui-Radio .fui-Radio__label {
+  color: var(--vscode-inputOption-activeForeground) !important;
+}
+
+.vsc-force-hover .fui-Radio input:not(:checked) ~ .fui-Radio__indicator {
+  border-color: #ffffff !important;
+}
+
+.vsc-force-hover .fui-Radio input:checked ~ .fui-Radio__indicator {
+  color: var(
+    --vscode-radio-selectHoverBackground,
+    var(
+      --vscode-radio-selectBackground,
+      var(--vscode-checkbox-selectBackground)
+    )
+  ) !important;
+  border-color: var(
+    --vscode-radio-hoverBorder,
+    var(
+      --vscode-checkbox-hoverBorder,
+      var(
+        --vscode-radio-selectBorder,
+        var(
+          --vscode-checkbox-selectBorder,
+          var(--vscode-radio-border, var(--vscode-checkbox-border))
+        )
+      )
+    )
+  ) !important;
+}
+
 /*
  * Force-focus for links: VS Code links use a double underline as the focus
  * affordance, so statically render it for the "Focus" column.
@@ -512,64 +542,49 @@ body {
  * Keep hover and selected distinct: hover uses hover tokens, selected uses
  * inactive-selection tokens.
  */
-.vsc-force-hover
-  .fui-Option:not([aria-selected='true']):not([aria-checked='true']) {
+.vsc-force-hover .fui-Option:not([aria-selected='true']):not([aria-checked='true']) {
   background-color: var(--vscode-list-hoverBackground) !important;
-  color: var(
-    --vscode-list-hoverForeground,
-    var(--vscode-input-foreground)
-  ) !important;
+  color: var(--vscode-list-hoverForeground,
+      var(--vscode-input-foreground)) !important;
 }
 
 .vsc-force-selected .fui-Option {
-  background-color: var(
-    --vscode-list-inactiveSelectionBackground,
-    var(--vscode-list-hoverBackground)
-  ) !important;
-  color: var(
-    --vscode-list-inactiveSelectionForeground,
-    var(--vscode-input-foreground)
-  ) !important;
+  background-color: var(--vscode-list-inactiveSelectionBackground,
+      var(--vscode-list-hoverBackground)) !important;
+  color: var(--vscode-list-inactiveSelectionForeground,
+      var(--vscode-input-foreground)) !important;
 }
 
 /*
  * Force-hover for SplitButton: apply hover background to both the primary
  * action and menu (chevron) buttons so the whole component looks hovered.
  */
-.vsc-force-hover
-  [data-appearance='primary']
-  .fui-SplitButton__primaryActionButton,
+.vsc-force-hover [data-appearance='primary'] .fui-SplitButton__primaryActionButton,
 .vsc-force-hover [data-appearance='primary'] .fui-SplitButton__menuButton {
   background-color: var(--vscode-button-hoverBackground) !important;
 }
-.vsc-force-hover
-  [data-appearance='secondary']
-  .fui-SplitButton__primaryActionButton,
+
+.vsc-force-hover [data-appearance='secondary'] .fui-SplitButton__primaryActionButton,
 .vsc-force-hover [data-appearance='secondary'] .fui-SplitButton__menuButton,
 .vsc-force-hover :not([data-appearance]) .fui-SplitButton__primaryActionButton,
 .vsc-force-hover :not([data-appearance]) .fui-SplitButton__menuButton {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
 }
-.vsc-force-hover
-  [data-appearance='outline']
-  .fui-SplitButton__primaryActionButton,
+
+.vsc-force-hover [data-appearance='outline'] .fui-SplitButton__primaryActionButton,
 .vsc-force-hover [data-appearance='outline'] .fui-SplitButton__menuButton,
-.vsc-force-hover
-  [data-appearance='subtle']
-  .fui-SplitButton__primaryActionButton,
+.vsc-force-hover [data-appearance='subtle'] .fui-SplitButton__primaryActionButton,
 .vsc-force-hover [data-appearance='subtle'] .fui-SplitButton__menuButton {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
 }
-.vsc-force-hover
-  [data-appearance='subtle']
-  .fui-SplitButton__primaryActionButton,
+
+.vsc-force-hover [data-appearance='subtle'] .fui-SplitButton__primaryActionButton,
 .vsc-force-hover [data-appearance='subtle'] .fui-SplitButton__menuButton {
   border-color: var(--vscode-button-border) !important;
   color: var(--vscode-button-secondaryForeground) !important;
 }
-.vsc-force-hover
-  [data-appearance='transparent']
-  .fui-SplitButton__primaryActionButton,
+
+.vsc-force-hover [data-appearance='transparent'] .fui-SplitButton__primaryActionButton,
 .vsc-force-hover [data-appearance='transparent'] .fui-SplitButton__menuButton {
   background-color: transparent !important;
   color: var(--vscode-textLink-foreground) !important;
@@ -579,9 +594,7 @@ body {
  * Use :not(.fui-SplitButton) to avoid also matching SplitButton wrappers.
  * Use :not(.fui-Tab) to avoid matching tabs (which have their own styling).
  */
-.vsc-force-hover
-  [data-appearance='primary']:not(.fui-SplitButton)
-  > button:not(.fui-Tab) {
+.vsc-force-hover [data-appearance='primary']:not(.fui-SplitButton)>button:not(.fui-Tab) {
   background-color: var(--vscode-button-hoverBackground) !important;
 }
 .vsc-force-hover
@@ -592,30 +605,25 @@ body {
   > button:not(.fui-Tab) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
 }
-.vsc-force-hover
-  [data-appearance='outline']:not(.fui-SplitButton)
-  > button:not(.fui-Tab) {
+
+.vsc-force-hover [data-appearance='outline']:not(.fui-SplitButton)>button:not(.fui-Tab) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
   color: var(--vscode-button-secondaryForeground) !important;
 }
-.vsc-force-hover
-  [data-appearance='subtle']:not(.fui-SplitButton)
-  > button:not(.fui-Tab) {
+
+.vsc-force-hover [data-appearance='subtle']:not(.fui-SplitButton)>button:not(.fui-Tab) {
   background-color: var(--vscode-button-secondaryHoverBackground) !important;
   border-color: var(--vscode-button-border) !important;
 }
 
-.vsc-force-hover
-  [data-appearance='subtle']:not(.fui-SplitButton)
-  > button:not(.fui-Tab):active,
+.vsc-force-hover [data-appearance='subtle']:not(.fui-SplitButton)>button:not(.fui-Tab):active,
 .fui-Button[data-appearance='subtle']:active .fui-Button__icon,
 .fui-MenuButton[data-appearance='subtle']:active .fui-Button__icon,
 .fui-MenuButton[data-appearance='subtle']:active .fui-MenuButton__menuIcon {
   color: var(--vscode-button-secondaryForeground) !important;
 }
-.vsc-force-hover
-  [data-appearance='transparent']:not(.fui-SplitButton)
-  > button:not(.fui-Tab) {
+
+.vsc-force-hover [data-appearance='transparent']:not(.fui-SplitButton)>button:not(.fui-Tab) {
   background-color: transparent !important;
   color: var(--vscode-textLink-foreground) !important;
 }
@@ -638,6 +646,7 @@ body {
 .vsc-force-hover .fui-Tab .fui-Tab__content {
   color: var(--vscode-tab-activeForeground) !important;
 }
+
 .vsc-force-hover.fui-Tab::before,
 .vsc-force-hover .fui-Tab::before {
   content: '' !important;
