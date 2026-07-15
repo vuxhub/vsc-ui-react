@@ -101,12 +101,18 @@ export const VerticalTabs: Story = {
   ),
 };
 
-/* ── With Icons ──────────────────────────────────────────────────── */
+/* ── With Icons – Default ────────────────────────────────────────── */
 
-export const WithIcons: Story = {
-  render: () => (
-    <Section title="Default with Icons" description="20px icons.">
-      <VscTabList defaultSelectedValue="general">
+export const WithIconsDefault: Story = {
+  args: {
+    defaultSelectedValue: 'general',
+  },
+  render: (args) => (
+    <Section
+      title="With Icons – Default"
+      description="Default appearance with 20px icons."
+    >
+      <VscTabList {...args}>
         <VscTab value="general" icon={<SettingsRegular />}>
           General
         </VscTab>
@@ -124,17 +130,17 @@ export const WithIcons: Story = {
   ),
 };
 
-/* ── Primary Appearance ──────────────────────────────────── */
+/* ── With Icons – Primary ────────────────────────────────────────── */
 
-export const Primary: Story = {
+export const WithIconsPrimary: Story = {
   args: {
     appearance: 'primary',
     defaultSelectedValue: 'general',
   },
   render: (args) => (
     <Section
-      title="Primary"
-      description="Acts like a primary button — the selected tab's icon and label use the VS Code accent blue, with the standard active line indicator."
+      title="With Icons – Primary"
+      description="Primary appearance with 20px icons — the selected tab's icon and label use the VS Code accent blue."
     >
       <VscTabList {...args}>
         <VscTab value="general" icon={<SettingsRegular />}>
@@ -146,7 +152,31 @@ export const Primary: Story = {
         <VscTab value="terminal" icon={<WindowRegular />}>
           Terminal
         </VscTab>
-        <VscTab value="extensions" icon={<PuzzlePieceRegular />} disabled>
+        <VscTab value="extensions" icon={<PuzzlePieceRegular />}>
+          Extensions
+        </VscTab>
+      </VscTabList>
+    </Section>
+  ),
+};
+
+/* ── Primary Appearance (text only) ──────────────────────────────── */
+
+export const Primary: Story = {
+  args: {
+    appearance: 'primary',
+    defaultSelectedValue: 'general',
+  },
+  render: (args) => (
+    <Section
+      title="Primary"
+      description="Acts like a primary button — the selected tab's label uses the VS Code accent blue, with the standard active line indicator."
+    >
+      <VscTabList {...args}>
+        <VscTab value="general">General</VscTab>
+        <VscTab value="editor">Editor</VscTab>
+        <VscTab value="terminal">Terminal</VscTab>
+        <VscTab value="extensions" disabled>
           Extensions
         </VscTab>
       </VscTabList>

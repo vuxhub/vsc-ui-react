@@ -41,10 +41,22 @@ const useTabListBaseStyles = makeStyles({
 });
 
 // ---------------------------------------------------------------------------
-//  Appearance — primary (accent) variant applied to all descendant tabs
+//  Appearance — styling variants
 // ---------------------------------------------------------------------------
 
 const useTabListAppearanceStyles = makeStyles({
+  default: {
+    /* Default appearance: selected tab text is white. */
+    '& [role="tab"][aria-selected="true"]': {
+      color: '#ffffff',
+    },
+    '& [role="tab"][aria-selected="true"] .fui-Tab__content': {
+      color: '#ffffff' as 'inherit',
+    },
+    '& [role="tab"][aria-selected="true"] .fui-Tab__icon': {
+      color: '#ffffff' as 'inherit',
+    },
+  },
   primary: {
     /* Only the selected tab uses accent blue; line indicator kept from base. */
     '& [role="tab"][aria-selected="true"]': {
@@ -198,7 +210,7 @@ export function useVscTabListStyles(options: {
   appearance?: VscTabListAppearance;
   className?: string;
 }): string {
-  const { size, appearance, className } = options;
+  const { size, appearance = 'default', className } = options;
 
   const base = useTabListBaseStyles();
   const sizeClasses = useTabListSizeStyles();
@@ -207,6 +219,7 @@ export function useVscTabListStyles(options: {
   return mergeClasses(
     base.root,
     size === 'small' && sizeClasses.small,
+    appearance === 'default' && appearanceClasses.default,
     appearance === 'primary' && appearanceClasses.primary,
     className,
   );

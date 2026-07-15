@@ -2108,6 +2108,46 @@ function TabListSection() {
             Disabled
           </VscTab>
         </VscTabList>
+
+        <span style={gridHeadStyle}>With Icons – Default</span>
+        <VscTabList defaultSelectedValue="selected">
+          <VscTab value="default" icon={<AddRegular />}>
+            Default
+          </VscTab>
+          <VscTab
+            value="hover"
+            icon={<OpenRegular />}
+            className="vsc-force-hover"
+          >
+            Hover
+          </VscTab>
+          <VscTab value="selected" icon={<CircleRegular />}>
+            Selected
+          </VscTab>
+          <VscTab value="disabled" icon={<DismissRegular />} disabled>
+            Disabled
+          </VscTab>
+        </VscTabList>
+
+        <span style={gridHeadStyle}>With Icons – Primary</span>
+        <VscTabList defaultSelectedValue="selected" appearance="primary">
+          <VscTab value="default" icon={<AddRegular />}>
+            Default
+          </VscTab>
+          <VscTab
+            value="hover"
+            icon={<OpenRegular />}
+            className="vsc-force-hover"
+          >
+            Hover
+          </VscTab>
+          <VscTab value="selected" icon={<CircleRegular />}>
+            Selected
+          </VscTab>
+          <VscTab value="disabled" icon={<DismissRegular />} disabled>
+            Disabled
+          </VscTab>
+        </VscTabList>
       </div>
     </section>
   );
