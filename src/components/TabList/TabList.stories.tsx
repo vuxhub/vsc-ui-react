@@ -30,6 +30,9 @@ const meta = {
       control: 'radio',
       options: ['default', 'primary'],
     },
+    vertical: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof VscTabList>;
 
@@ -40,7 +43,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    appearance: 'default',
     defaultSelectedValue: 'general',
+    size: 'medium',
+    vertical: false,
   },
   render: (args) => (
     <VscTabList {...args}>
@@ -55,9 +61,16 @@ export const Default: Story = {
 /* ── Default Tabs ────────────────────────────────────────────────── */
 
 export const SmallTabs: Story = {
-  render: () => (
+  args: {
+    appearance: 'default',
+    defaultSelectedValue: 'general',
+    size: 'small',
+    vertical: false,
+  },
+
+  render: (args) => (
     <Section title="Small (12px text size)">
-      <VscTabList size="small" defaultSelectedValue="general">
+      <VscTabList {...args}>
         <VscTab value="general">General</VscTab>
         <VscTab value="editor">Editor</VscTab>
         <VscTab value="terminal">Terminal</VscTab>
@@ -70,12 +83,18 @@ export const SmallTabs: Story = {
 /* ── With Disabled Tab ───────────────────────────────────────────── */
 
 export const WithDisabledTab: Story = {
-  render: () => (
+  args: {
+    appearance: 'default',
+    defaultSelectedValue: 'problems',
+    size: 'medium',
+    vertical: false,
+  },
+  render: (args) => (
     <Section
       title="Disabled Tab"
       description="Use disabled prop to disable a tab"
     >
-      <VscTabList defaultSelectedValue="problems">
+      <VscTabList {...args}>
         <VscTab value="problems">Problems</VscTab>
         <VscTab value="output">Output</VscTab>
         <VscTab value="logs" disabled>
@@ -89,9 +108,15 @@ export const WithDisabledTab: Story = {
 /* ── Vertical Tabs ───────────────────────────────────────────────── */
 
 export const VerticalTabs: Story = {
-  render: () => (
+  args: {
+    appearance: 'default',
+    defaultSelectedValue: 'search',
+    size: 'medium',
+    vertical: true,
+  },
+  render: (args) => (
     <Section title="Vertical" description="TabList with vertical orientation.">
-      <VscTabList vertical defaultSelectedValue="search">
+      <VscTabList {...args}>
         <VscTab value="explorer">Explorer</VscTab>
         <VscTab value="search">Search</VscTab>
         <VscTab value="git">Source Control</VscTab>
@@ -105,7 +130,10 @@ export const VerticalTabs: Story = {
 
 export const WithIconsDefault: Story = {
   args: {
+    appearance: 'default',
     defaultSelectedValue: 'general',
+    size: 'medium',
+    vertical: false,
   },
   render: (args) => (
     <Section
@@ -136,6 +164,8 @@ export const WithIconsPrimary: Story = {
   args: {
     appearance: 'primary',
     defaultSelectedValue: 'general',
+    size: 'medium',
+    vertical: false,
   },
   render: (args) => (
     <Section
@@ -166,6 +196,8 @@ export const Primary: Story = {
   args: {
     appearance: 'primary',
     defaultSelectedValue: 'general',
+    size: 'medium',
+    vertical: false,
   },
   render: (args) => (
     <Section
