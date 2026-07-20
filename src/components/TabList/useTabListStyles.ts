@@ -46,15 +46,15 @@ const useTabListBaseStyles = makeStyles({
 
 const useTabListAppearanceStyles = makeStyles({
   default: {
-    /* Default appearance: selected tab text is white. */
+    /* Default appearance: selected tab follows active theme foreground. */
     '& [role="tab"][aria-selected="true"]': {
-      color: '#ffffff',
+      color: 'var(--vscode-tab-activeForeground)',
     },
     '& [role="tab"][aria-selected="true"] .fui-Tab__content': {
-      color: '#ffffff' as 'inherit',
+      color: 'var(--vscode-tab-activeForeground)' as 'inherit',
     },
     '& [role="tab"][aria-selected="true"] .fui-Tab__icon': {
-      color: '#ffffff' as 'inherit',
+      color: 'var(--vscode-tab-activeForeground)' as 'inherit',
     },
   },
   primary: {
