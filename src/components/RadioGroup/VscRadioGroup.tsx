@@ -56,16 +56,18 @@ export const VscRadio = forwardRef<HTMLInputElement, VscRadioProps>(
     const hasSubtext = Boolean(subtext);
     const subtextId = useId('vsc-radio-subtext');
 
-    const { rootClassName, wrapperClassName, subtextClassName } = useRadioStyles({
-      size,
-      disabled,
-      className,
-      hasSubtext,
-    });
+    const { rootClassName, wrapperClassName, subtextClassName } =
+      useRadioStyles({
+        size,
+        disabled,
+        className,
+        hasSubtext,
+      });
 
-    const mergedAriaDescribedBy = [ariaDescribedBy, hasSubtext ? subtextId : undefined]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const mergedAriaDescribedBy =
+      [ariaDescribedBy, hasSubtext ? subtextId : undefined]
+        .filter(Boolean)
+        .join(' ') || undefined;
 
     const radio = (
       <Radio
