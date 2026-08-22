@@ -63,30 +63,28 @@ describe('VscSearchBox', () => {
     expect(container.querySelector('.custom')).toBeTruthy();
   });
 
-  it('produces distinct classes for outline vs transparent appearance', () => {
-    const { container: outlineContainer } = render(
-      <VscSearchBox appearance="outline" />,
-      { wrapper },
-    );
-    const { container: transparentContainer } = render(
-      <VscSearchBox appearance="transparent" />,
-      { wrapper },
-    );
-    const outlineRoot = outlineContainer.querySelector('.fui-Input')!;
-    const transparentRoot = transparentContainer.querySelector('.fui-Input')!;
-    expect(outlineRoot.className).not.toBe(transparentRoot.className);
+  it('produces distinct classes for each appearance', () => {
+    const appearances = ['filled', 'outline', 'transparent'] as const;
+    const classNames = appearances.map((appearance) => {
+      const { container } = render(<VscSearchBox appearance={appearance} />, {
+        wrapper,
+      });
+      return container.querySelector('.fui-Input')!.className;
+    });
+
+    expect(new Set(classNames).size).toBe(appearances.length);
   });
 
-  it('defaults to outline appearance', () => {
+  it('defaults to filled appearance', () => {
     const { container: defaultContainer } = render(<VscSearchBox />, {
       wrapper,
     });
-    const { container: outlineContainer } = render(
-      <VscSearchBox appearance="outline" />,
+    const { container: filledContainer } = render(
+      <VscSearchBox appearance="filled" />,
       { wrapper },
     );
     const defaultRoot = defaultContainer.querySelector('.fui-Input')!;
-    const outlineRoot = outlineContainer.querySelector('.fui-Input')!;
-    expect(defaultRoot.className).toBe(outlineRoot.className);
+    const filledRoot = filledContainer.querySelector('.fui-Input')!;
+    expect(defaultRoot.className).toBe(filledRoot.className);
   });
 });
