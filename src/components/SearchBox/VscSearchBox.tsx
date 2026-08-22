@@ -7,13 +7,13 @@ import {
 } from './useSearchBoxStyles';
 
 export type VscSearchBoxProps = Omit<SearchBoxProps, 'appearance'> & {
-  /** Visual style: outline (bordered) or transparent (underline only). */
+  /** Visual style: filled, outline (bordered), or transparent (underline only). */
   appearance?: VscSearchBoxAppearance;
 };
 
 export const VscSearchBox = forwardRef<HTMLInputElement, VscSearchBoxProps>(
   (
-    { size = 'small', appearance = 'outline', disabled, className, ...rest },
+    { size = 'small', appearance = 'filled', disabled, className, ...rest },
     ref,
   ) => {
     const mergedClass = useSearchBoxStyles({

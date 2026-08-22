@@ -6,7 +6,7 @@ import {
 
 import { vscFontFamily } from '../../styles/tokens';
 
-export type VscSearchBoxAppearance = 'outline' | 'transparent';
+export type VscSearchBoxAppearance = 'filled' | 'outline' | 'transparent';
 
 // ---------------------------------------------------------------------------
 //  Base – root override styles via makeStyles
@@ -113,8 +113,20 @@ const useBaseStyles = makeStyles({
 // ---------------------------------------------------------------------------
 
 const useAppearanceStyles = makeStyles({
-  outline: {
+  filled: {
     backgroundColor: 'var(--vscode-input-background)',
+    border: '1px solid var(--vscode-input-border)',
+    borderRadius: '2px',
+
+    '&.fui-Input:focus-within': {
+      borderTopColor: 'var(--vscode-input-border)',
+      borderLeftColor: 'var(--vscode-input-border)',
+      borderRightColor: 'var(--vscode-input-border)',
+    },
+  },
+
+  outline: {
+    backgroundColor: 'transparent',
     border: '1px solid var(--vscode-input-border)',
     borderRadius: '2px',
 
@@ -239,7 +251,7 @@ export interface UseSearchBoxStylesOptions {
 export function useSearchBoxStyles(options: UseSearchBoxStylesOptions): string {
   const {
     size = 'small',
-    appearance = 'outline',
+    appearance = 'filled',
     disabled,
     className,
   } = options;
@@ -250,6 +262,7 @@ export function useSearchBoxStyles(options: UseSearchBoxStylesOptions): string {
 
   return mergeClasses(
     base.root,
+    appearance === 'filled' && appearanceClasses.filled,
     appearance === 'outline' && appearanceClasses.outline,
     appearance === 'transparent' && appearanceClasses.transparent,
     size === 'medium' && classes.medium,

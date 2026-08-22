@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A search-specific input with a built-in search icon and dismiss action, styled to match VS Code. Defaults to `small` size and `outline` appearance.',
+          'A search-specific input with a built-in search icon and dismiss action, styled to match VS Code. Defaults to `small` size and `filled` appearance.',
       },
     },
   },
@@ -26,7 +26,7 @@ const meta = {
     },
     appearance: {
       control: 'radio',
-      options: ['outline', 'transparent'],
+      options: ['filled', 'outline', 'transparent'],
     },
   },
 } satisfies Meta<typeof VscSearchBox>;
@@ -68,7 +68,10 @@ export const AppearanceVariants: Story = {
   render: () => (
     <Section title="Appearance Variants">
       <Row>
-        <Inline label="Outline (default)">
+        <Inline label="Filled (default)">
+          <VscSearchBox appearance="filled" placeholder="Placeholder text" />
+        </Inline>
+        <Inline label="Outline">
           <VscSearchBox appearance="outline" placeholder="Placeholder text" />
         </Inline>
         <Inline label="Transparent">
@@ -87,6 +90,29 @@ export const AppearanceVariants: Story = {
 export const AppearanceBySize: Story = {
   render: () => (
     <Section title="Appearance × Size">
+      <Row>
+        <Inline label="Filled Small">
+          <VscSearchBox
+            appearance="filled"
+            size="small"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+        <Inline label="Filled Medium">
+          <VscSearchBox
+            appearance="filled"
+            size="medium"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+        <Inline label="Filled Large">
+          <VscSearchBox
+            appearance="filled"
+            size="large"
+            placeholder="Placeholder text"
+          />
+        </Inline>
+      </Row>
       <Row>
         <Inline label="Outline Small">
           <VscSearchBox
