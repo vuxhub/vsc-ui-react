@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A checkbox with VS Code styling. Supports three sizes, mixed/indeterminate state, and optional label text.',
+          'A checkbox with VS Code styling. Supports three sizes, mixed/indeterminate state, and optional label and description text.',
       },
     },
   },
@@ -29,6 +29,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     label: 'Accept terms',
+    subtext: 'Optional description text',
   },
 };
 
@@ -69,6 +70,29 @@ export const Indeterminate: Story = {
   render: () => (
     <Row>
       <VscCheckbox label="Indeterminate" checked="mixed" />
+    </Row>
+  ),
+};
+
+/* ── Subtext ─────────────────────────────────────────────────────── */
+
+export const Subtext: Story = {
+  render: () => (
+    <Row>
+      <VscCheckbox
+        size="small"
+        label="Small checkbox"
+        subtext="This is a small checkbox with subtext"
+      />
+      <VscCheckbox
+        label="Medium checkbox"
+        subtext="This is a medium checkbox with subtext"
+      />
+      <VscCheckbox
+        size="large"
+        label="Large checkbox"
+        subtext="This is a large checkbox with subtext"
+      />
     </Row>
   ),
 };

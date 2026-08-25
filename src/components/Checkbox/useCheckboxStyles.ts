@@ -312,6 +312,51 @@ const useStyles = makeStyles({
 });
 
 // ---------------------------------------------------------------------------
+//  Subtext styles
+// ---------------------------------------------------------------------------
+
+const useSubtextStyles = makeStyles({
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+
+    '&:focus-within': {
+      outlineStyle: 'solid',
+      outlineWidth: '1px',
+      outlineColor: 'var(--vscode-focusBorder)',
+      outlineOffset: '0',
+      ...shorthands.borderRadius('4px'),
+    },
+  },
+
+  suppressInnerFocusOutline: {
+    '&:focus-within': {
+      outlineStyle: 'none',
+    },
+  },
+
+  subtext: {
+    fontFamily: vscFontFamily,
+    fontSize: '11px',
+    lineHeight: '15px',
+    color: 'var(--vscode-descriptionForeground)',
+    paddingLeft: '22px',
+  },
+
+  subtextSmall: {
+    fontSize: '10px',
+    lineHeight: '14px',
+    paddingLeft: '16px',
+  },
+
+  subtextLarge: {
+    fontSize: '12px',
+    lineHeight: '16px',
+    paddingLeft: '28px',
+  },
+});
+
+// ---------------------------------------------------------------------------
 //  Exported hook
 // ---------------------------------------------------------------------------
 
@@ -319,20 +364,31 @@ export interface UseCheckboxStylesOptions {
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   className?: string;
+  hasSubtext?: boolean;
 }
 
 export function useCheckboxStyles(options: UseCheckboxStylesOptions) {
-  const { size, disabled, className } = options;
+  const { size, disabled, className, hasSubtext } = options;
   const base = useBaseStyles();
   const classes = useStyles();
+  const subtextClasses = useSubtextStyles();
 
   const rootClassName = mergeClasses(
     base.root,
     size === 'small' && classes.small,
     size === 'large' && classes.large,
     disabled && classes.disabled,
+    hasSubtext && subtextClasses.suppressInnerFocusOutline,
     className,
   );
 
-  return { rootClassName };
+  const wrapperClassName = subtextClasses.wrapper;
+
+  const subtextClassName = mergeClasses(
+    subtextClasses.subtext,
+    size === 'small' && subtextClasses.subtextSmall,
+    size === 'large' && subtextClasses.subtextLarge,
+  );
+
+  return { rootClassName, wrapperClassName, subtextClassName };
 }
