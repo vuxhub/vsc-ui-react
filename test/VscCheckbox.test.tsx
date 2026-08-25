@@ -14,6 +14,22 @@ describe('VscCheckbox', () => {
     expect(screen.getByRole('checkbox', { name: 'Accept' })).toBeTruthy();
   });
 
+  it('renders subtext as the checkbox description', () => {
+    render(
+      <VscCheckbox
+        label="Enable tracing"
+        subtext="Collects telemetry for this agent"
+      />,
+      { wrapper },
+    );
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Enable tracing' });
+    const subtext = screen.getByText('Collects telemetry for this agent');
+
+    expect(subtext.id).toBeTruthy();
+    expect(checkbox).toHaveAttribute('aria-describedby', subtext.id);
+  });
+
   it('forwards ref to underlying input element', () => {
     const ref = createRef<HTMLInputElement>();
     render(<VscCheckbox ref={ref} label="Ref Test" />, { wrapper });

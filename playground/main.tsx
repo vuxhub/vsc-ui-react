@@ -784,6 +784,53 @@ function RadioGroupSection() {
   );
 }
 
+function SelectionControlsComparisonSection() {
+  const rows = (['large', 'medium', 'small'] as const).flatMap((size) => [
+    { key: `${size}-unselected`, size, selected: false },
+    { key: `${size}-selected`, size, selected: true },
+  ]);
+
+  return (
+    <section style={sectionStyle}>
+      <h2 style={headerStyle}>Checkbox &amp; Radio Comparison</h2>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '180px minmax(260px, 1fr) minmax(260px, 1fr)',
+          columnGap: 32,
+          rowGap: 20,
+          alignItems: 'start',
+        }}
+      >
+        <span />
+        <span style={gridHeadStyle}>Checkbox</span>
+        <span style={gridHeadStyle}>Radio</span>
+        {rows.map(({ key, size, selected }) => (
+          <React.Fragment key={key}>
+            <span style={gridHeadStyle}>
+              {size} · {selected ? 'Selected' : 'Unselected'}
+            </span>
+            <VscCheckbox
+              size={size}
+              label="Option label"
+              subtext="Optional description text"
+              defaultChecked={selected}
+            />
+            <VscRadioGroup defaultValue={selected ? 'option' : undefined}>
+              <VscRadio
+                size={size}
+                value="option"
+                label="Option label"
+                subtext="Optional description text"
+              />
+            </VscRadioGroup>
+          </React.Fragment>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function SwitchSection() {
   return (
     <section style={sectionStyle}>
@@ -2986,6 +3033,7 @@ function Playground() {
           <SplitButtonSection />
           <CheckboxSection />
           <RadioGroupSection />
+          <SelectionControlsComparisonSection />
           <SwitchSection />
           <SliderSection />
           <InputSection />

@@ -71,6 +71,10 @@ const useRadioBaseStyles = makeStyles({
       paddingLeft: '0',
     },
 
+    '& input:checked ~ .fui-Radio__label.fui-Radio__label': {
+      color: 'var(--vscode-foreground)',
+    },
+
     // --- Hover: checked radios shift to the hover border + dot color ---
     ':hover input:checked ~ .fui-Radio__indicator.fui-Radio__indicator': {
       color:
@@ -86,6 +90,10 @@ const useRadioBaseStyles = makeStyles({
       color: 'var(--vscode-inputOption-activeForeground)',
     },
 
+    ':hover input:checked ~ .fui-Radio__label.fui-Radio__label': {
+      color: 'var(--vscode-inputOption-activeForeground)',
+    },
+
     // --- Focus: use :focus-within since focus is on the child <input> ---
     '&:focus-within': {
       outlineStyle: 'solid',
@@ -93,6 +101,10 @@ const useRadioBaseStyles = makeStyles({
       outlineColor: 'var(--vscode-focusBorder)',
       outlineOffset: '2px',
       ...shorthands.borderRadius('4px'),
+    },
+
+    '&:focus-within .fui-Radio__label.fui-Radio__label': {
+      color: 'var(--vscode-inputOption-activeForeground)',
     },
 
     '& input:focus-visible ~ .fui-Radio__indicator.fui-Radio__indicator': {
